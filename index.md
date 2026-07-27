@@ -33,4 +33,4 @@ A 4-week live course for marketing executives who want to understand, build, and
 
 - [Full Course Outline](outline.md)
 - [Week 1: Foundations](weeks/week-01.md)
-- [Prerequisites & Setup Guide](setup.md)
+- [Setup Guide & Prerequisites](setup.md)
