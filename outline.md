@@ -101,10 +101,11 @@ Delivered as: A template they fill out during the session and leave with as thei
   - Claude's 200K context: upload your full brand guidelines, past campaign briefs, competitor swipe file — all at once
   - Claude excels at structured outputs (tables, JSON) — directly usable in campaign dashboards and automation pipelines
   - Claude's Artifacts: living marketing documents, not just chat responses
-- The model lineup for marketing use:
-  - **Haiku** (fast/cheap): bulk product description generation, social post variants, subject line A/B testing — tasks where speed × volume > peak quality
-  - **Sonnet** (balanced): campaign briefs, competitive analyses, ad copy, email nurture sequences — the daily driver for marketing work
-  - **Opus** (best quality/costliest): brand strategy docs, thought leadership, high-stakes messaging for launch campaigns, positioning review
+- The model lineup for marketing use (current as of July 2026):
+  - **Claude Haiku 4.5** (fastest, near-frontier): bulk product description generation, social post variants, subject line A/B testing — tasks where speed × volume > peak quality
+  - **Claude Sonnet 5** (balanced daily driver): campaign briefs, competitive analyses, ad copy, email nurture sequences — the standard for marketing work
+  - **Claude Opus 5** (enterprise): complex analysis, high-stakes messaging for launch campaigns, positioning review, strategy docs
+  - **Claude Fable 5** (highest capability): long-running research agents, multi-step competitive intelligence, complex brand strategy — the top tier for when you need the absolute best output
 - **Marketing decision framework:** "For a Q3 product launch campaign with 40 assets across 6 channels, which model do you use for each asset type?"
 
 ### Part 2: Prompt Engineering for Marketing (45 min)
