@@ -55,7 +55,78 @@ This is not a theory course. Every week ends with a working artifact the student
 
 **Quick Vocabulary Quiz:** 5 scenarios, students identify which concept applies. Low stakes, high retention.
 
-### Part 2: The Four-Layer Automation Stack (40 min)
+### Part 2: The Input-to-Output Pipeline — How AI Agents Actually Work (20 min)
+
+**The Big Picture — Why This Matters Before Anything Else:**
+
+Before we talk about tools, workflows, or automation layers, you need to understand one thing: the architecture is the same every time. Whether you're using Claude.ai for a single task or a multi-agent system running 24/7 — the input-to-output pipeline is identical. Every week of this course teaches you how to optimize one part of this pipeline.
+
+Here's the foundational flow:
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                 THE AGENT PIPELINE (every interaction)          │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ① YOU GIVE                           ⑥ MODEL PRODUCES         │
+│     INPUT ─────────────────────────┐      ┌─── OUTPUT            │
+│                                    │      │   (response,         │
+│                                    ▼      │    content,           │
+│  ② AGENT GATHERS                ┌──────┐  │    action)            │
+│     CONTEXT                     │      │  │                      │
+│     (brand vault,               │  LLM │──┘                      │
+│      projects, docs)            │      │                         │
+│                                  │      │                          │
+│  ③ AGENT SEARCHES               └──────┘                          │
+│     MEMORY                           ▲                            │
+│      (past sessions,             ④ + ⑤  → LLM                  │
+│      user preferences,                (context + tools            │
+│      learned corrections)              + skills + MCP             │
+│                                       = augmented input)          │
+│  ④ AGENT USES TOOLS                                                │
+│     (skills, plugins,                                               │
+│      MCP servers)                                                    │
+│                                                                     │
+│  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │
+│  The LLM is the brain. Everything else feeds the brain.          │
+│                                                                   │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**The Simple Analogy: The Marketing Operations Center**
+
+Imagine you're briefing a senior marketing analyst (the LLM). You walk into their office and say "Write a LinkedIn post about our new feature." Here's what actually happens:
+
+| Pipeline Step | In Human Terms | In AI Terms |
+|---|---|---|
+| **① You give input** | You say: "Write a LinkedIn post about the new analytics dashboard" | The prompt — your instruction to the agent |
+| **② Gather context** | Analyst opens the brand book, persona guide, and product specs on their desk | Agent loads brand vault docs, project files, reference material |
+| **③ Search memory** | Analyst remembers: "Last time we launched a feature, the CTO persona responded best to 'time saved' messaging" | Agent searches session history + persistent memory for relevant past learnings |
+| **④ Use tools/skills/MCP** | Analyst opens LinkedIn, checks character limits, pulls the analytics dashboard screenshot from Google Drive | Agent runs a skill (LinkedIn post format), calls MCP tools (Google Drive, image analyzer, web search) |
+| **⑤ All flows to LLM** | Analyst sits down with all gathered material — brand guide, past notes, tool outputs — and starts writing | Everything — context, memory, tool results — is packed into the LLM's input context window |
+| **⑥ Model produces output** | Analyst hands back a finished post | The LLM generates the response — text, JSON, action, or decision |
+
+**Why This Pipeline Is the Skeleton of the Entire Course:**
+
+Every week of this course teaches you how to make one part of this pipeline more powerful:
+
+| Course Week | What You Learn | Which Pipeline Step It Optimizes |
+|---|---|---|
+| **Week 1 (today)** | The vocabulary + this pipeline | Understanding the whole flow |
+| **Week 2: Context Engineering** | Building your brand vault, voice guides, persona docs, campaign histories | **Step ②** — giving the agent richer context so it produces better output |
+| **Week 3: n8n Workflows** | Connecting tools, automating multi-step marketing tasks, reading/writing context on the fly | **Step ④** — giving the agent tools to act in the real world (send emails, update CRM, post to social) |
+| **Week 4: Hermes Agents** | Persistent memory, skills that load automatically, multi-platform autonomous operation | **Steps ③ + ④** — agent remembers past sessions and runs skills without you re-explaining everything |
+
+**Key Insight:** A better prompt helps Step ①. A richer brand vault helps Step ②. Persistent memory helps Step ③. Powerful tools and skills help Step ④. A smarter model helps Step ⑥. **The best automation systems improve ALL steps** — not just one.
+
+**Quick Comprehension Check (2 min):**
+- "I spent 10 minutes writing the perfect prompt but Claude still produced generic copy" — which pipeline step is weak? (Answer: Step ② — the agent lacked brand context)
+- "My agent gives good output but can't actually send the email or post to LinkedIn" — which step is weak? (Answer: Step ④ — no tools connected)
+- "Every session I have to re-explain who our target audience is" — which step is weak? (Answer: Step ③ — memory isn't persisting between sessions)
+
+**The Takeaway:** Every time you interact with an AI agent — whether it's Claude.ai, ChatGPT, or your own Hermes instance — this pipeline is running behind the scenes. Understanding it means you can diagnose *why* an output is weak and know exactly *which lever* to pull to fix it. That's what the rest of this course teaches.
+
+### Part 3: The Four-Layer Automation Stack (40 min)
 
 1. **Chat & Reasoning** (Claude.ai, ChatGPT) — ad-hoc analysis, drafting, brainstorming
 2. **Workflow Automation** (n8n) — connecting your tools end-to-end, no code
@@ -70,7 +141,7 @@ For each layer:
 
 **Exercise:** Map 10 real marketing tasks to the right layer. Honesty corner: what NOT to automate.
 
-### Part 3: Quick-Build Deliverable (50 min)
+### Part 4: Quick-Build Deliverable (50 min)
 
 **Deliverable: Automation Readiness Map**
 A structured document where the student:
@@ -375,280 +446,388 @@ Students run 3 real marketing tasks against their vault-fed Claude project:
 
 **Deliverable:** A **Brand Context Vault** — a structured knowledge base (Obsidian vault or markdown folder) with an Index, Brand Voice Guide, Buyer Persona, and Do-Not-Says, configured as a Claude Project with librarian-style custom instructions. Students leave with a system they can expand with every campaign, every persona, every competitive insight — reducing context setup from 15 minutes per task to zero.
 
-### Homework for Week 3
+### Homework for Week 3 (Prepares Your Vault for n8n)
 - Add 2 more context assets to your Brand Context Vault:
   - A second Buyer Persona (your next most important audience)
   - One Campaign Retro (any past campaign — what worked, what bombed, why)
+- **Vault prep for Week 3:** Make sure your vault path is accessible and you know the exact folder structure (n8n will read these files directly). Ensure your vault has clear YAML frontmatter on each note (type, status, last_updated) — n8n's Code node can parse this for dynamic context filtering.
 - Install Docker Desktop (if not already installed) — n8n runs in Docker
 - Have access to at least 2 marketing tools you use daily (Gmail, Slack, Notion, Google Sheets, HubSpot, etc.)
 - Bring 1 manual marketing workflow you do repeatedly that involves 3+ tools (e.g., "Every Monday I pull LinkedIn ad data, paste into a slide deck, add commentary, and email the team")
+- **Optional vault stretch goal:** Add a `tone-scale-by-channel.md` note with platform-specific tone targets (LinkedIn = authoritative but warm, Twitter = conversational/opinionated, email = helpful/personal) — your Week 3 n8n workflows will reference this directly
 
 ---
 
-## Week 3: n8n — Workflow Automation That Connects Your Marketing Stack
+## Week 3: n8n — Vault-Powered Workflows That Feed Your Marketing Stack
 
 **Session Length:** ~3 hours
-**Objective:** Connect your entire marketing stack without a developer. Build automated workflows with AI nodes, error handling, and real tool integrations. Every demo and exercise is a real marketing workflow a marketing exec would run every week.
+**Objective:** Connect your Brand Context Vault from Week 2 to your entire marketing stack. Build automated n8n workflows that **pull context FROM the vault** and **write results TO the vault** — making the vault a living asset that grows smarter with every campaign, not a static document you built once and forgot.
 
-**Strictly marketing framing:** This session never shows a generic "hello world" workflow. Every build starts from a marketing problem — lead enrichment delays, content distribution fragmentation, reporting that takes 3 hours every Monday morning, social posting that requires 4 tools and a prayer.
+**The vault thread:** Every workflow in this session starts with your Week 2 brand vault as the source of truth. When n8n needs to know your brand voice, it reads the vault. When Claude generates content, it's fed context from the vault. When a campaign finishes, the results flow back into the vault. The vault is the hub, n8n is the spoke system.
 
-### Part 1: Refresher + Vocabulary (15 min)
+**Strictly marketing framing:** This session never shows a generic "hello world" workflow. Every build starts from a marketing problem rooted in the gap between having brand knowledge and using it across tools.
+
+### Part 1: Refresher — How n8n Connects Your Vault to Your Tools (15 min)
 - Quick recap: what is an API? What is a webhook? (straight from Week 1)
-- How n8n uses both to connect your marketing tools without code
-- n8n v1.0: self-hosted (keep sensitive campaign data on your infra) vs. n8n Cloud (start in 5 minutes) — what each costs, when to use which for marketing ops
+- **The vault connection:** Your Obsidian vault is a folder of markdown files on your filesystem. n8n can READ those files (read file node, RSS/local file trigger) and WRITE to them (write file node, HTTP request to Obsidian Local REST API). Your vault is not just a reference document — it's a machine-readable database.
+- **How this changes your approach to workflow design:** Instead of hardcoding brand voice instructions into each n8n prompt, you inject them dynamically from the vault. Change a persona in the vault → every downstream workflow automatically picks up the update. The vault becomes a single source of truth, not 15 different prompt templates scattered across workflows.
+- n8n v1.0: self-hosted (keep sensitive campaign data + your vault on your infra) vs. n8n Cloud (start in 5 minutes) — what each costs, when to use which for marketing ops
 
-### Part 2: n8n Architecture in 25 Minutes (25 min)
+### Part 2: n8n Architecture — Focus on Vault Integration (25 min)
 
-- **The canvas — a marketing lens:** triggers (a form submit, a Notion page tagged "Ready", a scheduled Monday 9 AM report) → nodes (Gmail, HubSpot, Claude, Google Sheets, Slack, LinkedIn, Twitter) → data flow → output (post sent, email delivered, report shared, lead enriched)
-- **Trigger types relevant to marketing:** webhook (form fill, CRM event, tool push), schedule/cron (weekly ad report, daily social queue), manual (click a button to approve and publish)
-- **Node types:** action nodes (Gmail send, Slack message, Google Sheet append, HubSpot create contact), data transformation (format campaign data, remove duplicates, enrich with lookup), HTTP requests (call Claude API, fetch ad platform data), AI/LLM nodes (n8n v1.0 native Claude node)
-- **Data passing in plain language:** "When a lead fills out a form, their name, company, and email travel through the workflow as a little JSON package. Each node can add to it, transform it, or pass it along. You can see the data at every step — no black boxes."
+- **The canvas with the vault as the hub:** triggers → read vault context → Claude generates with context → write results to tools + vault → close the loop
+- **File nodes for vault reads:** n8n's Read Binary Files / Read File nodes can read individual markdown notes from your Obsidian vault path. You can read `brand-voice-guide.md` in one workflow step, pass its content into the Claude prompt context, and Claude already knows your voice.
+- **Writing to the vault:** n8n's Write File node can append or create new .md files in your vault. A campaign retro is generated → n8n writes it to `brand-context-vault/05-campaigns/q3-campaign-retro.md`. Your vault is now updated. Obsidian's graph view picks up the new note. Your whole knowledge graph grows automatically.
+- **Obsidian Local REST API (optional):** For advanced setups, the Obsidian Local REST API community plugin lets n8n create, update, and search notes via HTTP requests — no file path dependencies.
+- **Trigger types relevant to marketing:** webhook (form fill, CRM event, tool push), schedule/cron (weekly ad report, daily social queue), file watcher (new vault note created → trigger workflow), manual (click a button to approve and publish)
+- **Node types:** action nodes (Gmail send, Slack message, Google Sheet append, HubSpot create contact), data transformation (parse YAML frontmatter from vault notes, extract persona fields, enrich with lookup), HTTP requests (call Claude API, fetch ad platform data), file read/write (interact with vault)
 - **Error handling basics for marketing:** what happens when Claude API is busy, HubSpot rejects a contact, or an email bounces — design workflows that fail gracefully instead of falling silent
 
-**Live demo:** Build a simple marketing workflow start-to-finish in 10 minutes. A lead form submission webhook → Claude enriches the lead with company industry and employee count → appends to a Google Sheet → notifies the team in Slack. Everyone sees the data flow in real time.
+**Live demo — Vault-to-output in 10 minutes:** n8n reads `brand-voice-guide.md` and `persona-cto.md` from the vault → passes them as context to Claude API → Claude generates a LinkedIn post targeting that persona, using that voice → n8n writes the output to `content-library-index.md` in the vault as a new entry → posts the draft to Slack for approval. Everyone sees the data flow from vault → Claude → tools → back to vault in real time.
 
-### Part 3: Marketing Workflows That Actually Save Time (50 min)
+### Part 3: Vault-Powered Marketing Workflows (50 min)
 
-Walk through 4 real marketing workflows with live demos. Students follow along on their own n8n instances. Each workflow is named after a specific campaign scenario, not a generic function.
+Walk through 4 real marketing workflows with live demos. Students follow along on their own n8n instances. Every workflow starts and ends with the Brand Context Vault.
 
-**Workflow 1: Social Content Repurposing Engine**
-Campaign scenario: Your team published a 2,000-word thought leadership blog post on Monday. You need LinkedIn posts, Twitter threads, a newsletter blurb, and a Slack team summary — manually, this is 2 hours of reformatting.
+**Workflow 1: Social Content Repurposing Engine (Vault-Fed)**
+Campaign scenario: Your team published a 2,000-word thought leadership blog post. You need LinkedIn posts, Twitter threads, and a newsletter blurb — but you don't want to re-explain your brand voice to Claude every time. The vault already knows your voice, personas, and messaging hierarchy.
 
-- Trigger: RSS feed detects new blog post, or Notion page tagged "Published"
-- Claude API node: reads full article → generates 3 LinkedIn post variants (one thought-leader angle, one data-driven, one customer-story), a Twitter thread (5-tweet structure), and a 3-sentence newsletter blurb
-- Outputs: LinkedIn post via n8n's LinkedIn connector (draft/scheduled), Twitter thread via Twitter API, newsletter blurb appended to an "Upcoming Newsletter" Google Sheet row
-- **Key learning:** trigger, multi-output from a single AI call, platform-specific content formatting
-- **Marketing metric saved:** 2 hours/week per article × 4 articles/month = 8 hours/month reclaimed
+- **Step 1 — Read vault context:** n8n reads `brand-voice-guide.md` and `tone-scale-by-channel.md` from `brand-context-vault/01-voice/` → extracts tone instructions, do-say/don't-say lists, and LinkedIn-specific tone targets
+- **Step 2 — Trigger:** RSS feed detects new blog post, or Notion page tagged "Published"
+- **Step 3 — Claude API node (vault-context-injected):** Claude receives the blog post content + the vault voice guide as system context + the relevant tone scale. It generates:
+  - 3 LinkedIn post variants (thought-leader, data-driven, customer-story — each matching the vault's LinkedIn tone target)
+  - A Twitter thread (5-tweet structure, following the vault's vocabulary rules)
+  - A newsletter blurb (matching the vault's email nurture tone)
+- **Step 4 — Output to tools:** LinkedIn post via n8n's LinkedIn connector (draft/scheduled), Twitter thread via Twitter API, newsletter blurb appended to an "Upcoming Newsletter" Google Sheet
+- **Step 5 — Write back to vault:** n8n creates a new note at `brand-context-vault/05-campaigns/social-content-log.md` appending a row: date, article title, all generated variant URLs, and a link back to the source blog post. The vault now knows what content was produced and when.
+- **Key learning:** file read for vault context, multi-output AI with vault-injected prompts, vault write-back for self-documenting workflows
+- **Marketing metric saved:** 2 hours/week per article × 4 articles/month = 8 hours/month reclaimed — and every post is automatically on-brand because the vault enforces brand voice without prompt engineering
 
-**Workflow 2: Lead Enrichment & Routing Pipeline**
-Campaign scenario: A whitepaper download form captures name + email only. Your sales team needs company size, industry, recent funding news, and a personalization hook within 5 minutes — or the lead goes cold.
+**Workflow 2: Lead Enrichment — Persona-Matched Routing (Vault-Referenced)**
+Campaign scenario: A whitepaper download form captures name + email. But unlike a generic enrichment pipeline, your workflow cross-references the lead against your vault's buyer personas to route them with precision.
 
-- Trigger: Webhook from form submission (HubSpot form, Typeform, or manual webhook)
-- Claude API node: takes company domain (from email) → web searches company profile, checks Crunchbase for funding, identifies recent news → returns structured enrichment: industry, employee count, funding stage, key product category, 3 personalization angles
-- HubSpot node: creates/updates contact with enriched fields + lead score
-- Slack node: posts to #sales-alerts with "High-value lead: [Name], [Company] — just raised $X Series Y — recommended angle: [personalization hook]"
-- Conditional branch: if company > 200 employees AND recent funding → route to Enterprise sales Slack channel, otherwise → SDR queue
-- **Key learning:** webhook triggers, AI enrichment, conditional routing, CRM integration
-- **Marketing metric saved:** Lead response time from 2 hours → 2 minutes. Conversion lift from faster follow-up: documented industry benchmark is 7–10x
+- **Step 1 — Read vault personas:** n8n reads `persona-cto.md`, `persona-vp-marketing.md`, and `persona-procurement.md` from `brand-context-vault/02-personas/` → extracts pain points, buying triggers, channel preferences, and objections for each
+- **Step 2 — Trigger:** Webhook from form submission (HubSpot form, Typeform, or manual webhook)
+- **Step 3 — Claude API node (vault-persona-injected):** Claude receives the lead info (name, email, company domain) + the 3 buyer persona docs from the vault. Claude web-searches the company, then matches the lead to the most relevant persona from the vault based on company profile, job title, and industry. Returns: persona match, enrichment data, and a personalized outreach angle drawn from that persona's pain points and buying triggers.
+- **Step 4 — Conditional routing using vault persona data:** If matched to "CTO persona" → route to technical sales team + personalize email using that persona's objections (from vault). If matched to "VP Marketing" → route to marketing sales team + personalize with brand awareness angle (from vault). If matched to "Procurement" → route to deal desk with pricing sensitivity language (from vault).
+- **Step 5 — Update vault with new lead pattern:** n8n appends an anonymized note to `brand-context-vault/02-personas/persona-match-log.md`: "Date, lead industry, matched persona, company size range". Over time, this vault document reveals persona concentration patterns — "80% of our leads match the CTO persona" → signal to build more content for VP Marketing.
+- **Key learning:** vault persona injection into AI context, conditional routing based on vault data, vault analytics via write-back
+- **Marketing metric saved:** Lead response time from 2 hours → 2 minutes. Lead-to-persona matching accuracy improves because the vault personas are the same ones your marketing strategy is built on — no disconnect between how you segment and how you enrich.
 
-**Workflow 3: Content Operations — Notion Brief to Published Asset**
-Campaign scenario: Your content marketing manager approves a brief in Notion. Then begins the manual chain: assign writer → wait for draft → edit → upload to CMS → create social variants → request review. Each handoff introduces delays.
+**Workflow 3: Content Operations — Vault as the Brand Gate (Vault-Validated)**
+Campaign scenario: Your content team produces a draft in Notion. Before it goes live, it must pass a brand voice compliance check against your vault's voice guide and do-not-says. No more sending off-brand copy to the editor and hoping they catch it.
 
-- Trigger: Notion database status changes from "Brief Approved" to "In Production" (or manual webhook from your CMS)
-- Claude API node 1 (Draft): takes the Notion brief content → produces full article draft, respecting brand voice and SEO keywords from the brief
-- Google Docs node: creates a new Google Doc with the draft, shares it with the editor's email from Notion
-- Claude API node 2 (Social): generates platform-specific variants (LinkedIn, Twitter, email excerpt)
-- n8n Wait node: pauses for 24 hours (review time). Then checks if Google Doc status changed (manual human completion)
-- Slack node: posts "Content in review: [Doc title] — please approve by EOD" to #content-team
-- **Key learning:** tool integrations, conditional branches (human-in-the-loop delays), multi-stage AI processing, status checking
-- **Marketing metric saved:** Content publication cycle from 5 days → 1.5 days. Predictable pipeline, no manual chases.
+- **Step 1 — Read vault brand rules:** n8n reads `brand-voice-guide.md` and `do-not-says.md` from `brand-context-vault/01-voice/` and `06-messaging/`
+- **Step 2 — Trigger:** Notion database status changes from "Draft Complete" to "Ready for Review"
+- **Step 3 — Claude API node 1 (Brand Compliance Check):** Claude receives the draft + the vault's brand voice guide + do-not-says list. It checks every sentence against: do-not-say vocabulary, tone scale for the target channel, and persona relevance. Returns a structured compliance report: "✅ Brand voice: Pass (matches 'authoritative but warm' tone). ⚠️ Do-not-say violation found: 'leverage' on line 3 — suggested replacement: 'use'. ✅ Persona alignment: Matches CTO persona pain points."
+- **Step 4 — Conditional:** If compliance passes → Claude API node 2 generates a summary of the article for the content library. If compliance flags issues → Slack node sends a message to the writer: "Content flagged for brand voice issues — 3 do-not-say violations found. Fixes recommended. Article held from publication until reviewed."
+- **Step 5 — Write to vault:** On approval, n8n creates a new entry in `brand-context-vault/05-campaigns/content-library-index.md` with title, URL, persona targeted, and brand compliance score. Over time, you can query: "Which content pieces scored highest on brand compliance?" — the vault tracks quality automatically.
+- **Key learning:** vault as a validation source of truth, conditional branches based on vault rules, automated quality QA
+- **Marketing metric saved:** Off-brand content from 3 incidents/month → near zero. Editor review cycle from 2 days → same-day. The vault enforces brand standards mechanically, not manually.
 
-**Workflow 4: Automated Weekly Campaign Dashboard**
-Campaign scenario: Every Monday, a marketing operations person spends 2 hours pulling data from Meta Ads, Google Ads, LinkedIn Campaign Manager, and HubSpot, pasting into a Google Sheet, writing commentary, and emailing stakeholders. By Wednesday, the data is already stale.
+**Workflow 4: Weekly Campaign Dashboard — Pulled from Vault, Written to Vault**
+Campaign scenario: Every Monday, n8n produces a campaign performance report. But the report isn't just numbers — it compares performance against the vault's campaign history, competitive intel, and messaging hierarchy to deliver strategic recommendations rooted in your actual brand context.
 
-- Trigger: Schedule node — every Monday at 8 AM
-- HTTP Request node 1: pulls campaign data from Meta Ads API (cost, impressions, CTR, conversions)
-- HTTP Request node 2: pulls data from Google Ads API
-- HTTP Request node 3: pulls data from LinkedIn Campaign Manager API
-- Google Sheets node: appends all data to a master campaign tracker (one row per campaign per week)
-- Claude API node: reads the sheet row → generates a 3-paragraph executive summary: "This week's top performer was [Campaign X] with a 3.2x ROAS. [Campaign Y] underperformed — recommended actions: pause, reallocate budget to [Channel Z], A/B test creative refresh"
-- Email node (Gmail/SMTP): sends formatted report with tables and bullet-point recommendations to stakeholders
-- **Key learning:** scheduled triggers, multi-source data aggregation, AI summarization, email delivery
-- **Marketing metric saved:** Monday report from 2 hours → 5 minutes. Data is always fresh. Recommendations are actionable, not just numbers.
+- **Step 1 — Read vault context:** n8n reads competitive intel (`brand-context-vault/03-competitive/`), messaging hierarchy (`brand-context-vault/06-messaging/`), and past campaign retros (`brand-context-vault/05-campaigns/`)
+- **Step 2 — Trigger:** Schedule node — every Monday at 8 AM
+- **Step 3 — HTTP Request nodes:** pull campaign data from Meta Ads API, Google Ads API, LinkedIn Campaign Manager API (cost, impressions, CTR, conversions)
+- **Step 4 — Claude API node (vault-context-enriched):** Claude receives the campaign data + vault context: competitive positions (e.g., "Competitor A is winning on LinkedIn — we should counter-position there"), past campaign learnings (e.g., "Q2 demand gen underperformed on Meta — don't replicate that channel mix"), and messaging hierarchy (e.g., "The 'innovation' message outperforms 'cost savings' for CTO persona"). Claude generates a 3-section executive summary: "This week's top performer was [Campaign X] vs. benchmark from vault Q2 retro. [Campaign Y] underperforms our competitive position against Competitor A — recommended action: shift budget. New insight: The 'innovation' message variant is outperforming 'reliability' — update messaging hierarchy in vault to reflect this."
+- **Step 5 — Write insight back to vault:** n8n appends a campaign note to `brand-context-vault/05-campaigns/weekly-insights.md` with this week's top finding and recommended vault update. The vault grows a "channel performance over time" knowledge base organically.
+- **Step 6 — Email delivery:** Gmail/SMTP node sends formatted report to stakeholders — with a footnote: "This report was generated using your brand vault as the context baseline. Campaign retros, competitive intel, and messaging priorities all pulled from your vault."
+- **Key learning:** vault context injection for AI analysis, vault write-back for self-improving knowledge, multi-source data aggregation with brand context
+- **Marketing metric saved:** Monday report from 2 hours → 5 minutes. But the key metric: every report improves the vault, and a smarter vault means better future reports. Compound improvement, not just time savings.
 
-### Part 4: The Claude-n8n Bridge — AI-Powered Marketing Automation (30 min)
+### Part 4: The Vault-Claude-n8n Bridge — Context Injection Patterns (30 min)
 
-- Using n8n's HTTP node (or native Claude node in v1.0) to call the Claude API from any marketing workflow
-- **Structured prompting inside marketing workflows:** passing dynamic data into prompts — "Lead company name: {{company}} → Claude generates a personalized email opening referencing their recent funding round"
-- **Multi-step AI tasks for campaign execution:** Research (Claude reads competitor landing page) → Draft (Claude writes response campaign brief) → Personalize (Claude adapts for 3 audience segments) → QA (Claude reviews for brand voice compliance) — all in one automated pipeline
-- **Real example — ABM personalization at scale:** n8n receives a list of 50 target accounts → loops through each → Claude researches each account → generates personalized outreach copy → HubSpot creates contact + logs note → n8n sends email via Gmail. All 50 done in under 5 minutes.
+- **The injection pattern — how vault context travels through a workflow:**
+  ```
+  Vault .md file → n8n Read File → (file content as string) → Claude API prompt context → Claude generates with that context → output flows to tools → n8n Write File → vault .md file updated
+  ```
+- **Parsing vault frontmatter in n8n:** Use n8n's Code node (JavaScript) or Set node to extract YAML frontmatter from vault markdown notes (type, status, last_updated, tags). This lets you filter: "Only read persona docs where status = 'active'" or "Only pull competitor docs tagged with #priority"
+- **Dynamic context injection — persona-selective workflows:** A workflow detects the lead's industry from a form → reads only the relevant persona from the vault (using a lookup on frontmatter) → injects just that persona's context into Claude. Not the whole vault — just the context slice needed.
+- **Multi-step vault pipelines — how the vault grows through workflows:**
+  - Campaign launches → vault gets a new `campaign-launch-log.md`
+  - Content published → vault gets a new `content-library-index.md` entry
+  - Competitive brief generated → vault's competitive intel section gets an update
+  - Lead patterns analyzed → vault's persona section gets enrichment data
+  - Every workflow that touches your brand should leave a record in the vault
 - **Cost awareness for marketing budgets:**
-  - Each Claude API call in a workflow has a token cost — design workflows to batch requests rather than call per item
-  - Use Haiku for enrichment/scoring (high volume, lower quality needs), Sonnet for content generation, Opus for strategic analysis only
-  - Show a real cost calculation: "This lead enrichment workflow costs ~$0.03 per lead. At 200 leads/month, that's $6. A fraction of one hour of your ops person's time."
-- **Error recovery for campaign-critical workflows:** what happens when Claude is down, rate-limited, or returns bad output — design fallback paths (retry with delay, use cached response, alert the team instead of failing silently)
+  - Each Claude API call in a workflow has a token cost — but injecting vault context is cheap (voice guides are ~2K tokens, personas ~1K each). The vault reduces iteration cost because Claude gets it right on the first generation.
+  - Use Haiku for vault-parsing steps (identity extraction, frontmatter queries), Sonnet for content generation, Opus for strategic analysis against vault context
+  - Show a real cost calculation: "This lead enrichment workflow costs ~$0.03 per lead + the vault read is free (local file). At 200 leads/month, that's $6. And every enrichment adds a searchable record back to the vault."
+- **Error recovery for campaign-critical workflows:** what happens when Claude is down, rate-limited, or returns bad output — design fallback paths (retry with delay, use last cached vault output, alert the team instead of failing silently)
 
-### Part 5: Live Build — Automated Multi-Channel Campaign Distribution Pipeline (60 min)
+### Part 5: Live Build — Vault-Backed Multi-Channel Campaign Distribution Pipeline (60 min)
 
-Build a publish-ready workflow for a real campaign scenario: a product launch or major content piece that needs to hit 4+ channels with platform-optimized variants, all triggered from a single "Go" signal.
+Build a publish-ready workflow where the **brand vault is the source of truth for everything the campaign produces.** The vault defines the voice, selects the persona, sets the do-not-says, and stores the results. The workflow is just the delivery mechanism.
 
-**Campaign scenario:** Your team is launching a new research report ("2025 State of B2B Marketing"). The report is done, the landing page is live. Now someone needs to: write the launch post for every channel, schedule them, and make sure nothing breaks.
+**Campaign scenario:** Your team is launching a new research report ("2025 State of B2B Marketing"). The report is done, the landing page is live. Now someone needs to: write the launch posts using the brand's actual voice (from the vault), target the right persona (from the vault), avoid banned language (from the vault), and store everything back in the vault for future reference.
 
 Build this workflow:
 
-1. **Trigger — Single "Launch" signal:** A new Notion page tagged "Ready to Publish" OR a manual webhook (click a bookmarklet, send a POST from your CMS) with the campaign name, report URL, and key stat
-2. **Claude generates 4 channel-specific variants:**
-   - LinkedIn post (thought leadership angle, 3-paragraph, 2,000 char limit)
-   - Twitter thread (8-tweet arc: hook → findings → surprise stat → call to action)
-   - Email announcement to newsletter list (subject line, preheader, 150-word body, CTA button)
-   - Short-form video script (60-second script: hook → 3 key stats → CTA overlay)
-3. **n8n social connectors:** Queue LinkedIn post, Twitter thread, and schedule email via Gmail/SMTP
-4. **Google Sheets performance log:** Append a row with campaign name, timestamp, all channel URLs once posted, and a "Check back in 7 days" placeholder for metrics
-5. **Slack team notification:** Post to #marketing-ops with a summary table of what was posted where, with direct links to each post
-6. **Human-in-the-loop approval gate:** Before anything goes live, n8n sends a Slack message with preview links and a "👍 Approve / 🔁 Edit / ❌ Cancel" button — the workflow pauses until the marketing director clicks approve
+1. **Step 1 — Read vault context:** n8n reads `brand-voice-guide.md` and `tone-scale-by-channel.md` → extracts LinkedIn tone target (authoritative but warm), Twitter tone (conversational, opinionated), email tone (helpful, personal), and do-not-says. Also reads `persona-cto.md` (the primary buyer for this report) — pain points, channel preferences, and quoted language.
 
-**Deliverable:** A fully functional **Multi-Channel Campaign Distribution Pipeline** — ready to connect to the student's actual marketing accounts. Template provided so they can swap in their own tools (their HubSpot instead of generic CRM, their Mailchimp instead of Gmail, their brand's channel priorities).
+2. **Step 2 — Trigger — Single "Launch" signal:** A new Notion page tagged "Ready to Publish" with campaign name, report URL, and key stat
+
+3. **Step 3 — Claude generates 4 channel-specific variants, vault-context-injected:**
+   - **LinkedIn post:** 3-paragraph post using vault's LinkedIn tone target, addressing CTO persona pain points from vault, avoiding do-not-says from vault
+   - **Twitter thread:** 8-tweet arc (hook → findings → surprise stat → CTA) using vault's Twitter tone (conversational, opinionated), with vocabulary approved by vault
+   - **Email announcement:** Subject line, preheader, 150-word body, CTA button — using vault's email nurture tone (helpful, personal), referencing CTO persona's buying triggers from vault
+   - **Short-form video script:** 60-second script (hook → 3 key stats → CTA overlay) matching vault's brand voice archetype
+
+4. **Step 4 — Tool delivery:** Queue LinkedIn post, Twitter thread, schedule email via Gmail/SMTP
+
+5. **Step 5 — Write campaign launch to vault:** n8n creates a new note at `brand-context-vault/05-campaigns/state-of-b2b-launch.md`:
+   ```markdown
+   ---
+   title: 2025 State of B2B Marketing — Launch
+   type: campaign
+   status: launched
+   tags: [campaign, launch, report]
+   date: 2026-07-28
+   ---
+   ## Campaign Overview
+   - **Report URL:** https://...
+   - **Target Persona:** CTO (from vault)
+   - **Voice Guide Used:** Brand Voice Guide v1
+   - **Channels:** LinkedIn, Twitter, Email
+   
+   ## Channel Assets
+   - LinkedIn post: [url]
+   - Twitter thread: [url]
+   - Email send: [url]
+   
+   ## Notes
+   Campaign launched via n8n vault-backed pipeline.
+   All content passed vault brand compliance check automatically.
+   ```
+   Your vault now has a permanent, structured record of this launch. Next campaign, the vault will have more context to pull from.
+
+6. **Step 6 — Google Sheets performance log:** Append row with campaign name, timestamp, channel URLs, and "Check back in 7 days" placeholder
+
+7. **Step 7 — Human-in-the-loop approval gate:** Before anything goes live, n8n sends a Slack message with preview links and a "👍 Approve / 🔁 Edit / ❌ Cancel" button — the workflow pauses until the marketing director clicks approve
+
+**Deliverable:** A fully functional **Vault-Backed Campaign Distribution Pipeline** — a workflow that reads brand context from the Week 2 vault, generates channel-specific content in the brand's voice, publishes to tools, and writes campaign results back to the vault. Template provided so students can swap in their own vault structure and channel preferences.
 
 ### Homework for Week 4
+- Ensure your Week 2 Brand Context Vault has at least: Brand Voice Guide, 2 Buyer Personas, Do-Not-Says, and 1 Campaign Retro (these feed directly into the Hermes agent you'll build next week)
 - Install Hermes Agent (instructions provided: `pip install hermes-agent`)
 - Have a Claude API key ready (guide provided for getting one)
-- Think of 1 recurring marketing task you'd want an agent to handle autonomously — ideally something that currently consumes 2+ hours of your week (e.g., "Monday morning competitor briefing," "inbound lead qualification," "weekly content performance recap")
+- Look at your vault and identify: which section of the vault do you want your Hermes agent to reference most frequently? This becomes your agent's primary knowledge domain.
+- Think of 1 recurring marketing task you'd want an agent to handle autonomously — ideally something that currently consumes 2+ hours of your week (e.g., "Monday morning competitor briefing using vault competitive intel," "inbound lead persona-matching using vault personas," "weekly content performance recap compared to vault campaign history")
 
 ---
 
-## Week 4: Hermes Agent — Autonomous Marketing Operations
+## Week 4: Hermes Agent — An Agent That Lives in Your Brand Vault
 
 **Session Length:** ~3 hours
-**Objective:** Deploy a persistent AI agent that knows your brand, remembers past work, learns from feedback, and executes multi-step marketing tasks independently. Tie together everything from Weeks 1–3 into one autonomous marketing system.
+**Objective:** Deploy a persistent AI agent that has your Week 2 Brand Context Vault as its memory, knowledge base, and writing desk. The agent doesn't just "have brand memory" — it literally lives in the vault. It reads your voice guide when it writes content, consults your personas before targeting audiences, logs campaign retros back into the vault, and uses honcho.dev for session-to-session persistence. Tie together everything from Weeks 1–3 with the vault as the thread connecting it all.
 
-**Strictly marketing framing:** This session is delivered as "You're hiring a new team member — one that never sleeps, never forgets, and costs a fraction of a junior hire. But like any new hire, they need onboarding: brand voice training, tool access, and defined responsibilities." Every concept, every demo, every skill is a marketing-specific scenario.
+**The vault thread:** This is the capstone. Week 2 built the vault. Week 3 showed n8n reading from and writing to it. This week, you deploy an agent that **lives inside the vault** — it boots up every morning with your entire brand context already loaded, writes its outputs back into the vault's structure, and uses the vault's knowledge graph as its reference library. The vault is no longer a document you maintain — it's a living knowledge base your agent depends on and improves.
 
-### Part 1: Refresher — From Workflows to Autonomous Marketing Agents (15 min)
-- Quick recap: LLMs, APIs, webhooks, n8n workflows — the building blocks you now understand
-- **The gap in a marketing context:** n8n workflows execute fixed paths perfectly. But marketing is full of judgment calls: "Is this competitor move significant enough to brief the CMO?" "Should I use the customer story angle or the data angle for this LinkedIn post?" "This campaign underperformed — what changed?" Agents reason, adapt, and learn. They handle the judgment calls; workflows handle the execution.
-- How Hermes sits on top of everything we've covered: **Claude as the brain** (reasoning, content), **APIs as the limbs** (reach any tool), **webhooks as the senses** (agent hears about a new lead, a competitor launch, a campaign milestone), **n8n as the skeleton** (execution of multi-tool sequences the agent orchestrates)
+**Strictly marketing framing:** This session is delivered as "You're hiring a new team member — one that never sleeps, never forgets, and costs a fraction of a junior hire. And here's the kicker: on day one, they've already read everything in your brand vault. Every persona document. Every campaign retro. Your voice guide. Your competitor intel. They arrive with complete brand context, not a blank slate." Every concept, every demo, every skill starts from the vault.
 
-### Part 2: What Hermes Agent Is and What It Changes for Marketers (30 min)
+### Part 1: Refresher — The Vault Thread Across Three Weeks (15 min)
+- **Quick recap — the vault arc:**
+  - **Week 2:** You built the vault. Brand Voice Guide, Buyer Personas, Do-Not-Says, Campaign Histories — structured knowledge about your brand.
+  - **Week 3:** You connected the vault to n8n. Workflows that read vault context for content generation, wrote campaign data back to vault notes, and used vault personas for lead routing.
+  - **Week 4 (today):** Your agent lives in the vault permanently. It doesn't need n8n to read the vault — it has direct filesystem access. It brings together everything: the vault as memory, n8n as tool execution, Claude as reasoning.
+- **Why the vault makes agents possible for marketing:** Without the vault, an agent starts blank every time. With the vault, your agent arrives with 30+ hours of brand context pre-loaded. The difference between a generic AI assistant and one that sounds like your brand's senior marketer is the vault.
+- **How Hermes connects to the vault specifically:**
+  - **Obsidian vault path → Hermes filesystem tool:** Hermes can read any file in the vault — `brand-voice-guide.md`, `persona-cto.md`, `competitor-A.md` — and use that content as system context for reasoning
+  - **Vault as skill references:** Skills like "competitor analysis" can be coded to first read the competitive intel section of the vault before researching — so the agent knows what you already know
+  - **Vault as output destination:** When Hermes completes a campaign retro, analysis, or content brief, it writes the result as a new vault note — linked to existing vault entries
+  - **honcho.dev for session memory:** Between sessions, honcho.dev remembers what you were working on — so the agent doesn't lose track between Tuesday's campaign brief and Thursday's review
 
-**2.1 Core Concepts — Marketing Edition**
+### Part 2: What Hermes Agent Is — Your Vault's Permanent Resident (30 min)
+
+**2.1 Core Concepts — The Vault-Living Agent**
 - Hermes is an open-source agent framework by Nous Research
 - It wraps any LLM (Claude API, GPT, DeepSeek, local models) with tools, memory, and multi-platform delivery
-- It is NOT a separate model — it's a harness that turns any model into a marketing operations assistant that knows your business
+- **The critical vault concept:** Hermes has a `filesystem` tool that can read and write markdown files — exactly the format your Obsidian vault uses. This means your vault is natively accessible to Hermes. No export, no conversion, no special API. Your markdown notes are Hermes' memory store.
+- It is NOT a separate model — it's a harness that turns any model into a marketing operations assistant that **already knows your brand because it has read your vault**
 
-**2.2 Key Capabilities for Marketing Execs**
+**2.2 Key Capabilities — How Hermes Uses Your Vault**
 
-- **Persistent brand memory:** Hermes learns your voice guides, buyer personas, messaging hierarchy, competitor intel, and past campaign performance — across all sessions. You never re-explain who you are.
-  - *Marketing scenario:* You ran a Q2 demand gen campaign. In Q3, you ask "Hermes, tell me what messaging resonated best in Q2 and recommend the Q3 approach." It remembers the campaign data, the A/B test results, and your feedback from the post-mortem.
-- **Skills — reusable marketing procedures:** Invoke by name with parameters. "Hermes, run competitor analysis on [company name]" executes a multi-step procedure: web search → Claude analysis → structured brief → saved to Notion. You don't rewrite the process every time.
-- **Multi-platform delivery in a marketing team context:** Same agent on Slack (team asks questions in channel), email (forward a press release → agent processes → replies with briefing), terminal (your personal access), desktop app (always available)
-- **Profiles for agency/multi-brand marketing:** Separate agents for each brand or campaign — each with its own memory, skills, and tool access. No cross-brand contamination.
-- **Self-improvement loop:** You give feedback ("This brief was too long for the exec audience") → Hermes patches the skill → next execution is better. Like training a junior marketer, but the learnings persist in code, not in someone's memory.
-- **Tool access for marketing research:** Web search (competitor intel, market trends), file system (read/write campaign docs, briefs, data files), APIs (call any marketing tool Hermes is connected to)
+- **Vault-as-memory (read):** Hermes reads your vault on startup or on demand. When you say "Write a LinkedIn post about our new feature," Hermes first reads `brand-voice-guide.md` from the vault for tone instructions, then reads the relevant persona doc (`persona-cto.md`) for audience context, then reads `do-not-says.md` for banned language. Every output is vault-informed.
+  - *Marketing scenario:* You ask "What's our competitive position against Competitor A?" Hermes reads `brand-context-vault/03-competitive/competitor-A.md` from your vault → summarizes their positioning, your differentiator, and messaging gaps — from the vault, not from web search.
+- **Vault-as-notebook (write):** Hermes creates new vault notes as outputs. Campaign retro analysis → written to `brand-context-vault/05-campaigns/2026-q3-retro.md`. Content brief → written to a content calendar folder in the vault. The vault grows with every agent interaction.
+  - *Marketing scenario:* After analyzing this week's campaign performance, Hermes writes a companion note: `week-10-insights.md` linked back to the campaign brief it was created from, with a dataview-compatible frontmatter so Obsidian can query it.
+- **honcho.dev for session-to-session persistence:** The vault is your curated knowledge (stable, versioned). But what about the fact that you were mid-way through planning a Q4 campaign when you had to hop on a call? honcho.dev gives Hermes conversational memory — it remembers what you were working on, what decisions were made, and what the next step is.
+  - *Marketing scenario:* Monday: You brief Hermes on a competitor launch and ask it to draft a response by Wednesday. Tuesday: You reopen Hermes and say "Continue the competitor response." Hermes remembers the context from Monday (via honcho.dev), reads the competitive intel from the vault, and picks up where it left off.
+- **Skills — reusable procedures that reference vault assets:** Skills are markdown files that describe multi-step procedures. They can (and should) reference specific vault folders as context sources.
+- **Self-improvement loop feeds the vault:** You give feedback ("This brief didn't use our new competitive positioning") → Hermes patches the skill AND updates the vault (adds the missing competitive insight to the vault) → next execution is better. Feedback improves both the agent and the vault.
 
-**2.3 What Changes for a Marketing Team**
+**2.3 What Changes for a Marketing Team — The Vault is Now Alive**
 
-- **Before:** Drafting every prompt from scratch. Losing context between sessions. No institutional memory. Every campaign brief starts from zero.
-- **After:** "Hermes, run a Q3 product launch campaign retro" → agent knows the brand, has access to campaign performance data, produces a structured retro report with recommendations, saves it to the team's Notion campaign archive. Done in 3 minutes instead of a 2-hour meeting.
+- **Before:** You built a vault in Week 2. You connected it to n8n in Week 3. But nobody lives in it — it's a reference library you visit occasionally. Campaign retros are forgotten. Persona updates are manual. Competitive intel goes stale.
+- **After:** Your Hermes agent lives in the vault. It reads it for every task. It writes campaign retros back to it. It updates competitive intel when it discovers new information. It notes when a persona assumption is outdated. The vault was a reference library; now it's a living operations center that evolves with every campaign, every analysis, every interaction.
 
-### Part 3: Setting Up Hermes for Marketing Operations (40 min)
+### Part 3: Setting Up Hermes — Onboarding Your Agent Into the Vault (40 min)
 
-**Live walkthrough — students follow along on their machines, building an agent configured for their actual marketing needs:**
+**Live walkthrough — students follow along on their machines, connecting Hermes to their actual Week 2 vault:**
 
 1. **Installation & provider setup** (10 min)
    - Install Hermes (`pip install hermes-agent`)
    - Configure Claude as the reasoning engine (API key setup)
-   - First run: chat with the agent — give it a real marketing task ("What do you know about my brand?" — it knows nothing yet. Shows why memory matters.)
+   - First run: chat with the agent — give it a real marketing task ("What do you know about my brand?" — it knows nothing yet, because it hasn't been pointed at the vault. Shows why vault integration is everything.)
 
-2. **Configuring brand memory — onboarding your agent like a new hire** (10 min)
-   - **Brand voice guidelines → memory:** "Upload" (via prompt or file) your brand voice doc. Claude stores it in persistent context. From now on, every piece of content Hermes generates is on-brand.
-   - **Buyer personas → memory:** Add your 3 core ICPs with demographics, pain points, buying triggers, and channel preferences.
-   - **Competitive landscape → memory:** Add your top 3 competitors, their positioning, your differentiators vs. each.
-   - **Past campaign learnings → memory:** Add key takeaways from the last 2 campaigns (what worked, what bombed, why).
-   - **Verification:** Ask "Hermes, what's our brand voice on pricing conversations?" — it should answer from memory, not guess.
+2. **Connecting Hermes to your Week 2 vault — the critical setup step** (15 min)
+   - **The vault path configuration:** Set your Obsidian vault path as a Hermes filesystem root. Hermes can now see every `.md` file in your vault as a readable/writeable document.
+   - **Vault index as agent entry point:** Hermes reads your vault's `index.md` (which links to every section). This becomes the agent's table of contents for your brand knowledge.
+   - **Brand memory = vault section reads:** Instead of manually uploading context, Hermes is configured to read specific vault folders on boot:
+     - `brand-context-vault/01-voice/` → brand voice guidelines
+     - `brand-context-vault/02-personas/` → buyer personas
+     - `brand-context-vault/03-competitive/` → competitive intelligence
+     - `brand-context-vault/05-campaigns/` → campaign histories
+     - `brand-context-vault/06-messaging/` → messaging hierarchy
+   - **honcho.dev setup for session persistence:** Configure honcho.dev with your API key. Now Hermes remembers your conversation context between sessions — that Q4 campaign you started planning yesterday? Hermes remembers where you left off.
+   - **Verification:** Ask "Hermes, what's our brand voice and who are our key personas?" — it should answer from your vault files, not guess. Ask "What's our competitive positioning against Competitor A?" — it reads the competitor intel section of your vault.
 
-3. **Building your first 3 marketing skills** (15 min)
-   Skills are plain markdown files — editable, shareable, version-controllable. Students build alongside the instructor:
+3. **Building 3 skills that use the vault as context source** (15 min)
+   Skills are plain markdown files — editable, shareable, version-controllable. Each skill below explicitly references vault assets as its context source and vault folders as its output destination.
 
-   - **Skill 1: Competitive Analysis Brief**
+   - **Skill 1: Competitive Analysis Brief (Vault-Fed)**
      Trigger: "Run competitive analysis on [company]"
-     Procedure: Web search company → read landing page + latest blog/press → Claude writes structured competitive brief (positioning, strengths, weaknesses, messaging gaps, recommended counter-positioning) → saves to Notion campaign research database
-     *Marketing use case:* Before a quarterly strategy meeting, brief the team on everyone in the landscape in 5 minutes.
+     Context source: Reads `brand-context-vault/03-competitive/` for existing intelligence on this competitor → doesn't duplicate what you already know
+     Procedure: Web search company → read landing page + latest blog/press → Claude writes structured competitive brief (positioning, strengths, weaknesses, messaging gaps, recommended counter-positioning)
+     Vault write-back: Saves result to `brand-context-vault/03-competitive/[company]-analysis.md` as a new vault note with frontmatter (type: competitor-analysis, date, status: draft) — Obsidian graph view now links this new note into your knowledge graph
+     *Marketing use case:* Before a quarterly strategy meeting, brief the team on everyone in the landscape — and every brief enriches the vault for the next time.
 
-   - **Skill 2: Content Brief Generator**
+   - **Skill 2: Content Brief Generator (Vault-Persona-Aware)**
      Trigger: "Create content brief for [topic/product] targeting [persona]"
-     Procedure: Search internal knowledge base for existing content → research topic (web search) → Claude writes positioning, messaging hierarchy, channel-specific asset briefs, SEO keywords, and success metrics → saves to Notion content calendar
-     *Marketing use case:* A freelance writer needs a brief by 10 AM. You invoke this skill at 9:50 AM. Brief lands in their Notion before they ask.
+     Context source: Reads `brand-context-vault/02-personas/[persona-name].md` for pain points, channel preferences, and buying triggers — plus `brand-context-vault/04-product/` for accurate product specs
+     Procedure: Research topic (web search) → Claude writes positioning, messaging hierarchy, channel-specific asset briefs, SEO keywords, and success metrics — all referencing the vault persona as the audience anchor
+     Vault write-back: Saves to `brand-context-vault/content-briefs/[topic]-brief.md` with links to the persona doc and product specs it used
+     *Marketing use case:* A freelance writer needs a brief. The brief arrives with the persona's actual pain points and buying triggers — from the vault — not generic "our target audience is CTOs."
 
-   - **Skill 3: Campaign Retrospective**
+   - **Skill 3: Campaign Retrospective (Vault-Writing)**
      Trigger: "Run retro on [campaign name/period]"
-     Procedure: Pull campaign data from specified source (n8n workflow that fetches ad platform data, or a Google Sheet with campaign KPIs) → Claude analyzes performance vs. goals, identifies what drove results, surfaces anomalies, writes action recommendations → saves to Notion campaign archive
-     *Marketing use case:* Post-campaign debrief that actually produces action items instead of 45 minutes of "we should probably do more video."
+     Context source: Reads `brand-context-vault/05-campaigns/` for the campaign launch record, plus `brand-context-vault/06-messaging/` for the messaging hierarchy that was used
+     Procedure: Pull campaign data from specified source (n8n workflow that fetches ad platform data, or a Google Sheet with campaign KPIs) → Claude analyzes performance vs. goals, identifies what drove results, surfaces anomalies, writes action recommendations
+     Vault write-back: Saves the full retro as `brand-context-vault/05-campaigns/[campaign]-retro.md` with YAML frontmatter (type: retro, campaign: [name], date, status: complete, key-insight: "video outperformed blog 3:1") — the vault now has a permanent, queryable campaign history
+     *Marketing use case:* Post-campaign debrief that produces action items AND enriches the vault for future campaign planning. Next time you brief a campaign, the vault has richer history for the agent to reference.
 
-4. **Multi-platform delivery for marketing teams** (5 min)
-   - **Connect Hermes to Slack:** Marketing team posts "Hermes, what's the competitive landscape for our Q4 planning?" in #marketing-research → Hermes runs Competitor Analysis skill → posts structured brief as a thread -> team discusses in channel without leaving Slack
-   - **Connect Hermes to email:** Forward a competitor's press release to hermes@yourdomain.com → Hermes processes → replies with a competitive response brief — before you've finished your coffee
+4. **Multi-platform delivery — the vault agent everywhere** (5 min)
+   - **Connect Hermes to Slack:** Marketing team posts "Hermes, check our competitive intel in the vault and brief us on Competitor B" in #marketing-research → Hermes reads `brand-context-vault/03-competitive/competitor-B.md` → summarizes with latest web research → posts structured brief. Team discusses without leaving Slack — and the vault is the source of truth.
+   - **Connect Hermes to email:** Forward a competitor's press release to hermes@yourdomain.com → Hermes reads the vault's competitive intel section → cross-references what you already knew → writes a competitive response brief → saves it as a new vault note → replies with a summary. The brief is in your vault before you finish reading the press release.
 
-### Part 4: Hermes + n8n — The Hybrid Marketing Automation Pattern (30 min)
+### Part 4: Hermes + n8n — Both Sharing the Same Vault (30 min)
 
-- **The two integration patterns for marketing campaigns:**
+- **The vault is the shared context between Hermes and n8n:** Hermes and n8n both read from and write to the same vault. This is the architecture that ties everything together:
 
-  1. **n8n triggers Hermes — workflow hits an AI-heavy step that needs judgment:**
-     *Example:* Lead enrichment workflow runs. Data is collected. But the AI enrichment step needs Hermes-level reasoning: "This lead is from a company that just announced a layoff — adjust the personalization angle to be empathetic." The n8n workflow fires a webhook to Hermes, Hermes reasons, returns the enriched output, n8n continues.
+  ```
+          ┌─────────────────────────┐
+          │  Brand Context Vault    │
+          │  (Obsidian .md files)   │
+          └──────┬──────────┬───────┘
+                 │          │
+           Reads/Writes  Reads/Writes
+                 │          │
+          ┌──────▼──┐  ┌───▼────────┐
+          │ Hermes  │  │    n8n     │
+          │ (Agent) │  │ (Workflow) │
+          └─────────┘  └────────────┘
+  ```
 
-  2. **Hermes triggers n8n — agent decides it needs tool execution beyond its capabilities:**
-     *Example:* Hermes is running a competitive monitoring skill. It finds a major competitor launch. It decides: "This needs immediate action." Hermes calls an n8n webhook → n8n workflow: creates an Asana task for the product marketing lead, writes a Slack alert to #war-room, drafts a CMO briefing email, and schedules a 30-min huddle on the team calendar. Hermes makes the decision; n8n executes the multi-tool response.
+- **Pattern 1: n8n writes to vault → Hermes reacts to vault changes:**
+  - n8n completes a lead enrichment workflow → writes findings to `brand-context-vault/02-personas/lead-patterns.md`
+  - Hermes (watching vault changes or triggered by you) notices the new lead patterns → offers: "I see new lead enrichment data in the vault. 80% match the CTO persona but only 30% convert. Want me to analyze and update the persona doc with this insight?"
+  - *The vault is the shared journal — both tools leave notes for each other.*
 
-- **Live demo — End-to-end marketing campaign response:**
-  Campaign scenario: A competitor launches a new feature that threatens your positioning.
+- **Pattern 2: Hermes decides → n8n executes multi-tool response → writes result to vault:**
+  - Hermes is running a competitive monitoring skill. It finds a major competitor launch.
+  - It reads the vault's competitive intel to understand your position vs. this competitor.
+  - Hermes decides: "This needs immediate action." It calls an n8n webhook.
+  - n8n workflow runs: creates Asana task, posts Slack alert to #war-room, drafts CMO briefing email, schedules team huddle.
+  - **n8n workflow also writes to vault:** Creates a new note `brand-context-vault/03-competitive/competitor-X-launch-response.md` with the n8n-generated response actions, linked back to the existing competitor doc.
+  - Hermes reads that vault note on next startup and knows the response is already in motion.
+
+- **Pattern 3: The vault as the handoff protocol:**
+  - You hand a task to n8n (scheduled campaign report) → n8n writes the report to the vault
+  - You hand a task to Hermes (analyze the week's data) → Hermes reads the vault note n8n created, analyzes it, writes findings back
+  - Neither tool needs to talk directly — they communicate through the vault. This is the most resilient integration pattern: even if one tool is down, the vault preserves the data.
+
+- **Live demo — Vault-mediated campaign response:**
+  Campaign scenario: A competitor launches a new feature.
   1. Hermes (monitoring skill) detects new product announcement via RSS/blog monitoring
-  2. Hermes researches the feature (web search, competitor landing page, social reception)
-  3. Hermes decides: "This is significant — escalate" and calls n8n webhook
-  4. n8n workflow runs:
-     - Creates Notion page "Competitor Threat: [Feature]" with Hermes' research as the brief
-     - Posts to Slack #marketing-war-room: "Competitor X launched [Feature] — here's what it does, here's how our positioning holds up, recommended counter-play: [strategy]"
-     - Sends email to product marketing lead with full briefing
-     - Adds a task to Asana: "Draft competitive response campaign — due in 48 hours"
-  5. Marketing director reviews in Slack, replies with feedback → next iteration begins
+  2. Hermes reads `brand-context-vault/03-competitive/[competitor].md` to understand your current positioning against them
+  3. Hermes researches the new feature → writes initial analysis to `brand-context-vault/03-competitive/[competitor]-new-feature-threat.md` — the vault is updated immediately
+  4. Hermes decides: "This is significant — escalate" and calls n8n webhook
+  5. n8n workflow reads Hermes' vault note for context → creates Asana task, Slack alert, briefing email
+  6. n8n writes to vault: appends `response-actions.md` with the actions taken, backlinks to the threat analysis
+  7. Your vault now has a complete, linked record: threat detected → analysis → response actions — all in one graph
 
-- **Decision framework for marketing execs: when to handle a step in n8n vs. in Hermes**
+- **Decision framework — when Hermes handles vs. n8n handles (with vault in mind):**
 
-| Scenario | Handle In | Why |
-|---|---|---|
-| Post draft to social on schedule | n8n | Fixed execution, no judgment needed |
-| What angle should this social post take? | Hermes | Requires brand knowledge, audience understanding, and campaign context |
-| Send email when lead reaches score 80 | n8n | Deterministic trigger + action |
-| Should we escalate this competitor move? | Hermes | Judgment call based on severity, brand risk, and campaign timing |
-| Format and deliver weekly report | n8n | Predictable data aggregation and delivery |
-| What story does this week's data tell? | Hermes | Requires synthesis, trend-spotting, strategic framing |
+| Scenario | Handle In | Vault Role |
+|----------|-----------|------------|
+| Post draft to social on schedule | n8n | n8n reads vault voice guide for tone, writes post-log to vault |
+| What angle should this social post take? | Hermes | Hermes reads vault personas + campaign history for context |
+| Should I update the persona doc? | Hermes | Hermes analyzes lead data, writes updated persona to vault |
+| Build weekly report from ad data | n8n | n8n aggregates data, writes raw report to vault |
+| What story does this week's data tell? | Hermes | Hermes reads n8n's vault report, adds strategic analysis |
+| Detect stale vault content | Hermes | Hermes scans vault frontmatter, flags outdated entries |
 
-### Part 5: Compressed — Multi-Agent Orchestration & Production for Marketing (30 min)
+### Part 5: Compressed — Multi-Agent Orchestration & Production (30 min)
 
-**Orchestration — Why One Marketing Agent Isn't Enough for Growing Teams**
-- **Specialization logic:** A researcher agent needs different context (competitor tracking, market trends, news) than a content agent (brand voice, audience segments, campaign history). Stuffing everything into one agent dilutes both.
-- **The pattern — manager agent orchestrates specialists:**
-  1. **Monitoring Agent:** Watches competitor blogs, press releases, social accounts, review sites — flags significant moves
-  2. **Research Agent:** Takes a flag → deep-dives → produces structured brief (positioning change, feature gaps, messaging analysis)
-  3. **Content Agent:** Takes the research brief → drafts response assets (blog, social, email sequence, sales enablement one-pager)
-  4. **Distribution Agent:** Takes approved content → calls n8n workflows → schedules across channels → logs performance
-  5. **Manager Agent:** Orchestrates the flow, decides when human review is needed, maintains the strategic lens
-- **Marketing analogy:** This is exactly how a marketing department works — a CMO (manager), strategist (researcher), copywriter (content), and ops manager (distribution). You're building the AI equivalent.
-- **Quick live demo:** Monitoring agent flags competitor blog post → researcher writes brief → content drafts response → posts to Slack for human approval. All within 8 minutes of the competitor publishing.
+**Orchestration — When One Vault-Living Agent Isn't Enough**
+- **The vault scales to multiple agents:** Each agent reads the same vault but specializes in different sections. A research agent focuses on `03-competitive/` and `05-campaigns/`. A content agent focuses on `01-voice/`, `02-personas/`, and `06-messaging/`. All share the same vault as their source of truth — no context fragmentation.
+- **The pattern — agents sharing a vault:**
+  1. **Monitoring Agent:** Watches competitor blogs, press releases — flags moves and writes raw intelligence to `brand-context-vault/03-competitive/intelligence-flags/`
+  2. **Research Agent:** Monitors the flags folder → reads new intelligence → deep-dives → produces structured brief → writes to `03-competitive/` as a proper competitor doc
+  3. **Content Agent:** Reads the new competitor doc → drafts response assets → writes drafts to `brand-context-vault/content-drafts/`
+  4. **Distribution Agent:** Takes approved content from vault → calls n8n workflows → schedules across channels → logs performance to `brand-context-vault/05-campaigns/`
+  5. **Manager Agent:** Monitors all vault sections, flags stale content, identifies coverage gaps in the vault
+- **Marketing analogy:** This is a marketing team sharing one shared drive (the vault). Each person has their focus area but everything is in one place, connected, searchable.
 
-**Production — Making Marketing Automation Last**
-- **Reliability in marketing operations:** What breaks (Claude API rate limits during peak campaign launches, n8n workflow timeouts on big data pulls, tool authentication expiring) and how to design around it — retries, fallback channels, alerting when a workflow falls over
+**Production — Keeping Your Vault Healthy**
+- **Vault reliability:** Your vault is markdown files — they don't go down. Even if Hermes or n8n is offline, your vault is intact. This is the resilience of a file-based knowledge base.
+- **Vault maintenance via Hermes:** Create a skill "vault-health-check" that scans every note's `last_updated` frontmatter and flags anything over 90 days without an update. "Flagging 3 persona docs and 2 competitor docs as potentially stale — review these vault entries."
 - **Cost management for marketing budgets:**
-  - Token budgeting per campaign: track what each campaign workflow costs in API calls
-  - Model tiering by task: Haiku for enrichment/scoring (90% of volume, lowest cost), Sonnet for content generation, Opus for strategy and high-stakes messaging only
-  - Show real budget projection: "$50/month in Claude API costs replaces ~$3,000/month of contractor hours on content generation"
-- **Security — what a marketing exec must know:**
-  - What data should never touch an external API (customer PII beyond what's needed, unreleased campaign strategy, board-level financial targets)
-  - GDPR/CCPA for marketing automation: automated consent management, data retention, right-to-deletion workflows
-  - Access control: who in the marketing org can trigger/modify automation, audit trails for campaign approvals
-- **Team rollout strategy:**
-  - Profiles per team member or per brand (agency scenario)
-  - Shared skills library: the competitive analysis skill one person builds→ the whole team uses
-  - Onboarding: new team member gets their own Hermes instance pre-loaded with brand memory and team skills
+  - The vault reads are free (local filesystem). Only Claude API calls cost tokens.
+  - Model tiering by task: Haiku for vault-maintenance tasks (scanning frontmatter, flagging stale content), Sonnet for content generation against vault context, Opus for strategic analysis against the full vault knowledge base
+- **Security — the vault model is inherently safer:** Your vault lives on your machine. Hermes reads it locally. n8n reads it locally. No third-party cloud stores your brand context. You choose what flows through external APIs (only the Claude API calls with selected context slices).
 
-### Part 6: Live Build — Brand Intelligence Agent (60 min)
+### Part 6: Live Build — Brand Intelligence Agent, Pre-Loaded with Your Vault (60 min)
 
-Students build their own production-ready marketing agent, configured for their actual brand, audience, and workflows.
+Students build their own production-ready marketing agent that lives in their Week 2 vault.
 
-1. **Deploy** — Hermes instance running with Claude as the brain
-2. **Configure brand memory:**
-   - Brand voice guidelines (tone, vocabulary, do-not-says, competitive positioning)
-   - 2–3 buyer personas (demographics, pain points, buying triggers, channel preferences)
-   - Competitive landscape (top 3 competitors, key differentiators, messaging gaps)
-3. **Build 3 skills:**
-   - **Skill 1: Competitive Analysis Brief** — company name → web research → structured brief → saved to Notion
-   - **Skill 2: Content Brief Generator** — product/topic + persona → full marketing brief with positioning + per-channel assets → saved to content calendar
-   - **Skill 3: Campaign Retrospective** — campaign name/period → performance analysis → recommendations → saved to campaign archive
-4. **Connect at least one n8n workflow** — e.g., the lead enrichment pipeline from Week 3. When Hermes identifies a high-value lead during analysis, it triggers the n8n workflow to execute the multi-tool response.
-5. **Test with a real scenario:** "Analyze our main competitor's latest product launch and brief the marketing team"
-   - Instructor runs this live on their machine first, showing the full output
-   - Students run it on their own agent with their own competitor
-   - Debrief: what did the agent get right? What needs refinement? How do you give feedback to improve the skill?
+1. **Deploy** — Hermes instance running with Claude as the brain, vault path configured
 
-**Deliverable:** A live **Brand Intelligence Agent** — fully configured with brand memory, 3 marketing skills, and n8n integration. Ready to handle real marketing workflows on Monday morning. Students leave with a working AI team member, not a theoretical concept.
+2. **Configure brand memory (from the vault, not from scratch):**
+   Instead of manually typing brand info, Hermes reads directly from the vault:
+   - `brand-context-vault/index.md` → the agent's table of contents for your brand
+   - `brand-context-vault/01-voice/brand-voice-guide.md` → voice guidelines
+   - `brand-context-vault/02-personas/persona-cto.md` → primary persona
+   - `brand-context-vault/02-personas/persona-vp-marketing.md` → secondary persona
+   - `brand-context-vault/03-competitive/` → competitive landscape
+   - `brand-context-vault/05-campaigns/` → campaign history and learnings
+   - `brand-context-vault/06-messaging/do-not-says.md` → banned language
+   - **Verification:** Ask "Hermes, what's in my brand vault?" — it should list the vault structure. Ask "What did I learn from my last campaign?" — it reads the campaign retro from the vault.
+
+3. **Set up honcho.dev for session persistence:**
+   - Configure honcho.dev API key
+   - Start a conversation: "We're planning a Q4 ABM campaign targeting the CTO persona. Let's start with competitive positioning."
+   - Close Hermes. Reopen. Ask: "Continue where we left off on the Q4 campaign." Hermes remembers via honcho.dev — and has the vault context ready from the filesystem.
+
+4. **Build 3 skills that use the vault as context source and output destination:**
+   - **Skill 1: Competitive Analysis Brief** — reads vault competitive Intel section first, then web researches, writes result as a new vault note
+   - **Skill 2: Content Brief Generator** — reads vault persona doc + product specs, generates brief, saves to vault content-briefs folder
+   - **Skill 3: Campaign Retrospective** — pulls performance data, reads vault campaign launch record, writes retro to vault campaigns folder with frontmatter
+
+5. **Connect the Week 3 vault-backed n8n workflow:**
+   - The lead enrichment pipeline from Week 3 (Workflow 2) writes persona-match data to the vault
+   - Hermes detects the new lead-patterns.md in the vault → offers: "I see new lead patterns. Want me to analyze and update the persona doc?"
+   - This demonstrates the vault as shared context: n8n writes → Hermes reads → Hermes enriches → writes back → n8n reads the enriched vault on next execution
+
+6. **Test with a real scenario — the vault arc complete:**
+   **"Analyze our main competitor's latest product launch. Reference what we already know in the vault. Write a brief. Save it to the vault."**
+   - Instructor demonstrates: Hermes reads `brand-context-vault/03-competitive/[competitor].md` → sees what you already know → web researches for updates → Claude writes brief → saves to `brand-context-vault/03-competitive/[competitor]-updated-analysis.md`
+   - Students run it on their own agent with their own vault and competitor
+   - Debrief: The output is better because the vault prevented the agent from re-researching what you already knew. The vault is the agent's memory — the agent starts with knowledge, not a blank state.
+
+**Deliverable:** A live **Brand Intelligence Agent** — pre-loaded with your Week 2 vault, configured to read vault context for every task, write outputs back as new vault notes, and maintain session memory via honcho.dev. The vault is no longer a static reference — it's the agent's permanent home. Students leave with a working AI team member that already knows their entire brand context because it lives in the vault.
 
 ---
 
@@ -659,10 +838,12 @@ Week 1: Foundations     → "I understand the AI stack — LLMs, APIs, webhooks,
                            and can map my marketing ops against it"
 Week 2: Claude           → "I can build brand context vaults that feed my agents,
                            making context engineering my superpower"
-Week 3: n8n              → "I can automate multi-tool marketing workflows 
-                           without a developer"
-Week 4: Hermes Agent     → "I have a persistent AI marketing assistant with brand
-                           memory, skills, and tool integration"
+Week 3: n8n              → "I can build workflows that read brand context FROM my vault 
+                           and write campaign results TO my vault — the vault is my 
+                           automation hub"
+Week 4: Hermes Agent     → "I have an AI agent that LIVES in my brand vault — it wakes 
+                           up every day knowing my voice, personas, and campaigns, and 
+                           writes its outputs back into the vault. The vault is its home"
 ```
 
 ## What the Student Walks Away With
@@ -671,15 +852,15 @@ Week 4: Hermes Agent     → "I have a persistent AI marketing assistant with br
 |------|---------------------|
 | 1 | **Automation Readiness Map** — their entire marketing workload mapped against the AI stack with prioritized next steps |
 | 2 | **Brand Context Vault** — structured knowledge base (voice guide, personas, do-not-says) feeding Claude and agents — grows smarter every campaign |
-| 3 | **Multi-Channel Campaign Distribution Pipeline** — automated Notion → Claude variants → LinkedIn + Twitter + email → performance log |
-| 4 | **Brand Intelligence Agent** — live Hermes instance with brand memory, 3 skills, and n8n integration |
+| 3 | **Vault-Backed Campaign Distribution Pipeline** — n8n workflow that reads brand context FROM your Week 2 vault, generates channel-specific content in your brand's voice, publishes to LinkedIn + Twitter + email, and writes campaign records back to the vault |
+| 4 | **Brand Intelligence Agent** — live Hermes instance that lives in your Week 2 vault, reads brand context for every task, writes outputs back as new vault notes, and maintains session memory via honcho.dev. The vault is its permanent home |
 
 ### Knowledge Evolution
 
 | Before | After |
 |--------|-------|
 | "AI" is a black box | Can explain what an LLM, API, webhook, and agent actually are |
-| Uses ChatGPT for ad-hoc tasks | Has a persistent agent with brand memory, skills, and n8n integration |
+| Uses ChatGPT for ad-hoc tasks | Has a persistent agent that lives in the brand vault — reads vault context, writes outputs back, remembers sessions |
 | Manual handoffs between tools | End-to-end automated workflows connecting 200+ tools |
 | Doesn't know what tools exist | Knows exactly which layer (chat, workflow, agent, orchestration) for which job |
 | Depends on engineering for automation | Can build and deploy their own automation independently |
@@ -693,8 +874,8 @@ Week 4: Hermes Agent     → "I have a persistent AI marketing assistant with br
 |------|-------|-------------------------------|
 | **LLM concepts** | 1, throughout | Explain what a model, API, webhook, token, and agent are — to stakeholders and vendors |
 || **Claude** | 2, 3, 4 | Build structured brand context vaults that give agents rich brand awareness; produce marketing content that sounds like your brand, not a generic AI |
-| **n8n** | 3, 4 | Build production-grade marketing workflows connecting 200+ tools; trigger AI steps; handle errors |
-| **Hermes Agent** | 4 | Deploy autonomous agents with persistent memory, skills, and multi-platform reach |
+| **n8n** | 3, 4 | Build production-grade marketing workflows that read brand context FROM the Week 2 vault, inject it into AI prompts, and write campaign results back TO the vault as structured notes |
+| **Hermes Agent** | 4 | Deploy autonomous agents that live in the Week 2 vault — read vault context as their permanent memory, write outputs back as vault notes, and maintain session persistence via honcho.dev |
 | **Orchestration** | 4 (compressed) | Understand multi-agent patterns for when workloads outgrow a single agent |
 | **Production ops** | 4 (compressed) | Manage costs, reliability, security, and team rollout |
 
