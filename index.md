@@ -8,7 +8,7 @@ A 4-week live course for marketing executives who want to understand, build, and
 
 ## Course Outline
 
-[View full outline →](outline.md)
+[View full outline →](outline)
 
 ---
 
@@ -16,10 +16,10 @@ A 4-week live course for marketing executives who want to understand, build, and
 
 | Week | Topic | Deliverable |
 |------|-------|-------------|
-| [Week 1](weeks/week-01.md) | Foundations — LLMs, APIs, Webhooks, Agents | Automation Readiness Map |
-| [Week 2](weeks/week-02.md) | Claude & Prompt Engineering for Marketing | Marketing Brief Generator |
-| [Week 3](weeks/week-03.md) | n8n — Marketing Workflow Automation | Content Distribution Pipeline |
-| [Week 4](weeks/week-04.md) | Hermes Agent — Autonomous Marketing Operations | Brand Intelligence Agent |
+| [Week 1](weeks/week-01) | Foundations — LLMs, APIs, Webhooks, Agents | Automation Readiness Map |
+| [Week 2](weeks/week-02) | Claude & Prompt Engineering for Marketing | Marketing Brief Generator |
+| [Week 3](weeks/week-03) | n8n — Marketing Workflow Automation | Content Distribution Pipeline |
+| [Week 4](weeks/week-04) | Hermes Agent — Autonomous Marketing Operations | Brand Intelligence Agent |
 
 ---
 
@@ -31,6 +31,6 @@ A 4-week live course for marketing executives who want to understand, build, and
 
 ## Quick Links
 
-- [Full Course Outline](outline.md)
-- [Week 1: Foundations](weeks/week-01.md)
-- [Setup Guide & Prerequisites](setup.md)
+- [Full Course Outline](outline)
+- [Week 1: Foundations](weeks/week-01)
+- [Setup Guide & Prerequisites](setup)
