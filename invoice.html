@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice — AI Automation Course</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  .invoice {
+    max-width: 800px;
+    width: 100%;
+    background: white;
+    border-radius: 16px;
+    padding: 48px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 2px solid #f0f0f0;
+  }
+  .brand h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: -0.02em;
+  }
+  .brand .tagline {
+    font-size: 13px;
+    color: #888;
+    margin-top: 4px;
+  }
+  .badge {
+    background: #f0f7ff;
+    color: #0066cc;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .invoice-to {
+    margin-bottom: 32px;
+  }
+  .invoice-to .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .invoice-to .name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+  }
+  .invoice-to .detail {
+    font-size: 14px;
+    color: #555;
+    margin-top: 2px;
+  }
+  .meta {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 32px;
+  }
+  .meta-item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    font-weight: 600;
+  }
+  .meta-item .value {
+    font-size: 14px;
+    font-weight: 500;
+    color: #111;
+    margin-top: 4px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+  }
+  th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #888;
+    font-weight: 600;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+  }
+  td {
+    padding: 14px 0;
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 14px;
+    color: #333;
+  }
+  td:last-child, th:last-child { text-align: right; }
+  td:nth-child(3), th:nth-child(3) { text-align: right; }
+  .item-desc { font-size: 12px; color: #888; margin-top: 2px; }
+  .totals { margin-left: auto; width: 280px; }
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #555;
+  }
+  .total-row.final {
+    border-top: 2px solid #111;
+    margin-top: 8px;
+    padding-top: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #111;
+  }
+  .payment-terms {
+    margin-top: 32px;
+    padding: 20px;
+    background: #fafafa;
+    border-radius: 10px;
+  }
+  .payment-terms h3 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  .payment-terms p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .footer {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+  }
+  @media print {
+    body { background: white; padding: 0; }
+    .invoice { box-shadow: none; padding: 32px; }
+  }
+</style>
+</head>
+<body>
+<div class="invoice">
+  <div class="header">
+    <div class="brand">
+      <h1>INVOICE</h1>
+      <div class="tagline">Femi — AI Transformation Lead</div>
+    </div>
+    <span class="badge">AI Automation Course</span>
+  </div>
+
+  <div class="invoice-to">
+    <div class="label">Bill To</div>
+    <div class="name">Marketing Executive</div>
+    <div class="detail">Private Client — Referral</div>
+  </div>
+
+  <div class="meta">
+    <div class="meta-item">
+      <div class="label">Invoice #</div>
+      <div class="value">INV-001</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Date</div>
+      <div class="value">July 27, 2026</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Payment Terms</div>
+      <div class="value">50% Upfront / 50% on Completion</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Qty</th>
+        <th>Rate</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          AI Automation for Marketing Executives — Live Course
+          <div class="item-desc">4 weekly sessions × ~3 hours. Curriculum: Context Engineering, n8n Workflows, Hermes Agents. Includes Brand Context Vault template, Content Distribution Pipeline, and Brand Intelligence Agent.</div>
+        </td>
+        <td>1</td>
+        <td>₦350,000</td>
+        <td>₦350,000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="totals">
+    <div class="total-row">
+      <span>Subtotal</span>
+      <span>₦350,000</span>
+    </div>
+    <div class="total-row">
+      <span>Deposit Paid (50%)</span>
+      <span>—</span>
+    </div>
+    <div class="total-row final">
+      <span>Balance Due</span>
+      <span>₦350,000</span>
+    </div>
+  </div>
+
+  <div class="payment-terms">
+    <h3>Payment Schedule</h3>
+    <p>
+      <strong>1st Payment (50%):</strong> ₦175,000 — Due before Week 1 session<br>
+      <strong>2nd Payment (50%):</strong> ₦175,000 — Due upon course completion
+    </p>
+  </div>
+
+  <div class="footer">
+    Femi · AI Transformation Lead · Abuja, Nigeria<br>
+    Invoice generated July 27, 2026
+  </div>
+</div>
+</body>
+</html>
