@@ -1,0 +1,6 @@
+title: AI Automation for Marketing Executives
+description: A 4-week live course — from ground zero to autonomous marketing operations
+remote_theme: pages-themes/modernist@v0.2.0
+plugins:
+  - jekyll-remote-theme
+show_downloads: false
