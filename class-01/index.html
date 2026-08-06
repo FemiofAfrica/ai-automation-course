@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Automation for Marketing Executives — Class 1: The Foundations</title>
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --bg-alt: #ffffff;
+    --panel: #ffffff;
+    --panel-alt: #f0f0ec;
+    --ink: #1a1a1a;
+    --ink-soft: #55554f;
+    --ink-dim: #8a8a82;
+    --line: #d9d9d2;
+    --accent: #0f766e;
+    --accent-soft: #ccfbf1;
+    --accent-ink: #134e4a;
+    --warn: #b45309;
+    --warn-soft: #fef3c7;
+    --danger: #b91c1c;
+    --danger-soft: #fee2e2;
+    --ok: #15803d;
+    --ok-soft: #dcfce7;
+    --code-bg: #1e1e1e;
+    --code-ink: #e8e8e8;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 14px rgba(0,0,0,.05);
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121212;
+    --bg-alt: #181818;
+    --panel: #1c1c1c;
+    --panel-alt: #242424;
+    --ink: #ecece6;
+    --ink-soft: #b8b8ae;
+    --ink-dim: #7a7a72;
+    --line: #33332e;
+    --accent: #2dd4bf;
+    --accent-soft: #134e4a;
+    --accent-ink: #99f6e4;
+    --warn: #fbbf24;
+    --warn-soft: #3a2a08;
+    --danger: #f87171;
+    --danger-soft: #3a1212;
+    --ok: #4ade80;
+    --ok-soft: #0f2f18;
+    --shadow: 0 1px 3px rgba(0,0,0,.5);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+  header.top {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(6px);
+  }
+  .top-inner {
+    max-width: 900px; margin: 0 auto; padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .brand { font-weight: 700; font-size: 15px; letter-spacing: .02em; }
+  .brand small { display: block; font-weight: 500; color: var(--ink-dim); font-size: 12px; }
+  .toggle-btn {
+    background: var(--panel); color: var(--ink); border: 1px solid var(--line);
+    border-radius: 8px; padding: 6px 12px; font-size: 13px; cursor: pointer;
+  }
+  .toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .hero { padding: 44px 0 28px; }
+  .course-strip {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px;
+  }
+  .week-chip {
+    font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--ink-dim); background: var(--panel);
+  }
+  .week-chip.active {
+    background: var(--accent); border-color: var(--accent); color: #fff;
+  }
+  h1 { font-size: 34px; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 10px; }
+  .sub { font-size: 18px; color: var(--ink-soft); max-width: 700px; }
+  .meta { margin-top: 14px; font-size: 13px; color: var(--ink-dim); display: flex; gap: 16px; flex-wrap: wrap; }
+  h2 {
+    font-size: 24px; letter-spacing: -.01em; margin: 56px 0 6px;
+    padding-top: 16px; border-top: 1px solid var(--line);
+  }
+  h2 .num {
+    display: inline-block; margin-right: 10px; color: var(--accent);
+  }
+  h3 { font-size: 18px; margin: 24px 0 8px; }
+  p { margin: 10px 0; }
+  .lead { font-size: 17px; color: var(--ink-soft); }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 20px; margin: 16px 0; box-shadow: var(--shadow);
+  }
+  .callout {
+    border-left: 4px solid var(--accent); background: var(--accent-soft);
+    padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 16px 0;
+  }
+  .callout.warn { border-left-color: var(--warn); background: var(--warn-soft); }
+  .callout.danger { border-left-color: var(--danger); background: var(--danger-soft); }
+  .callout strong:first-child { display: block; margin-bottom: 2px; }
+  .callout p { margin: 4px 0; }
+  ul, ol { margin: 10px 0 10px 22px; }
+  li { margin: 6px 0; }
+  strong { font-weight: 650; }
+
+  /* Card grids */
+  .grid { display: grid; gap: 14px; margin: 18px 0; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px 18px; box-shadow: var(--shadow);
+  }
+  .card h4 { font-size: 16px; margin-bottom: 6px; }
+  .card .tag {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
+    border-radius: 999px; padding: 2px 8px; margin-bottom: 8px;
+  }
+  .card p { font-size: 14.5px; color: var(--ink-soft); margin: 6px 0; }
+  .card .example { font-size: 13px; color: var(--ink-dim); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 8px; }
+
+  /* Flow rows */
+  .flow { display: flex; flex-direction: column; gap: 0; margin: 18px 0; }
+  .flow-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 14px 16px; position: relative;
+  }
+  .flow-row:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+  .flow-row:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+  .flow-row + .flow-row { border-top: none; }
+  .flow-num {
+    flex: 0 0 30px; height: 30px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+  }
+  .flow-body h4 { font-size: 15.5px; }
+  .flow-body p { font-size: 14px; color: var(--ink-soft); margin: 2px 0 0; }
+  .flow-body .use { font-size: 13px; color: var(--ink-dim); margin-top: 6px; }
+
+  /* Terminal-window code blocks */
+  .term { background: var(--code-bg); border-radius: 10px; overflow: hidden; margin: 16px 0; box-shadow: var(--shadow); }
+  .term-head {
+    display: flex; align-items: center; gap: 6px; padding: 8px 12px;
+    background: #2a2a2a; border-bottom: 1px solid #3a3a3a;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .term-title { color: #aaa; font-size: 12px; margin-left: 8px; font-family: ui-monospace, "Cascadia Code", monospace; }
+  .term pre { padding: 14px 16px; overflow-x: auto; color: var(--code-ink); font-family: ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 13.5px; line-height: 1.55; }
+  .term .cmt { color: #7d7d7d; }
+  .term .k { color: #c792ea; }
+  .term .s { color: #c3e88d; }
+  .term .f { color: #82aaff; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14.5px; background: var(--panel); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--panel-alt); font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); }
+  tr:last-child td { border-bottom: none; }
+
+  /* SVG pipeline */
+  .diagram { margin: 20px 0; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+
+  /* Checklist */
+  .checklist { list-style: none; margin: 16px 0; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 14px; margin: 8px 0; cursor: pointer;
+  }
+  .checklist input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; flex: 0 0 16px; }
+  .checklist label { flex: 1; font-size: 14.5px; }
+  .checklist li.done label { text-decoration: line-through; color: var(--ink-dim); }
+
+  /* Quiz */
+  .quiz-item { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin: 12px 0; box-shadow: var(--shadow); }
+  .quiz-q { font-weight: 600; margin-bottom: 10px; }
+  .quiz-opts { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .quiz-opt {
+    border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px;
+    font-size: 14px; cursor: pointer; background: var(--panel-alt); color: var(--ink);
+    text-align: left; transition: all .12s;
+  }
+  .quiz-opt:hover { border-color: var(--accent); }
+  .quiz-opt.correct { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); font-weight: 600; }
+  .quiz-opt.wrong { background: var(--danger-soft); border-color: var(--danger); color: var(--danger); }
+  .quiz-opt:disabled { cursor: default; opacity: .85; }
+  .quiz-explain { display: none; margin-top: 10px; font-size: 14px; color: var(--ink-soft); border-top: 1px dashed var(--line); padding-top: 10px; }
+  .quiz-item.answered .quiz-explain { display: block; }
+
+  /* Readiness Map */
+  .rm-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .rm-table th, .rm-table td { padding: 8px 10px; }
+  .rm-table input, .rm-table select {
+    width: 100%; background: var(--bg-alt); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font-size: 13.5px;
+  }
+  .rm-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  .btn {
+    background: var(--accent); color: #fff; border: none; border-radius: 8px;
+    padding: 9px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.ghost { background: var(--panel-alt); color: var(--ink); border: 1px solid var(--line); }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--accent); filter: none; }
+  .btn.danger-ghost { background: var(--danger-soft); color: var(--danger); border: 1px solid var(--danger); }
+  .rm-hint { font-size: 13.5px; color: var(--ink-dim); }
+
+  .footer-note { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-dim); font-size: 13px; }
+  code { background: var(--panel-alt); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; font-size: .9em; font-family: ui-monospace, Menlo, monospace; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px; }
+  .pill.chat { background: var(--accent-soft); color: var(--accent-ink); }
+  .pill.wf { background: #e0f2fe; color: #075985; }
+  [data-theme="dark"] .pill.wf { background: #0c3a52; color: #bae6fd; }
+  .pill.agent { background: #ede9fe; color: #5b21b6; }
+  [data-theme="dark"] .pill.agent { background: #2e1a55; color: #ddd6fe; }
+  .pill.orch { background: #fce7f3; color: #9d174d; }
+  [data-theme="dark"] .pill.orch { background: #4a1130; color: #fbcfe8; }
+  .pill.no { background: var(--panel-alt); color: var(--ink-dim); border: 1px solid var(--line); }
+  @media print {
+    .toggle-btn, .rm-actions .btn:not(.print-keep) { display: none; }
+    body { background: #fff; }
+    .panel, .card, .quiz-item { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">AI Automation for Marketing Executives
+      <small>Stones &amp; Stacks Consulting · Class 1 of 4 · Live Session</small>
+    </div>
+    <button class="toggle-btn" id="themeToggle" aria-label="Toggle light/dark mode">☾ Dark mode</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="course-strip">
+      <span class="week-chip active">Week 1 · Foundations (today)</span>
+      <span class="week-chip">Week 2 · Context</span>
+      <span class="week-chip">Week 3 · Workflows</span>
+      <span class="week-chip">Week 4 · Your Agent</span>
+    </div>
+    <h1>The Foundations: What You're Actually Working With</h1>
+    <p class="sub">Everything you learn today transfers to <strong>any AI tool, any model</strong>. No vendor tricks. No tool-specific clicks. By the end of this session you'll be able to explain what AI is, diagnose why an AI output is weak, and map your own marketing workload to the right automation layer.</p>
+    <div class="meta">
+      <span>⏱ ~3 hours</span>
+      <span>📋 Deliverable: Automation Readiness Map</span>
+      <span>🧰 Tools needed: none (bring a real marketing problem)</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The promise of this course</strong>
+    <p>By Week 4 you'll have AI systems tracking your content, analytics, tests, meetings, customer relationships, and issues. But that only works if you understand what sits underneath. Today we build the foundation — <em>the vocabulary, the mental model, and the habits</em> — so that every tool you touch from here on makes sense.</p>
+  </div>
+
+  <!-- ============ SECTION 1 ============ -->
+  <h2><span class="num">01</span>The Mental Model: One Pipeline, Every Tool</h2>
+  <p class="lead">Before vocabulary, get the architecture. Whether you type a question into ChatGPT, use Claude.ai, or run a fully autonomous agent — <strong>the same pipeline runs behind the scenes</strong>. The only difference is how many of the middle steps actually happen.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 760 470" role="img" aria-label="The six-step agent pipeline">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"/>
+        </marker>
+      </defs>
+      <!-- boxes -->
+      <g font-family="-apple-system, Segoe UI, sans-serif">
+        <!-- 1 -->
+        <rect x="30" y="10" width="340" height="52" rx="10" fill="var(--panel)" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="48" y="32" font-size="13" font-weight="700" fill="var(--accent)">① YOU GIVE INPUT</text>
+        <text x="48" y="50" font-size="12.5" fill="var(--ink-soft)">The prompt — your instruction to the LLM</text>
+        <!-- arrow -->
+        <line x1="200" y1="62" x2="200" y2="84" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+        <!-- 2 -->
+        <rect x="30" y="84" width="340" height="52" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="48" y="106" font-size="13" font-weight="700" fill="var(--ink-soft)">② HARNESS GATHERS CONTEXT</text>
+        <text x="48" y="124" font-size="12.5" fill="var(--ink-soft)">Brand docs, notes, project files</text>
+        <line x1="200" y1="136" x2="200" y2="158" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+        <!-- 3 -->
+        <rect x="30" y="158" width="340" height="52" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="48" y="180" font-size="13" font-weight="700" fill="var(--ink-soft)">③ HARNESS SEARCHES MEMORY</text>
+        <text x="48" y="198" font-size="12.5" fill="var(--ink-soft)">Past sessions, preferences, learnings</text>
+        <line x1="200" y1="210" x2="200" y2="232" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+        <!-- 4 -->
+        <rect x="30" y="232" width="340" height="52" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="48" y="254" font-size="13" font-weight="700" fill="var(--ink-soft)">④ HARNESS USES TOOLS</text>
+        <text x="48" y="272" font-size="12.5" fill="var(--ink-soft)">Web search, APIs, skills, integrations</text>
+        <line x1="200" y1="284" x2="200" y2="306" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+        <!-- 5 -->
+        <rect x="30" y="306" width="340" height="52" rx="10" fill="var(--panel)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="48" y="328" font-size="13" font-weight="700" fill="var(--accent)">⑤ EVERYTHING FLOWS TO THE MODEL</text>
+        <text x="48" y="346" font-size="12.5" fill="var(--ink-soft)">Context + memory + tool results → the brain</text>
+        <line x1="200" y1="358" x2="200" y2="380" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+        <!-- 6 -->
+        <rect x="30" y="380" width="340" height="52" rx="10" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/>
+        <text x="48" y="402" font-size="13" font-weight="700" fill="#fff">⑥ MODEL PRODUCES OUTPUT</text>
+        <text x="48" y="420" font-size="12.5" fill="rgba(255,255,255,.85)">Response, content, decision — that YOU verify</text>
+        <!-- right annotation -->
+        <rect x="430" y="10" width="300" height="120" rx="10" fill="var(--panel-alt)" stroke="var(--line)"/>
+        <text x="448" y="36" font-size="13.5" font-weight="700" fill="var(--ink)">The key insight</text>
+        <text x="448" y="58" font-size="12.5" fill="var(--ink-soft)">In a simple chat app (ChatGPT,</text>
+        <text x="448" y="76" font-size="12.5" fill="var(--ink-soft)">Claude.ai), steps ②③④ are thin</text>
+        <text x="448" y="94" font-size="12.5" fill="var(--ink-soft)">or missing. In an agent, they're</text>
+        <text x="448" y="112" font-size="12.5" fill="var(--ink-soft)">fully built. Same prompt, different</text>
+        <text x="448" y="130" font-size="12.5" fill="var(--ink-soft)">result — <tspan font-weight="700" fill="var(--accent)">that's the pipeline, not magic.</tspan></text>
+        <rect x="430" y="150" width="300" height="150" rx="10" fill="var(--panel)" stroke="var(--line)"/>
+        <text x="448" y="176" font-size="13.5" font-weight="700" fill="var(--ink)">How to use this</text>
+        <text x="448" y="198" font-size="12.5" fill="var(--ink-soft)">Weak output? Ask: which step</text>
+        <text x="448" y="216" font-size="12.5" fill="var(--ink-soft)">was weak?</text>
+        <text x="448" y="238" font-size="12.5" fill="var(--ink-soft)">• Generic copy → ② lacked brand</text>
+        <text x="448" y="256" font-size="12.5" fill="var(--ink-soft)">• Can't act, only talk → ④ no tools</text>
+        <text x="448" y="274" font-size="12.5" fill="var(--ink-soft)">• Re-explains everything → ③ no memory</text>
+        <text x="448" y="296" font-size="12.5" fill="var(--ink-soft)">• Confidently wrong → verify ⑥</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="panel">
+    <h3>The course arc — one pipeline, four weeks</h3>
+    <table>
+      <tr><th>Week</th><th>What you learn</th><th>Pipeline step it strengthens</th></tr>
+      <tr><td><strong>1 (today)</strong></td><td>Vocabulary + this pipeline</td><td>Understanding the whole flow</td></tr>
+      <tr><td><strong>2</strong></td><td>Context engineering — brand vault, personas, voice</td><td>② Giving the model rich context</td></tr>
+      <tr><td><strong>3</strong></td><td>Workflow automation (n8n)</td><td>④ Giving the model tools to act</td></tr>
+      <tr><td><strong>4</strong></td><td>Your own persistent agent</td><td>③ + ④ Memory and autonomy</td></tr>
+    </table>
+    <p class="rm-hint">Every time you interact with AI — this pipeline runs. Understanding it means you can diagnose <em>why</em> an output is weak and know <em>which lever</em> to pull. That skill is the whole course.</p>
+  </div>
+
+  <!-- ============ SECTION 2 ============ -->
+  <h2><span class="num">02</span>The Vocabulary: Six Words That Unlock Everything</h2>
+  <p class="lead">Marketing execs get sold "AI" as one thing. It isn't. Six words — and you can decode any vendor pitch, any tool, any article.</p>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <span class="tag">The brain</span>
+      <h4>Model</h4>
+      <p>A pattern-recognition machine trained on enormous amounts of data. It doesn't <em>think</em> — it predicts the next most likely word, image, or action.</p>
+      <p class="example">Analogy: a brilliant new hire who has read the entire internet. Needs clear instructions. Knows nothing about your brand yet. Can hallucinate confidently.</p>
+    </div>
+    <div class="card">
+      <span class="tag">The brain, bigger</span>
+      <h4>LLM</h4>
+      <p>Large Language Model = a text model scaled up enough to hold conversations and generate long-form content.</p>
+      <p class="example">Key properties: <strong>context window</strong> (how much it can "see" at once), <strong>tokens</strong> (how it counts text), <strong>temperature</strong> (creativity vs. precision).</p>
+    </div>
+    <div class="card">
+      <span class="tag">The waiter</span>
+      <h4>API</h4>
+      <p>Application Programming Interface — the structured way one tool asks another for data or actions. <em>Pull.</em></p>
+      <p class="example">"Go get data from this place." Your spreadsheet auto-syncing with your CRM, instead of copy-pasting between them.</p>
+    </div>
+    <div class="card">
+      <span class="tag">The phone call</span>
+      <h4>Webhook</h4>
+      <p>A notification: "call me when something happens." <em>Push.</em></p>
+      <p class="example">New lead fills your form → a webhook tells your CRM instantly. Form → WhatsApp alert to sales. No polling, no delay.</p>
+    </div>
+    <div class="card">
+      <span class="tag">The worker</span>
+      <h4>Agent</h4>
+      <p>An LLM with <strong>tools, memory, and autonomy</strong>. Given a goal, it works multi-step: searches, reads, drafts, decides.</p>
+      <p class="example">Analogy: the intern after six months — knows your brand, works without hand-holding, tells you when something needs you.</p>
+    </div>
+    <div class="card">
+      <span class="tag">The wrapper</span>
+      <h4>Harness</h4>
+      <p>The software that wraps a model with a chat interface, tools, memory, and delivery. <strong>A tool is not a model.</strong></p>
+      <p class="example">ChatGPT, Claude.ai, Copilot, Hermes — all harnesses. GPT and Claude are models. This distinction alone saves you from bad vendor math.</p>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <strong>The single most useful distinction of the day</strong>
+    <p><strong>Model ≠ Tool.</strong> "ChatGPT" is not a model — it's a harness around models. When someone says "we use AI," ask: <em>which model, and which harness?</em> When results differ across tools, it's usually the harness (pipeline steps ②③④), not the brain.</p>
+  </div>
+
+  <!-- ============ SECTION 3 ============ -->
+  <h2><span class="num">03</span>The Habits That Transfer: Briefing AI Like a New Hire</h2>
+  <p class="lead">The skills in this section work identically on ChatGPT, Claude, Gemini, Copilot — any harness, most models. This is what "replicable on any harness" means: you're not learning buttons, you're learning <strong>how to brief intelligence</strong>.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>1. Give it a role, audience, and goal</h4>
+      <p>"You are a senior marketing strategist. I run a fintech for SME owners in Lagos. Our goal is demo signups from serious founders." The model can't know your context unless you give it — that's pipeline step ② in action.</p>
+    </div>
+    <div class="card">
+      <h4>2. Ask for a shape</h4>
+      <p>"Give me a table," "bullet points," "a draft," "3 options ranked." Structured requests get structured, usable output — instead of paragraphs you have to rework.</p>
+    </div>
+    <div class="card">
+      <h4>3. One job at a time</h4>
+      <p>Don't ask for strategy + copy + channel plan + calendar in one message. Sequence it: strategy first, then copy, then distribution. Or ask for a plan first and approve before it executes.</p>
+    </div>
+    <div class="card">
+      <h4>4. Ask for the reasoning</h4>
+      <p>When the output matters, add: "Explain why this headline works" or "Show your logic." You can't evaluate what you can't inspect. This is your quality-control handle.</p>
+    </div>
+  </div>
+
+  <div class="callout danger">
+    <strong>The meta-habit: verify before you trust</strong>
+    <p>Every model hallucinates — produces confident, plausible-sounding nonsense. Numbers, dates, quotes, prices, statistics: <strong>check them</strong>. Treat AI output like a sharp new hire's first draft: useful, never assumed correct. This habit alone will save you more embarrassment than any prompt skill.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt-template.txt — copy this shape into ANY tool</span></div>
+    <pre><span class="cmt"># The universal brief — fill in the brackets, works on every model</span>
+<span class="k">ROLE:</span>     You are a <span class="s">[senior marketing strategist]</span>.
+<span class="k">CONTEXT:</span>  I run <span class="s">[a fintech for SME owners in Lagos]</span>.
+           We just <span class="s">[launched a bookkeeping feature]</span>.
+           Our audience is <span class="s">[founders who do their own accounts]</span>.
+<span class="k">TASK:</span>     Write <span class="s">[3 LinkedIn post options]</span> announcing it.
+<span class="k">FORMAT:</span>   A table: <span class="s">[Hook | Body | CTA | Why it works]</span>.
+<span class="k">CHECK:</span>    Flag any claim not supported by what I told you.</pre>
+  </div>
+
+  <div class="term">
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">api-example.sh — for recognition only, you will NOT write this today</span></div>
+    <pre><span class="cmt"># An API call is just a structured request. This is what it looks like:</span>
+<span class="f">curl</span> https://api.example.com/v1/chat/completions \
+  -H <span class="s">"Authorization: Bearer YOUR_KEY"</span> \
+  -d <span class="s">'{"model": "gpt-4o",
+       "messages": [{"role": "user",
+       "content": "Summarize this campaign report"}]}'</span>
+
+<span class="cmt"># When someone says "we connected the tools with an API",
+# this is what happened under the hood. That's all.</span></pre>
+  </div>
+
+  <!-- ============ SECTION 4 ============ -->
+  <h2><span class="num">04</span>The Four-Layer Stack: Where Your Tasks Belong</h2>
+  <p class="lead">Not every marketing task needs an agent. Most tasks need the <em>cheapest layer that works</em>. The maturity curve: most teams start at Layer 1 and grow up as they earn the right.</p>
+
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-num">1</div>
+      <div class="flow-body">
+        <h4>Chat &amp; Reasoning <span class="pill chat">ChatGPT · Claude.ai · Gemini</span></h4>
+        <p>Ad-hoc analysis, drafting, brainstorming, summarizing. You talk, it answers. No memory between sessions unless you paste context in.</p>
+        <p class="use">Use for: drafting an email, summarizing a report, brainstorming campaign angles, writing the first version of anything.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">2</div>
+      <div class="flow-body">
+        <h4>Workflow Automation <span class="pill wf">n8n · Zapier · Make</span></h4>
+        <p>Connecting tools end-to-end with no code. "When X happens, do Y with Z." Uses APIs and webhooks — the words from Section 02.</p>
+        <p class="use">Use for: form → CRM, sheet updates, scheduled reports, content posting, anything that repeats on a trigger.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">3</div>
+      <div class="flow-body">
+        <h4>Autonomous Agents <span class="pill agent">Hermes · custom agents</span></h4>
+        <p>An LLM with tools, memory, and persistence. It remembers your brand, loads your skills, and executes multi-step work toward a goal.</p>
+        <p class="use">Use for: "monitor competitors and brief me weekly," "track this campaign and flag anomalies," tasks that currently eat 2+ hours of your week.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">4</div>
+      <div class="flow-body">
+        <h4>Orchestration <span class="pill orch">multi-agent systems</span></h4>
+        <p>Several agents coordinating — one researches, one writes, one distributes, one reports. For workloads that outgrow a single agent.</p>
+        <p class="use">Use when: your operation is big enough that specialized agents sharing one knowledge base beat one generalist. Weeks 3–4 get you ready for this.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The maturity question</strong>
+    <p>Where is your org today? Most are Layer 1 with a sprinkle of Layer 2. That's fine. The goal of this course is to move you deliberately up the stack — <em>task by task</em>, not all at once. And some tasks should never be automated: anything where judgment, relationship, or legal risk lives. <strong>Automation is a tool, not a religion.</strong></p>
+  </div>
+
+  <!-- ============ SECTION 5 ============ -->
+  <h2><span class="num">05</span>Pitfalls — Before You Hit Them</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>⚠️ Hallucination is normal</h4>
+      <p>Every model invents things confidently. Verify numbers, quotes, prices, and anything that would embarrass you if wrong.</p>
+    </div>
+    <div class="card">
+      <h4>⚠️ It forgets between chats</h4>
+      <p>Most chat apps have no persistent memory. If context matters, paste it into the message. (Week 4 fixes this permanently.)</p>
+    </div>
+    <div class="card">
+      <h4>⚠️ Context windows are finite</h4>
+      <p>A model can only "see" so much at once. Very long documents get truncated. Give it the relevant slice, not the whole file.</p>
+    </div>
+    <div class="card">
+      <h4>⚠️ Same prompt ≠ same output</h4>
+      <p>Different models and harnesses give different results for the same prompt. That's the pipeline, not a bug. Judge the tool by its output on <em>your</em> task.</p>
+    </div>
+    <div class="card">
+      <h4>⚠️ Don't paste customer data</h4>
+      <p>Never put customer PII, contracts, or internal financials into a public tool until you know its data policy. Test with anonymized examples.</p>
+    </div>
+    <div class="card">
+      <h4>⚠️ "I read it" ≠ "I can use it"</h4>
+      <p>The exercises below exist to check you. If you can't produce the Readiness Map, the foundation isn't solid — say so. That's what the class is for.</p>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 6 ============ -->
+  <h2><span class="num">06</span>Exercise 1 — The Vocabulary Check</h2>
+  <p class="lead">Five scenarios. Pick the concept. No notes — this is retention, not memorization.</p>
+  <div id="quiz"></div>
+
+  <h2><span class="num">07</span>Exercise 2 — The Automation Readiness Map <span style="font-size:14px; color:var(--ink-dim); font-weight:400;">(today's deliverable)</span></h2>
+  <p class="lead">Your working artifact for the next 3 weeks. List your recurring marketing tasks, map each to a layer, spot the gaps, rank by ROI.</p>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">How to fill it</h3>
+    <ol>
+      <li><strong>List 10 recurring tasks</strong> across content, analytics, tests, meetings, customer relationships, and issues — the ops you actually run.</li>
+      <li><strong>Map each to a layer</strong>: Chat, Workflow, Agent, or <em>Don't automate</em> (honesty corner).</li>
+      <li><strong>Note what's missing</strong> — the tool, API access, or data you'd need to automate it.</li>
+      <li><strong>Rank by ROI priority</strong>: time saved × frequency × strategic value. Your top 3 become your course projects.</li>
+    </ol>
+    <p class="rm-hint">Your work saves automatically in this browser. Bring this map to every class — it's your action plan.</p>
+    <div class="rm-actions">
+      <button class="btn" id="rmAdd">+ Add task</button>
+      <button class="btn ghost" id="rmPrint">🖨 Print / Save as PDF</button>
+      <button class="btn danger-ghost" id="rmReset">Reset map</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="rm-table">
+        <thead>
+          <tr>
+            <th style="width:34px;">#</th>
+            <th>Task / process</th>
+            <th style="width:120px;">Frequency</th>
+            <th style="width:140px;">Layer</th>
+            <th>What's missing to automate it?</th>
+            <th style="width:70px;">Priority</th>
+            <th style="width:40px;"></th>
+          </tr>
+        </thead>
+        <tbody id="rmBody"></tbody>
+      </table>
+    </div>
+    <p class="rm-hint" id="rmCount"></p>
+  </div>
+
+  <h2><span class="num">08</span>Exercise 3 — The Transfer Test <span style="font-size:14px; color:var(--ink-dim); font-weight:400;">(if time allows)</span></h2>
+  <div class="panel">
+    <p><strong>Proof that today's skills transfer:</strong> take one real task (e.g. "summarize this week's campaign email"), brief it using the template from Section 03, and run it on <em>two different tools</em> — the one on your phone and the one on your laptop, or two free tools.</p>
+    <p><strong>Compare the outputs:</strong> Which is more usable? Which needed more context from you? You've just experienced pipeline steps ②③④ in real life — same prompt, different harness, different result.</p>
+    <p class="rm-hint">Success: you can explain <em>why</em> the outputs differed, using the pipeline.</p>
+  </div>
+
+  <!-- ============ SECTION 7 ============ -->
+  <h2><span class="num">09</span>Deliverable Wrap &amp; Homework</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>✅ Today's deliverable is done when</h4>
+      <ul style="font-size:14.5px;">
+        <li>You can explain model vs. tool vs. agent in your own words</li>
+        <li>You named the 6 pipeline steps and diagnosed one weak output</li>
+        <li>Your Readiness Map has 10 tasks, each mapped to a layer</li>
+        <li>You've ranked your top 3 ROI priorities</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>📚 Homework for Class 2</h4>
+      <ul style="font-size:14.5px;">
+        <li>Get a <strong>Claude.ai account</strong> (Pro recommended, ~$20/mo)</li>
+        <li>Bring <strong>3 real marketing challenges</strong> you want AI to help with</li>
+        <li>Complete the gaps in your Readiness Map</li>
+        <li>If you can, run the Transfer Test once at home</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Session checklist</h3>
+    <ul class="checklist" id="checklist">
+      <li><input type="checkbox" id="c1"><label for="c1">I can explain the pipeline in my own words — and diagnose which step is weak</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">I can explain model, LLM, API, webhook, agent, and harness to a colleague</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">I completed the Vocabulary Check (5/5 or reviewed my misses)</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">My Readiness Map has 10 tasks mapped to layers, with gaps noted</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">I ranked my top 3 ROI priorities and know my course projects</label></li>
+      <li><input type="checkbox" id="c6"><label for="c6">I know the 3 marketing challenges I'm bringing to Class 2</label></li>
+    </ul>
+    <p class="rm-hint">Checklist progress is saved on this device.</p>
+  </div>
+
+  <div class="footer-note">
+    <p><strong>AI Automation for Marketing Executives</strong> — Class 1 of 4 · Stones &amp; Stacks Consulting. Next class: <em>Context Engineering — giving your AI the right brand context.</em> This handout works offline; your Readiness Map is saved in this browser only.</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var THEME_KEY = "ssc-theme";
+  function applyTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    var btn = document.getElementById("themeToggle");
+    if (btn) btn.textContent = t === "dark" ? "☀ Light mode" : "☾ Dark mode";
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(THEME_KEY); } catch(e){}
+  applyTheme(saved || "light");
+  document.getElementById("themeToggle").addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-theme");
+    applyTheme(cur === "dark" ? "light" : "dark");
+    try { localStorage.setItem(THEME_KEY, cur === "dark" ? "light" : "dark"); } catch(e){}
+  });
+
+  /* ---------- Quiz ---------- */
+  var QUIZ = [
+    { q: "You paste a full campaign brief into a chat tool and ask for a summary. The tool only 'sees' part of it and misses your last section. What bit you?",
+      opts: ["Hallucination", "Context window limit", "Webhook", "Temperature"],
+      answer: 1,
+      explain: "The context window is how much the model can 'see' at once. Long documents get truncated — give it the relevant slice." },
+    { q: "A lead fills your form. Within seconds, your CRM has a new record and sales gets a WhatsApp alert — nobody pressed anything. What made that possible?",
+      opts: ["An agent", "A webhook", "A hallucination", "A context window"],
+      answer: 1,
+      explain: "A webhook is the push: 'call me when something happens.' Form submit → webhook → CRM + WhatsApp alert." },
+    { q: "You ask a chat tool for market size statistics. It gives you a confident, detailed number — which is completely wrong. What just happened?",
+      opts: ["A model swap", "Context overflow", "Hallucination", "An API error"],
+      answer: 2,
+      explain: "Every model hallucinates. Confident-sounding nonsense is the #1 reason to verify numbers, quotes, and dates before you use them." },
+    { q: "A tool remembers your brand voice from past conversations, loads your content guidelines automatically, and drafts your weekly newsletter overnight. What is this?",
+      opts: ["A webhook", "An LLM", "A harness with no model", "An agent"],
+      answer: 3,
+      explain: "An agent = LLM + tools + memory + autonomy. It persists context and executes multi-step work toward a goal." },
+    { q: "Your colleague says: 'We switched AI providers and the same prompt now gives different results.' What's the most accurate response?",
+      opts: ["'The model or harness changed — results vary by design'", "'You're using it wrong'", "'The first provider was better'", "'It's a data breach'"],
+      answer: 0,
+      explain: "Different models and harnesses (pipeline steps ②③④) produce different outputs for the same prompt. Judge tools by output on your task." }
+  ];
+  var quizEl = document.getElementById("quiz");
+  QUIZ.forEach(function(item, i){
+    var div = document.createElement("div");
+    div.className = "quiz-item";
+    div.id = "quiz-" + i;
+    var q = document.createElement("div");
+    q.className = "quiz-q";
+    q.textContent = (i+1) + ". " + item.q;
+    div.appendChild(q);
+    var opts = document.createElement("div");
+    opts.className = "quiz-opts";
+    item.opts.forEach(function(opt, oi){
+      var b = document.createElement("button");
+      b.className = "quiz-opt";
+      b.textContent = opt;
+      b.addEventListener("click", function(){
+        if (div.classList.contains("answered")) return;
+        div.classList.add("answered");
+        var btns = opts.querySelectorAll(".quiz-opt");
+        btns[item.answer].classList.add("correct");
+        if (oi !== item.answer) b.classList.add("wrong");
+      });
+      opts.appendChild(b);
+    });
+    div.appendChild(opts);
+    var ex = document.createElement("div");
+    ex.className = "quiz-explain";
+    ex.innerHTML = "<strong>Why:</strong> " + item.explain;
+    div.appendChild(ex);
+    quizEl.appendChild(div);
+  });
+
+  /* ---------- Readiness Map ---------- */
+  var RM_KEY = "ssc-readiness-map";
+  var FREQ = ["Daily", "Weekly", "Monthly", "Quarterly", "Ad-hoc"];
+  var LAYERS = [
+    { v: "chat", label: "1 · Chat & Reasoning" },
+    { v: "workflow", label: "2 · Workflow" },
+    { v: "agent", label: "3 · Agent" },
+    { v: "no", label: "Don't automate" }
+  ];
+  var rows = [];
+  function loadRows(){
+    try {
+      var raw = localStorage.getItem(RM_KEY);
+      rows = raw ? JSON.parse(raw) : [];
+    } catch(e){ rows = []; }
+  }
+  function saveRows(){
+    try { localStorage.setItem(RM_KEY, JSON.stringify(rows)); } catch(e){}
+  }
+  function mkSel(options, current){
+    var s = document.createElement("select");
+    options.forEach(function(o){
+      var op = document.createElement("option");
+      if (typeof o === "string") { op.value = o; op.textContent = o; }
+      else { op.value = o.v; op.textContent = o.label; }
+      if (op.value === current) op.selected = true;
+      s.appendChild(op);
+    });
+    return s;
+  }
+  function render(){
+    var tbody = document.getElementById("rmBody");
+    tbody.innerHTML = "";
+    if (rows.length === 0){
+      var tr = document.createElement("tr");
+      var td = document.createElement("td");
+      td.colSpan = 7;
+      td.style.textAlign = "center";
+      td.style.color = "var(--ink-dim)";
+      td.style.padding = "18px";
+      td.textContent = "No tasks yet — add your first recurring marketing task.";
+      tr.appendChild(td);
+      tbody.appendChild(tr);
+      document.getElementById("rmCount").textContent = "";
+      return;
+    }
+    rows.forEach(function(row, i){
+      var tr = document.createElement("tr");
+
+      var tdN = document.createElement("td");
+      tdN.textContent = i + 1;
+      tr.appendChild(tdN);
+
+      var tdTask = document.createElement("td");
+      var inp = document.createElement("input");
+      inp.type = "text";
+      inp.placeholder = "e.g. Weekly content calendar";
+      inp.value = row.task || "";
+      inp.addEventListener("input", function(){ row.task = inp.value; saveRows(); });
+      tdTask.appendChild(inp);
+      tr.appendChild(tdTask);
+
+      var tdF = document.createElement("td");
+      var selF = mkSel(FREQ, row.freq);
+      selF.addEventListener("change", function(){ row.freq = selF.value; saveRows(); });
+      tdF.appendChild(selF);
+      tr.appendChild(tdF);
+
+      var tdL = document.createElement("td");
+      var selL = mkSel(LAYERS, row.layer);
+      selL.addEventListener("change", function(){ row.layer = selL.value; saveRows(); });
+      tdL.appendChild(selL);
+      tr.appendChild(tdL);
+
+      var tdG = document.createElement("td");
+      var inpG = document.createElement("input");
+      inpG.type = "text";
+      inpG.placeholder = "e.g. Needs CRM API access";
+      inpG.value = row.gap || "";
+      inpG.addEventListener("input", function(){ row.gap = inpG.value; saveRows(); });
+      tdG.appendChild(inpG);
+      tr.appendChild(tdG);
+
+      var tdP = document.createElement("td");
+      var inpP = document.createElement("input");
+      inpP.type = "number";
+      inpP.min = "1";
+      inpP.max = "10";
+      inpP.placeholder = "1";
+      inpP.value = row.priority || "";
+      inpP.addEventListener("input", function(){ row.priority = inpP.value; saveRows(); });
+      tdP.appendChild(inpP);
+      tr.appendChild(tdP);
+
+      var tdX = document.createElement("td");
+      var del = document.createElement("button");
+      del.className = "btn danger-ghost";
+      del.textContent = "✕";
+      del.style.padding = "4px 9px";
+      del.style.fontSize = "13px";
+      del.addEventListener("click", function(){
+        rows.splice(i, 1);
+        saveRows(); render();
+      });
+      tdX.appendChild(del);
+      tr.appendChild(tdX);
+
+      tbody.appendChild(tr);
+    });
+    document.getElementById("rmCount").textContent =
+      rows.length + " tasks mapped · " + rows.filter(function(r){ return r.layer === "no"; }).length + " flagged 'don't automate'";
+  }
+  loadRows();
+  render();
+  document.getElementById("rmAdd").addEventListener("click", function(){
+    rows.push({ task: "", freq: "Weekly", layer: "chat", gap: "", priority: "" });
+    saveRows(); render();
+    var inputs = document.querySelectorAll("#rmBody tr:last-child input[type=text]");
+    if (inputs[0]) inputs[0].focus();
+  });
+  document.getElementById("rmPrint").addEventListener("click", function(){ window.print(); });
+  document.getElementById("rmReset").addEventListener("click", function(){
+    if (confirm("Clear your entire Readiness Map? This cannot be undone.")){
+      rows = [];
+      saveRows(); render();
+    }
+  });
+
+  /* ---------- Checklist ---------- */
+  var CL_KEY = "ssc-checklist";
+  var items = document.querySelectorAll("#checklist li");
+  items.forEach(function(li){
+    var cb = li.querySelector("input");
+    var key = "ssc-cl-" + cb.id;
+    try {
+      if (localStorage.getItem(key) === "1"){ cb.checked = true; li.classList.add("done"); }
+    } catch(e){}
+    cb.addEventListener("change", function(){
+      li.classList.toggle("done", cb.checked);
+      try { localStorage.setItem(key, cb.checked ? "1" : "0"); } catch(e){}
+    });
+  });
+})();
+</script>
+</body>
+</html>
