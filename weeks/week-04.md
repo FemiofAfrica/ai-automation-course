@@ -1,4 +1,4 @@
-# Week 4: Hermes Agent — Autonomous Marketing Operations
+# Week 4: Hermes Agent for Autonomous Marketing Operations
 
 **Session Length:** ~3 hours
 **Objective:** Deploy a persistent AI agent that knows your brand, remembers past work, learns from feedback, and executes multi-step marketing tasks independently.
@@ -17,7 +17,7 @@
 
 ## Deliverable
 
-**Brand Intelligence Agent** — A live Hermes instance with brand memory, 3 marketing skills, and n8n integration. Ready to handle real marketing workflows.
+**Brand Intelligence Agent**: a live Hermes instance with brand memory, 3 marketing skills, and n8n integration. Ready to handle real marketing workflows.
 
 ## Prerequisites
 

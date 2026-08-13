@@ -162,7 +162,7 @@ Delivered as: A template they fill out during the session and leave with as thei
 ## Week 2: Claude & Context Engineering — Giving Your AI the Right Brand Context
 
 **Session Length:** ~3 hours
-**Objective:** Understand the 2026 paradigm shift — models are intelligent enough that prompt engineering is obsolete. The real skill is **context engineering**: building knowledge bases (brand vaults, memory stores, knowledge graphs) that give agents rich brand context so they do their best work without needing perfectly crafted prompts.
+**Objective:** Understand the 2026 paradigm shift — capable models shift the leverage away from wording prompts. The higher-leverage skill is now **context engineering**: building knowledge bases (brand vaults, memory stores, knowledge graphs) that give agents rich brand context so they do their best work without needing perfectly crafted prompts.
 
 **Why this shift matters:** In 2025, marketers needed intricate prompt templates — persona blocks, few-shot examples, chain-of-thought instructions — to get good output from even the best models. By 2026, models like Claude Opus 5 and Fable 5 are capable enough that the bottleneck has moved. The question is no longer "How do I phrase this prompt?" but "Does my agent have the brand context it needs to make good decisions?" A great model with thin context produces generic output. A capable model with rich context produces work that feels like your brand.
 
@@ -173,7 +173,7 @@ Delivered as: A template they fill out during the session and leave with as thei
 - **The 2026 shift: Context > Prompting:**
   - Models today (Claude Opus 5, Fable 5) are intelligent enough to do brilliant work — if you give them the right context to work with
   - Analogy: You don't give a world-class chef a recipe. You stock the kitchen with your ingredients, tell them your taste, and let them cook. The chef is good enough; the secret is the pantry.
-  - Prompt engineering was a 2024–2025 skill — teaching fragile models to understand what you wanted. Context engineering is the 2026+ skill — building rich knowledge environments where capable models thrive.
+  - Prompt engineering still matters, and clear instructions still help. What changed is where the leverage sits: with capable models, building rich knowledge environments beats re-wording requests. Anthropic frames context engineering as the natural progression of prompt engineering.
   - Real test: A great prompt on a model with no brand context produces better output than a mediocre prompt — but a capable model with a full brand vault produces output indistinguishable from your senior copywriter.
 - Claude's strengths in a context-engineering world:
   - Claude's 200K context window: big enough to hold your entire brand context vault in a single session
@@ -188,16 +188,16 @@ Delivered as: A template they fill out during the session and leave with as thei
 
 ### Part 2: Context Engineering for Marketing (50 min)
 
-**2.1 The Shift: Why Context Engineering Replaces Prompt Engineering**
+**2.1 The Shift: Why Context Engineering Is the Higher-Leverage Skill**
 - **The old way:** Spend 15 minutes crafting the perfect persona block, few-shot examples, and constraint list. Re-engineering prompts per task. Maintaining a library of 50 prompt templates. Every new campaign starts from scratch.
-- **The 2026 way:** Spend 15 minutes building a reusable brand context asset (buyer persona doc, voice guide, campaign retro). Point the model at it. Let the model do its job with zero prompt engineering.
+- **The 2026 way:** Spend 15 minutes building a reusable brand context asset (buyer persona doc, voice guide, campaign retro). Point the model at it. Let the model do its job without you crafting a long prompt each time.
 - **What changed:** Models in 2025 needed hand-holding — chain-of-thought, explicit reasoning instructions, heavily engineered prompts. Models in 2026 are capable enough that the work goes into **what you tell them, not how you tell them.**
 - **The new skill stack for marketers:**
   1. **Knowledge curation** — what brand context you capture (voice, personas, competitive intel, history)
   2. **Knowledge structuring** — how you format it so agents can consume it (structured docs, linked notes, schemas)
   3. **Knowledge accessibility** — how the agent finds the right context at the right time (memory systems, project files, retrieval)
   4. **Knowledge maintenance** — keeping the vault alive as your brand evolves
-- **The ROI reframe:** Every hour you invest in building your brand context vault saves 10 hours of future prompt engineering. Context is a compounding asset; prompt libraries are disposable.
+- **The ROI reframe:** Every hour you invest in building your brand context vault saves hours of future prompt rewriting. Context is a compounding asset; prompt libraries are disposable.
 
 **2.2 Building Your Brand Context Vault — What Goes In**
 
@@ -501,7 +501,7 @@ Campaign scenario: Your team published a 2,000-word thought leadership blog post
 - **Step 4 — Output to tools:** LinkedIn post via n8n's LinkedIn connector (draft/scheduled), Twitter thread via Twitter API, newsletter blurb appended to an "Upcoming Newsletter" Google Sheet
 - **Step 5 — Write back to vault:** n8n creates a new note at `brand-context-vault/05-campaigns/social-content-log.md` appending a row: date, article title, all generated variant URLs, and a link back to the source blog post. The vault now knows what content was produced and when.
 - **Key learning:** file read for vault context, multi-output AI with vault-injected prompts, vault write-back for self-documenting workflows
-- **Marketing metric saved:** 2 hours/week per article × 4 articles/month = 8 hours/month reclaimed — and every post is automatically on-brand because the vault enforces brand voice without prompt engineering
+- **Marketing metric saved:** 2 hours/week per article × 4 articles/month = 8 hours/month reclaimed — and every post is on-brand because the vault carries the brand voice, so you do not re-specify it each time
 
 **Workflow 2: Lead Enrichment — Persona-Matched Routing (Vault-Referenced)**
 Campaign scenario: A whitepaper download form captures name + email. But unlike a generic enrichment pipeline, your workflow cross-references the lead against your vault's buyer personas to route them with precision.

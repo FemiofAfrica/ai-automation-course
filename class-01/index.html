@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Automation for Marketing Executives — Class 1: The Foundations</title>
+<title>AI Automation for Marketing Executives, Class 1: The Foundations</title>
 <style>
   :root {
     --bg: #f7f7f5;
@@ -85,6 +85,21 @@
   .week-chip.active {
     background: var(--accent); border-color: var(--accent); color: #fff;
   }
+  a.week-chip { text-decoration: none; }
+  a.week-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-row {
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--line);
+  }
+  .nav-link {
+    display: block; text-decoration: none; color: var(--ink);
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 16px; font-size: 14px; box-shadow: var(--shadow); flex: 1 1 240px;
+  }
+  .nav-link:hover { border-color: var(--accent); }
+  .nav-link small { display: block; color: var(--ink-dim); font-size: 12px; margin-bottom: 3px; }
+  .nav-link strong { color: var(--accent); }
+  .nav-link.next { text-align: right; }
   h1 { font-size: 34px; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 10px; }
   .sub { font-size: 18px; color: var(--ink-soft); max-width: 700px; }
   .meta { margin-top: 14px; font-size: 13px; color: var(--ink-dim); display: flex; gap: 16px; flex-wrap: wrap; }
@@ -114,7 +129,7 @@
   li { margin: 6px 0; }
   strong { font-weight: 650; }
 
-  /* Exercise blocks — appear right after the section that teaches them */
+  /* Exercise blocks, appear right after the section that teaches them */
   .exercise {
     background: var(--panel); border: 1px solid var(--line);
     border-left: 4px solid var(--accent); border-radius: var(--radius);
@@ -276,8 +291,8 @@
 
   <div class="hero">
     <div class="course-strip">
-      <span class="week-chip active">Week 1 · Foundations (today)</span>
-      <span class="week-chip">Week 2 · Context</span>
+      <span class="week-chip active">Week 1 · Foundations</span>
+      <a class="week-chip" href="../class-02/">Week 2 · Context Engineering</a>
       <span class="week-chip">Week 3 · Workflows</span>
       <span class="week-chip">Week 4 · Your Agent</span>
     </div>
@@ -292,12 +307,12 @@
 
   <div class="callout">
     <strong>The promise of this course</strong>
-    <p>By Week 4 you'll have AI systems tracking your content, analytics, tests, meetings, customer relationships, and issues. But that only works if you understand what sits underneath. Today we build the foundation — <em>the vocabulary, the mental model, and the habits</em> — so that every tool you touch from here on makes sense.</p>
+    <p>By Week 4 you'll have AI systems tracking your content, analytics, tests, meetings, customer relationships, and issues. But that only works if you understand what sits underneath. Today we build the foundation, <em>the vocabulary, the mental model, and the habits</em>, so that every tool you touch from here on makes sense.</p>
   </div>
 
   <!-- ============ SECTION 01 ============ -->
   <h2><span class="num">01</span>The Mental Model: One Pipeline, Every Tool</h2>
-  <p class="lead">Before vocabulary, get the architecture. Whether you type a question into ChatGPT, use Claude.ai, or run a fully autonomous agent — <strong>the same pipeline runs behind the scenes</strong>. The only difference is how many of the middle steps actually happen.</p>
+  <p class="lead">Before vocabulary, get the architecture. Whether you type a question into ChatGPT, use Claude.ai, or run a fully autonomous agent, <strong>the same pipeline runs behind the scenes</strong>. The only difference is how many of the middle steps actually happen.</p>
 
   <div class="diagram">
     <svg viewBox="0 0 760 470" role="img" aria-label="The six-step agent pipeline">
@@ -311,7 +326,7 @@
         <!-- 1 -->
         <rect x="30" y="10" width="340" height="52" rx="10" fill="var(--panel)" stroke="var(--accent)" stroke-width="1.5"/>
         <text x="48" y="32" font-size="13" font-weight="700" fill="var(--accent)">① YOU GIVE INPUT</text>
-        <text x="48" y="50" font-size="12.5" fill="var(--ink-soft)">The prompt — your instruction to the LLM</text>
+        <text x="48" y="50" font-size="12.5" fill="var(--ink-soft)">The prompt, your instruction to the LLM</text>
         <!-- arrow -->
         <line x1="200" y1="62" x2="200" y2="84" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
         <!-- 2 -->
@@ -337,7 +352,7 @@
         <!-- 6 -->
         <rect x="30" y="380" width="340" height="52" rx="10" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.5"/>
         <text x="48" y="402" font-size="13" font-weight="700" fill="#fff">⑥ MODEL PRODUCES OUTPUT</text>
-        <text x="48" y="420" font-size="12.5" fill="rgba(255,255,255,.85)">Response, content, decision — that YOU verify</text>
+        <text x="48" y="420" font-size="12.5" fill="rgba(255,255,255,.85)">Response, content, decision, that YOU verify</text>
         <!-- right annotation -->
         <rect x="430" y="10" width="300" height="120" rx="10" fill="var(--panel-alt)" stroke="var(--line)"/>
         <text x="448" y="36" font-size="13.5" font-weight="700" fill="var(--ink)">The key insight</text>
@@ -345,7 +360,7 @@
         <text x="448" y="76" font-size="12.5" fill="var(--ink-soft)">Claude.ai), steps ②③④ are thin</text>
         <text x="448" y="94" font-size="12.5" fill="var(--ink-soft)">or missing. In an agent, they're</text>
         <text x="448" y="112" font-size="12.5" fill="var(--ink-soft)">fully built. Same prompt, different</text>
-        <text x="448" y="130" font-size="12.5" fill="var(--ink-soft)">result — <tspan font-weight="700" fill="var(--accent)">that's the pipeline, not magic.</tspan></text>
+        <text x="448" y="130" font-size="12.5" fill="var(--ink-soft)">result, <tspan font-weight="700" fill="var(--accent)">that's the pipeline, not magic.</tspan></text>
         <rect x="430" y="150" width="300" height="150" rx="10" fill="var(--panel)" stroke="var(--line)"/>
         <text x="448" y="176" font-size="13.5" font-weight="700" fill="var(--ink)">How to use this</text>
         <text x="448" y="198" font-size="12.5" fill="var(--ink-soft)">Weak output? Ask: which step</text>
@@ -359,20 +374,20 @@
   </div>
 
   <div class="panel">
-    <h3>The course arc — one pipeline, four weeks</h3>
+    <h3>The course arc, one pipeline, four weeks</h3>
     <table>
       <tr><th>Week</th><th>What you learn</th><th>Pipeline step it strengthens</th></tr>
       <tr><td><strong>1 (today)</strong></td><td>Vocabulary + this pipeline</td><td>Understanding the whole flow</td></tr>
-      <tr><td><strong>2</strong></td><td>Context engineering — brand vault, personas, voice</td><td>② Giving the model rich context</td></tr>
+      <tr><td><strong>2</strong></td><td>Context engineering, brand vault, personas, voice</td><td>② Giving the model rich context</td></tr>
       <tr><td><strong>3</strong></td><td>Workflow automation (n8n)</td><td>④ Giving the model tools to act</td></tr>
       <tr><td><strong>4</strong></td><td>Your own persistent agent</td><td>③ + ④ Memory and autonomy</td></tr>
     </table>
-    <p class="rm-hint">Every time you interact with AI — this pipeline runs. Understanding it means you can diagnose <em>why</em> an output is weak and know <em>which lever</em> to pull. That skill is the whole course.</p>
+    <p class="rm-hint">Every time you interact with AI, and this pipeline runs. Understanding it means you can diagnose <em>why</em> an output is weak and know <em>which lever</em> to pull. That skill is the whole course.</p>
   </div>
 
   <div class="callout">
     <strong>The loop behind "autonomous"</strong>
-    <p>An agent doesn't answer once and stop. It runs <strong>plan → act → observe → adjust</strong> until the job is done or it needs you. Each loop spends tokens — which is why an unconstrained agent can burn budget (we'll meet the money in Section 07). For now: <em>autonomy = the pipeline repeating itself with feedback.</em></p>
+    <p>An agent doesn't answer once and stop. It runs <strong>plan → act → observe → adjust</strong> until the job is done or it needs you. Each loop spends tokens, which is why an unconstrained agent can burn budget (we'll meet the money in Section 07). For now: <em>autonomy = the pipeline repeating itself with feedback.</em></p>
   </div>
 
   <div class="exercise">
@@ -383,13 +398,13 @@
 
   <!-- ============ SECTION 02 ============ -->
   <h2><span class="num">02</span>The Vocabulary: Seven Words That Unlock Everything</h2>
-  <p class="lead">Marketing execs get sold "AI" as one thing. It isn't. Seven words — and you can decode any vendor pitch, any tool, any article.</p>
+  <p class="lead">Marketing execs get sold "AI" as one thing. It isn't. Seven words, and you can decode any vendor pitch, any tool, any article.</p>
 
   <div class="grid grid-3">
     <div class="card">
       <span class="tag">The brain</span>
       <h4>Model</h4>
-      <p>A pattern-recognition machine trained on enormous amounts of data. It doesn't <em>think</em> — it predicts the next most likely word, image, or action.</p>
+      <p>A pattern-recognition machine trained on enormous amounts of data. It doesn't <em>think</em>. It predicts the next most likely word, image, or action.</p>
       <p class="example">Analogy: a brilliant new hire who has read the entire internet. Needs clear instructions. Knows nothing about your brand yet. Can hallucinate confidently.</p>
     </div>
     <div class="card">
@@ -401,7 +416,7 @@
     <div class="card">
       <span class="tag">The waiter</span>
       <h4>API</h4>
-      <p>Application Programming Interface — the structured way one tool asks another for data or actions. <em>Pull.</em></p>
+      <p>Application Programming Interface, the structured way one tool asks another for data or actions. <em>Pull.</em></p>
       <p class="example">"Go get data from this place." Your spreadsheet auto-syncing with your CRM, instead of copy-pasting between them.</p>
     </div>
     <div class="card">
@@ -414,29 +429,29 @@
       <span class="tag">The worker</span>
       <h4>Agent</h4>
       <p>An LLM with <strong>tools, memory, and autonomy</strong>. Given a goal, it works multi-step: searches, reads, drafts, decides.</p>
-      <p class="example">Analogy: the intern after six months — knows your brand, works without hand-holding, tells you when something needs you.</p>
+      <p class="example">Analogy: the intern after six months, knows your brand, works without hand-holding, tells you when something needs you.</p>
     </div>
     <div class="card">
       <span class="tag">The wrapper</span>
       <h4>Harness</h4>
       <p>The software that wraps a model with a chat interface, tools, memory, and delivery. <strong>A tool is not a model.</strong></p>
-      <p class="example">ChatGPT, Claude.ai, Copilot, Hermes — all harnesses. GPT and Claude are models. This distinction alone saves you from bad vendor math.</p>
+      <p class="example">ChatGPT, Claude.ai, Copilot, Hermes, all harnesses. GPT and Claude are models. This distinction alone saves you from bad vendor math.</p>
     </div>
     <div class="card">
       <span class="tag">The plug</span>
       <h4>MCP</h4>
-      <p>Model Context Protocol — the open standard (2026) that lets any AI assistant plug into your tools: Drive, CRM, databases. One plug instead of custom cables per pair.</p>
+      <p>Model Context Protocol, the open standard (2026) that lets any AI assistant plug into your tools: Drive, CRM, databases. One plug instead of custom cables per pair.</p>
       <p class="example">Think "USB-C for AI connections." When a vendor says "we support MCP," it means their AI can reach your tools without a bespoke integration.</p>
     </div>
   </div>
 
   <div class="callout warn">
     <strong>The single most useful distinction of the day</strong>
-    <p><strong>Model ≠ Tool.</strong> "ChatGPT" is not a model — it's a harness around models. When someone says "we use AI," ask: <em>which model, and which harness?</em> When results differ across tools, it's usually the harness (pipeline steps ②③④), not the brain.</p>
+    <p><strong>Model ≠ Tool.</strong> "ChatGPT" is not a model, it's a harness around models. When someone says "we use AI," ask: <em>which model, and which harness?</em> When results differ across tools, it's usually the harness (pipeline steps ②③④), not the brain.</p>
   </div>
 
   <div class="term">
-    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">api-example.sh — for recognition only, you will NOT write this today</span></div>
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">api-example.sh, for recognition only, you will NOT write this today</span></div>
     <pre><span class="cmt"># An API call is just a structured request. This is what it looks like:</span>
 <span class="f">curl</span> https://api.example.com/v1/chat/completions \
   -H <span class="s">"Authorization: Bearer YOUR_KEY"</span> \
@@ -450,66 +465,66 @@
 
   <div class="exercise">
     <h3><span class="ex-badge">Exercise 2</span> The Vocabulary Check</h3>
-    <p>Five scenarios. Pick the concept. No notes — this is retention, not memorization.</p>
+    <p>Five scenarios. Pick the concept. No notes, this is retention, not memorization.</p>
     <div id="quiz"></div>
   </div>
 
   <!-- ============ SECTION 03 ============ -->
   <h2><span class="num">03</span>How Automation Actually Works</h2>
-  <p class="lead">The vocabulary gives you the parts. Now see how they move. Every automation — whether it's n8n, Zapier, or a full agent — is the same three-part loop. Learn this and no automation will ever look like magic again.</p>
+  <p class="lead">The vocabulary gives you the parts. Now see how they move. Every automation, whether it's n8n, Zapier, or a full agent, is the same three-part loop. Learn this and no automation will ever look like magic again.</p>
 
   <div class="flow">
     <div class="flow-row">
       <div class="flow-num">1</div>
       <div class="flow-body">
-        <h4>Trigger — what starts it</h4>
-        <p>Three kinds. <strong>Event</strong> (the webhook rings — a form filled, an email received). <strong>Schedule</strong> (the clock — every Monday 8am). <strong>Manual</strong> (you click "run now").</p>
+        <h4>Trigger, what starts it</h4>
+        <p>Three kinds. <strong>Event</strong> (the webhook rings, a form filled, an email received). <strong>Schedule</strong> (the clock, every Monday 8am). <strong>Manual</strong> (you click "run now").</p>
         <p class="use">The first question to ask about any automation: <em>what starts it, and how often does that happen?</em></p>
       </div>
     </div>
     <div class="flow-row">
       <div class="flow-num">2</div>
       <div class="flow-body">
-        <h4>Action — what it does</h4>
+        <h4>Action, what it does</h4>
         <p>The work: fetch data, ask the model, update the CRM, send the email, post the content. One action or a chain of them.</p>
-        <p class="use">This is where APIs (pull) and webhooks (push) get used — the waiter and the phone call from Section 02.</p>
+        <p class="use">This is where APIs (pull) and webhooks (push) get used, the waiter and the phone call from Section 02.</p>
       </div>
     </div>
     <div class="flow-row">
       <div class="flow-num">3</div>
       <div class="flow-body">
-        <h4>Check — how you know it worked</h4>
-        <p>Logs, alerts, or an approval request. <strong>Rule: fail loudly, never silently.</strong> If something breaks, a human should hear about it — fast.</p>
+        <h4>Check, how you know it worked</h4>
+        <p>Logs, alerts, or an approval request. <strong>Rule: fail loudly, never silently.</strong> If something breaks, a human should hear about it, fast.</p>
         <p class="use">Good automation tells you when it fails. Bad automation hides it and lets you believe the work happened.</p>
       </div>
     </div>
   </div>
 
   <div class="panel">
-    <h3 style="margin-top:0;">Cron jobs — the "set and forget" engine</h3>
-    <p>When an automation runs on a <strong>schedule</strong>, the clock is the trigger. Tools call it a <em>schedule trigger</em>, a <em>recurring task</em>, or a <em>cron job</em> — same idea, different names. Cron is the classic engine, named after the Greek word for time (<em>chronos</em>). You ask <em>once</em>; the machine asks forever, on time.</p>
+    <h3 style="margin-top:0;">Cron jobs, the "set and forget" engine</h3>
+    <p>When an automation runs on a <strong>schedule</strong>, the clock is the trigger. Tools call it a <em>schedule trigger</em>, a <em>recurring task</em>, or a <em>cron job</em>, same idea, different names. Cron is the classic engine, named after the Greek word for time (<em>chronos</em>). You ask <em>once</em>; the machine asks forever, on time.</p>
     <div class="chain">
       <span class="step clock">⏰ Every Monday 08:00</span><span class="arrow">→</span>
       <span class="step">Check competitor blogs</span><span class="arrow">→</span>
       <span class="step">Draft briefing with the model</span><span class="arrow">→</span>
       <span class="step">Send to your Slack</span>
     </div>
-    <p class="rm-hint">Your first automation wins are almost always scheduled: Monday competitor briefing, weekly campaign report, daily lead digest. You don't need to know how to write a cron expression — you need to know that <em>schedules exist and can run without you</em>.</p>
+    <p class="rm-hint">Your first automation wins are almost always scheduled: Monday competitor briefing, weekly campaign report, daily lead digest. You don't need to know how to write a cron expression, you need to know that <em>schedules exist and can run without you</em>.</p>
   </div>
 
   <div class="callout danger">
     <strong>An automation that fails silently is worse than no automation</strong>
-    <p>Wrong data, an expired key, a changed form, a model timeout — automations break quietly all the time. If nothing alerts you, you keep believing the work is done while the pipeline quietly stops. Design rule: <strong>if it fails, tell a human. If it touches anything public, add an approval step.</strong> A good employee escalates; a bad one hides it.</p>
+    <p>Wrong data, an expired key, a changed form, a model timeout, automations break quietly all the time. If nothing alerts you, you keep believing the work is done while the pipeline quietly stops. Design rule: <strong>if it fails, tell a human. If it touches anything public, add an approval step.</strong> A good employee escalates; a bad one hides it.</p>
   </div>
 
   <div class="exercise">
     <h3><span class="ex-badge">Exercise 3</span> What Starts It?</h3>
-    <p>For each scenario, name the trigger — or spot the failure. This is the diagnostic habit of every automation person.</p>
+    <p>For each scenario, name the trigger, or spot the failure. This is the diagnostic habit of every automation person.</p>
     <div id="quiz-trigger"></div>
   </div>
 
   <!-- ============ SECTION 04 ============ -->
-  <h2><span class="num">04</span>Pitfalls — Before You Hit Them</h2>
+  <h2><span class="num">04</span>Pitfalls, Before You Hit Them</h2>
   <div class="grid grid-2">
     <div class="card">
       <h4>⚠️ Hallucination is normal</h4>
@@ -539,16 +554,16 @@
 
   <!-- ============ SECTION 05 ============ -->
   <h2><span class="num">05</span>The Habits That Transfer: Briefing AI Like a New Hire</h2>
-  <p class="lead">The skills in this section work identically on ChatGPT, Claude, Gemini, Copilot — any harness, most models. This is what "replicable on any harness" means: you're not learning buttons, you're learning <strong>how to brief intelligence</strong>.</p>
+  <p class="lead">The skills in this section work identically on ChatGPT, Claude, Gemini, Copilot, any harness, most models. This is what "replicable on any harness" means: you're not learning buttons, you're learning <strong>how to brief intelligence</strong>.</p>
 
   <div class="grid grid-2">
     <div class="card">
       <h4>1. Give it a role, audience, and goal</h4>
-      <p>"You are a senior marketing strategist. I run a fintech for SME owners in Lagos. Our goal is demo signups from serious founders." The model can't know your context unless you give it — that's pipeline step ② in action.</p>
+      <p>"You are a senior marketing strategist. I run a fintech for SME owners in Lagos. Our goal is demo signups from serious founders." The model can't know your context unless you give it, that's pipeline step ② in action.</p>
     </div>
     <div class="card">
       <h4>2. Ask for a shape</h4>
-      <p>"Give me a table," "bullet points," "a draft," "3 options ranked." Structured requests get structured, usable output — instead of paragraphs you have to rework.</p>
+      <p>"Give me a table," "bullet points," "a draft," "3 options ranked." Structured requests get structured, usable output, instead of paragraphs you have to rework.</p>
     </div>
     <div class="card">
       <h4>3. One job at a time</h4>
@@ -562,12 +577,12 @@
 
   <div class="callout danger">
     <strong>The meta-habit: verify before you trust</strong>
-    <p>Every model hallucinates — produces confident, plausible-sounding nonsense. Numbers, dates, quotes, prices, statistics: <strong>check them</strong>. Treat AI output like a sharp new hire's first draft: useful, never assumed correct. This habit alone will save you more embarrassment than any prompt skill.</p>
+    <p>Every model hallucinates, produces confident, plausible-sounding nonsense. Numbers, dates, quotes, prices, statistics: <strong>check them</strong>. Treat AI output like a sharp new hire's first draft: useful, never assumed correct. This habit alone will save you more embarrassment than any prompt skill.</p>
   </div>
 
   <div class="term">
-    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt-template.txt — copy this shape into ANY tool</span></div>
-    <pre><span class="cmt"># The universal brief — fill in the brackets, works on every model</span>
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">prompt-template.txt, copy this shape into ANY tool</span></div>
+    <pre><span class="cmt"># The universal brief, fill in the brackets, works on every model</span>
 <span class="k">ROLE:</span>     You are a <span class="s">[senior marketing strategist]</span>.
 <span class="k">CONTEXT:</span>  I run <span class="s">[a fintech for SME owners in Lagos]</span>.
            We just <span class="s">[launched a bookkeeping feature]</span>.
@@ -579,8 +594,8 @@
 
   <div class="exercise">
     <h3><span class="ex-badge">Exercise 4</span> The Transfer Test</h3>
-    <p><strong>Proof that today's skills transfer:</strong> take one real task (e.g. "summarize this week's campaign email"), brief it using the template above, and run it on <em>two different tools</em> — the one on your phone and the one on your laptop, or two free tools.</p>
-    <p><strong>Compare the outputs:</strong> Which is more usable? Which needed more context from you? You've just experienced pipeline steps ②③④ in real life — same prompt, different harness, different result.</p>
+    <p><strong>Proof that today's skills transfer:</strong> take one real task (e.g. "summarize this week's campaign email"), brief it using the template above, and run it on <em>two different tools</em>, the one on your phone and the one on your laptop, or two free tools.</p>
+    <p><strong>Compare the outputs:</strong> Which is more usable? Which needed more context from you? You've just experienced pipeline steps ②③④ in real life, same prompt, different harness, different result.</p>
     <p class="rm-hint">Success: you can explain <em>why</em> the outputs differed, using the pipeline.</p>
   </div>
 
@@ -601,7 +616,7 @@
       <div class="flow-num">2</div>
       <div class="flow-body">
         <h4>Workflow Automation <span class="pill wf">n8n · Zapier · Make</span></h4>
-        <p>Connecting tools end-to-end with no code. "When X happens, do Y with Z." Uses the trigger → action → check loop from Section 03 — schedules, webhooks, and APIs.</p>
+        <p>Connecting tools end-to-end with no code. "When X happens, do Y with Z." Uses the trigger → action → check loop from Section 03, schedules, webhooks, and APIs.</p>
         <p class="use">Use for: form → CRM, sheet updates, scheduled reports, content posting, anything that repeats on a trigger.</p>
       </div>
     </div>
@@ -609,7 +624,7 @@
       <div class="flow-num">3</div>
       <div class="flow-body">
         <h4>Autonomous Agents <span class="pill agent">Hermes · custom agents</span></h4>
-        <p>An LLM with tools, memory, and persistence. It remembers your brand, loads your skills, and executes multi-step work toward a goal — running the plan → act → observe → adjust loop from Section 01.</p>
+        <p>An LLM with tools, memory, and persistence. It remembers your brand, loads your skills, and executes multi-step work toward a goal, running the plan → act → observe → adjust loop from Section 01.</p>
         <p class="use">Use for: "monitor competitors and brief me weekly," "track this campaign and flag anomalies," tasks that currently eat 2+ hours of your week.</p>
       </div>
     </div>
@@ -617,15 +632,15 @@
       <div class="flow-num">4</div>
       <div class="flow-body">
         <h4>Orchestration <span class="pill orch">multi-agent systems</span></h4>
-        <p>Several agents coordinating — one researches, one writes, one distributes, one reports. For workloads that outgrow a single agent.</p>
-        <p class="use">Use when: your operation is big enough that specialized agents sharing one knowledge base beat one generalist. Weeks 3–4 get you ready for this.</p>
+        <p>Several agents coordinating, one researches, one writes, one distributes, one reports. For workloads that outgrow a single agent.</p>
+        <p class="use">Use when: your operation is big enough that specialized agents sharing one knowledge base beat one generalist. Weeks 3 to 4 get you ready for this.</p>
       </div>
     </div>
   </div>
 
   <div class="callout">
     <strong>The maturity question</strong>
-    <p>Where is your org today? Most are Layer 1 with a sprinkle of Layer 2. That's fine. The goal of this course is to move you deliberately up the stack — <em>task by task</em>, not all at once. And some tasks should never be automated: anything where judgment, relationship, or legal risk lives. <strong>Automation is a tool, not a religion.</strong></p>
+    <p>Where is your org today? Most are Layer 1 with a sprinkle of Layer 2. That's fine. The goal of this course is to move you deliberately up the stack, <em>task by task</em>, not all at once. And some tasks should never be automated: anything where judgment, relationship, or legal risk lives. <strong>Automation is a tool, not a religion.</strong></p>
   </div>
 
   <!-- ============ SECTION 07 ============ -->
@@ -635,7 +650,7 @@
   <div class="grid grid-2">
     <div class="card">
       <h4>Subscriptions vs. API</h4>
-      <p>Chat apps charge a flat monthly fee ($20–200) and hide usage behind it. APIs charge <strong>per token</strong> — pay for exactly what you use.</p>
+      <p>Chat apps charge a flat monthly fee ($20 to $200) and hide usage behind it. APIs charge <strong>per token</strong>, pay for exactly what you use.</p>
       <p class="example">Budget questions are really billing-mode questions: "Is this a fixed subscription task or a pay-as-you-go task?"</p>
     </div>
     <div class="card">
@@ -645,7 +660,7 @@
     <div class="card">
       <h4>Why bills spike</h4>
       <p>Re-sending the same big context on every run. Agents looping many steps. Using the biggest model for everything. Feeding the whole file when a slice would do.</p>
-      <p class="example">Week 2's vault is a real cost lever — we'll teach you to slice context, not dump it.</p>
+      <p class="example">Week 2's vault is a real cost lever, we'll teach you to slice context, not dump it.</p>
     </div>
     <div class="card">
       <h4>Rate limits</h4>
@@ -656,22 +671,22 @@
 
   <div class="callout">
     <strong>The budget rule</strong>
-    <p><strong>Use the cheapest layer that works.</strong> Chat for ad-hoc, workflow for repeats, agent for the 2-hour weekly tasks. Cheap model for bulk work (product descriptions), top model for strategy (positioning, high-stakes copy). And check the pricing page <em>before</em> you build — not after the first invoice.</p>
+    <p><strong>Use the cheapest layer that works.</strong> Chat for ad-hoc, workflow for repeats, agent for the 2-hour weekly tasks. Cheap model for bulk work (product descriptions), top model for strategy (positioning, high-stakes copy). And check the pricing page <em>before</em> you build, not after the first invoice.</p>
   </div>
 
   <!-- ============ SECTION 08 ============ -->
-  <h2><span class="num">08</span>Exercise 5 — The Automation Readiness Map <span style="font-size:14px; color:var(--ink-dim); font-weight:400;">(today's deliverable)</span></h2>
+  <h2><span class="num">08</span>Exercise 5, The Automation Readiness Map <span style="font-size:14px; color:var(--ink-dim); font-weight:400;">(today's deliverable)</span></h2>
   <p class="lead">Your working artifact for the next 3 weeks. List your recurring marketing tasks, map each to a layer, spot the gaps, rank by ROI. You now have everything you need: the layers (Section 06) and the cost lens (Section 07).</p>
 
   <div class="panel">
     <h3 style="margin-top:0;">How to fill it</h3>
     <ol>
-      <li><strong>List 10 recurring tasks</strong> across content, analytics, tests, meetings, customer relationships, and issues — the ops you actually run.</li>
+      <li><strong>List 10 recurring tasks</strong> across content, analytics, tests, meetings, customer relationships, and issues, the ops you actually run.</li>
       <li><strong>Map each to a layer</strong>: Chat, Workflow, Agent, or <em>Don't automate</em> (honesty corner).</li>
-      <li><strong>Note what's missing</strong> — the tool, API access, data, or cost you'd need to automate it.</li>
+      <li><strong>Note what's missing</strong>, the tool, API access, data, or cost you'd need to automate it.</li>
       <li><strong>Rank by ROI priority</strong>: time saved × frequency × strategic value. Your top 3 become your course projects.</li>
     </ol>
-    <p class="rm-hint">Your work saves automatically in this browser. Bring this map to every class — it's your action plan.</p>
+    <p class="rm-hint">Your work saves automatically in this browser. Bring this map to every class, it's your action plan.</p>
     <div class="rm-actions">
       <button class="btn" id="rmAdd">+ Add task</button>
       <button class="btn ghost" id="rmPrint">🖨 Print / Save as PDF</button>
@@ -698,12 +713,12 @@
 
   <!-- ============ SECTION 09 ============ -->
   <h2><span class="num">09</span>A Look Ahead: How Your AI Will Know Your Data</h2>
-  <p class="lead">One preview before you go — because it's the bridge to Class 2 and it explains why the next weeks feel different.</p>
+  <p class="lead">One preview before you go, because it's the bridge to Class 2 and it explains why the next weeks feel different.</p>
 
   <div class="panel">
     <h3 style="margin-top:0;">Closed-book vs. open-book</h3>
-    <p>Today, when you use a chat tool, the model answers from what it learned during training — <em>closed-book</em>. It doesn't actually know your brand, your last campaign, or your customers. That's why generic output happens.</p>
-    <p><strong>RAG</strong> (Retrieval-Augmented Generation) is the open-book version: <em>before answering, the model looks up the relevant documents from your own knowledge base.</em> Your campaign retros, personas, voice guide. It answers from your real history instead of guessing — and hallucinations drop sharply.</p>
+    <p>Today, when you use a chat tool, the model answers from what it learned during training, <em>closed-book</em>. It doesn't actually know your brand, your last campaign, or your customers. That's why generic output happens.</p>
+    <p><strong>RAG</strong> (Retrieval-Augmented Generation) is the open-book version: <em>before answering, the model looks up the relevant documents from your own knowledge base.</em> Your campaign retros, personas, voice guide. It answers from your real history instead of guessing, and hallucinations drop sharply.</p>
     <div class="chain">
       <span class="step clock">❓ "What did we learn last quarter?"</span><span class="arrow">→</span>
       <span class="step">Agent reads the campaign retro from your vault</span><span class="arrow">→</span>
@@ -739,10 +754,10 @@
   <div class="panel">
     <h3 style="margin-top:0;">Session checklist</h3>
     <ul class="checklist" id="checklist">
-      <li><input type="checkbox" id="c1"><label for="c1">I can explain the pipeline in my own words — and diagnose which step is weak</label></li>
+      <li><input type="checkbox" id="c1"><label for="c1">I can explain the pipeline in my own words, and diagnose which step is weak</label></li>
       <li><input type="checkbox" id="c2"><label for="c2">I can explain model, LLM, API, webhook, agent, harness, and MCP to a colleague</label></li>
       <li><input type="checkbox" id="c3"><label for="c3">I completed the Vocabulary Check (5/5 or reviewed my misses)</label></li>
-      <li><input type="checkbox" id="c4"><label for="c4">I completed the "What Starts It?" check — I can name the trigger type (event / schedule / manual)</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">I completed the "What Starts It?" check, I can name the trigger type (event / schedule / manual)</label></li>
       <li><input type="checkbox" id="c5"><label for="c5">My Readiness Map has 10 tasks mapped to layers, with gaps noted</label></li>
       <li><input type="checkbox" id="c6"><label for="c6">I ranked my top 3 ROI priorities and know my course projects</label></li>
       <li><input type="checkbox" id="c7"><label for="c7">I know the 3 marketing challenges I'm bringing to Class 2</label></li>
@@ -750,8 +765,21 @@
     <p class="rm-hint">Checklist progress is saved on this device.</p>
   </div>
 
+  <div class="nav-row">
+    <a class="nav-link" href="../">
+      <small>&#8592; Course home</small>
+      <strong>All four weeks</strong>
+      <span class="rm-hint" style="display:block;">Outline, setup guide, every handout</span>
+    </a>
+    <a class="nav-link next" href="../class-02/">
+      <small>Next &#8594;</small>
+      <strong>Class 2: Context Engineering</strong>
+      <span class="rm-hint" style="display:block;">Build a Brand Context Vault your AI reads</span>
+    </a>
+  </div>
+
   <div class="footer-note">
-    <p><strong>AI Automation for Marketing Executives</strong> — Class 1 of 4 · Ingenious Resources Int'l. Next class: <em>Context Engineering — giving your AI the right brand context.</em> This handout works offline; your Readiness Map is saved in this browser only.</p>
+    <p><strong>AI Automation for Marketing Executives</strong>, Class 1 of 4 · Ingenious Resources Int'l. Next class: <em>Context Engineering, giving your AI the right brand context.</em> This handout works offline; your Readiness Map is saved in this browser only.</p>
   </div>
 
 </div>
@@ -809,37 +837,37 @@
     });
   }
 
-  /* Exercise 1 — Diagnose the weak pipeline step */
+  /* Exercise 1, Diagnose the weak pipeline step */
   var QUIZ_DIAG = [
     { q: "You spend 10 minutes writing the perfect prompt, but the tool still produces generic copy that could be anyone's brand. Which step is weak?",
-      opts: ["① Input — your instruction was bad", "② Context — the tool lacked your brand info", "④ Tools — nothing is connected", "⑥ Output — you didn't verify"],
+      opts: ["① Input, your instruction was bad", "② Context, the tool lacked your brand info", "④ Tools, nothing is connected", "⑥ Output, you didn't verify"],
       answer: 1,
-      explain: "Step ②: the model had no brand context — no voice guide, no product specs, no examples. A better prompt helps, but thin context produces generic output." },
+      explain: "Step ②: the model had no brand context, no voice guide, no product specs, no examples. A better prompt helps, but thin context produces generic output." },
     { q: "Your agent writes great copy but can't actually send the email or post to LinkedIn. Which step is weak?",
-      opts: ["② Context — not enough brand docs", "③ Memory — it forgot", "④ Tools — nothing is connected", "① Input — bad instruction"],
+      opts: ["② Context, not enough brand docs", "③ Memory, it forgot", "④ Tools, nothing is connected", "① Input, bad instruction"],
       answer: 2,
-      explain: "Step ④: the harness has no tools connected — no email API, no social integration. It can only talk; it can't act. Week 3 fixes this." },
+      explain: "Step ④: the harness has no tools connected, no email API, no social integration. It can only talk; it can't act. Week 3 fixes this." },
     { q: "Every session, you re-explain who your target audience is. The tool never remembers. Which step is weak?",
-      opts: ["③ Memory — nothing persists between sessions", "⑤ The model can't see", "② Context — too much context", "⑥ Output — unverified"],
+      opts: ["③ Memory, nothing persists between sessions", "⑤ The model can't see", "② Context, too much context", "⑥ Output, unverified"],
       answer: 0,
       explain: "Step ③: most chat apps have no persistent memory. In Week 4, your agent keeps memory and stops making you repeat yourself." },
-    { q: "The output reads brilliantly — but the statistic in it is completely wrong. Where did the process fail?",
-      opts: ["④ Tools — broken integration", "② Context — stale data", "⑥ Output — you trusted it without verifying", "③ Memory — it forgot"],
+    { q: "The output reads brilliantly, but the statistic in it is completely wrong. Where did the process fail?",
+      opts: ["④ Tools, broken integration", "② Context, stale data", "⑥ Output, you trusted it without verifying", "③ Memory, it forgot"],
       answer: 2,
-      explain: "Step ⑥: hallucination is normal on every model. The verify habit (Section 05) is the fix — check numbers, dates, and quotes." }
+      explain: "Step ⑥: hallucination is normal on every model. The verify habit (Section 05) is the fix, check numbers, dates, and quotes." }
   ];
 
-  /* Exercise 2 — Vocabulary check */
+  /* Exercise 2, Vocabulary check */
   var QUIZ = [
     { q: "You paste a full campaign brief into a chat tool and ask for a summary. The tool only 'sees' part of it and misses your last section. What bit you?",
       opts: ["Hallucination", "Context window limit", "Webhook", "Temperature"],
       answer: 1,
-      explain: "The context window is how much the model can 'see' at once. Long documents get truncated — give it the relevant slice." },
-    { q: "A lead fills your form. Within seconds, your CRM has a new record and sales gets a WhatsApp alert — nobody pressed anything. What made that possible?",
+      explain: "The context window is how much the model can 'see' at once. Long documents get truncated, give it the relevant slice." },
+    { q: "A lead fills your form. Within seconds, your CRM has a new record and sales gets a WhatsApp alert, nobody pressed anything. What made that possible?",
       opts: ["An agent", "A webhook", "A hallucination", "A context window"],
       answer: 1,
       explain: "A webhook is the push: 'call me when something happens.' Form submit → webhook → CRM + WhatsApp alert." },
-    { q: "You ask a chat tool for market size statistics. It gives you a confident, detailed number — which is completely wrong. What just happened?",
+    { q: "You ask a chat tool for market size statistics. It gives you a confident, detailed number, which is completely wrong. What just happened?",
       opts: ["A model swap", "Context overflow", "Hallucination", "An API error"],
       answer: 2,
       explain: "Every model hallucinates. Confident-sounding nonsense is the #1 reason to verify numbers, quotes, and dates before you use them." },
@@ -848,33 +876,33 @@
       answer: 3,
       explain: "An agent = LLM + tools + memory + autonomy. It persists context and executes multi-step work toward a goal." },
     { q: "Your colleague says: 'We switched AI providers and the same prompt now gives different results.' What's the most accurate response?",
-      opts: ["'The model or harness changed — results vary by design'", "'You're using it wrong'", "'The first provider was better'", "'It's a data breach'"],
+      opts: ["'The model or harness changed, results vary by design'", "'You're using it wrong'", "'The first provider was better'", "'It's a data breach'"],
       answer: 0,
       explain: "Different models and harnesses (pipeline steps ②③④) produce different outputs for the same prompt. Judge tools by output on your task." }
   ];
 
-  /* Exercise 3 — What starts it? (triggers + fail-loud) */
+  /* Exercise 3, What starts it? (triggers + fail-loud) */
   var QUIZ_TRIGGER = [
     { q: "Every Monday at 9am, your tool drafts next week's social posts for review. What starts it?",
       opts: ["Event (a webhook)", "Schedule (the clock)", "Manual (you)", "The model decides"],
       answer: 1,
-      explain: "Schedule — a cron-style trigger. The clock starts it, on repeat, whether you're there or not. This is the 'set and forget' pattern." },
+      explain: "Schedule, a cron-style trigger. The clock starts it, on repeat, whether you're there or not. This is the 'set and forget' pattern." },
     { q: "A lead fills your form; within seconds the CRM has a record and sales gets a WhatsApp alert. What starts it?",
       opts: ["Schedule (the clock)", "Manual (you)", "Event (a webhook)", "A rate limit"],
       answer: 2,
-      explain: "Event — the webhook rings when the form is submitted. Something happened, so the automation runs immediately. No waiting, no polling." },
+      explain: "Event, the webhook rings when the form is submitted. Something happened, so the automation runs immediately. No waiting, no polling." },
     { q: "You open your dashboard and click 'Run weekly report now.' What starts it?",
       opts: ["Manual (you)", "Event (a webhook)", "Schedule (the clock)", "Fail-loud"],
       answer: 0,
-      explain: "Manual — you are the trigger. Great for testing and on-demand reports. Many automations start life as manual runs before you schedule them." },
-    { q: "Your Monday competitor briefing stopped running three weeks ago after the blog feed changed — and nobody noticed. What went wrong?",
-      opts: ["The trigger was wrong", "It failed silently — no alarm", "The schedule was wrong", "The model hallucinated"],
+      explain: "Manual, you are the trigger. Great for testing and on-demand reports. Many automations start life as manual runs before you schedule them." },
+    { q: "Your Monday competitor briefing stopped running three weeks ago after the blog feed changed, and nobody noticed. What went wrong?",
+      opts: ["The trigger was wrong", "It failed silently, no alarm", "The schedule was wrong", "The model hallucinated"],
       answer: 1,
-      explain: "The Check failed. The automation broke quietly and no human was told. Rule from Section 03: fail loudly — alert a human the moment something breaks." },
+      explain: "The Check failed. The automation broke quietly and no human was told. Rule from Section 03: fail loudly, alert a human the moment something breaks." },
     { q: "Your brand-monitoring tool checks social media for new mentions every 15 minutes and flags anything important. What starts it?",
       opts: ["Event (a webhook)", "Manual (you)", "Schedule (the clock)", "MCP"],
       answer: 2,
-      explain: "Schedule — it polls on a timer. Note the trade-off: a true event (webhook) would be instant, but a 15-minute check is often good enough and far simpler." }
+      explain: "Schedule, it polls on a timer. Note the trade-off: a true event (webhook) would be instant, but a 15-minute check is often good enough and far simpler." }
   ];
 
   buildQuiz("quiz-diag", QUIZ_DIAG);
@@ -921,7 +949,7 @@
       td.style.textAlign = "center";
       td.style.color = "var(--ink-dim)";
       td.style.padding = "18px";
-      td.textContent = "No tasks yet — add your first recurring marketing task.";
+      td.textContent = "No tasks yet, add your first recurring marketing task.";
       tr.appendChild(td);
       tbody.appendChild(tr);
       document.getElementById("rmCount").textContent = "";

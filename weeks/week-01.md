@@ -15,7 +15,7 @@
 
 ## Deliverable
 
-**Automation Readiness Map** — Your entire marketing workload mapped against the AI stack with prioritized next steps.
+**Automation Readiness Map**: your entire marketing workload mapped against the AI stack with prioritized next steps.
 
 ## Homework
 

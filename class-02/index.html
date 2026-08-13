@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Automation for Marketing Executives, Class 2: Context Engineering</title>
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --bg-alt: #ffffff;
+    --panel: #ffffff;
+    --panel-alt: #f0f0ec;
+    --ink: #1a1a1a;
+    --ink-soft: #55554f;
+    --ink-dim: #8a8a82;
+    --line: #d9d9d2;
+    --accent: #0f766e;
+    --accent-soft: #ccfbf1;
+    --accent-ink: #134e4a;
+    --warn: #b45309;
+    --warn-soft: #fef3c7;
+    --danger: #b91c1c;
+    --danger-soft: #fee2e2;
+    --ok: #15803d;
+    --ok-soft: #dcfce7;
+    --code-bg: #1e1e1e;
+    --code-ink: #e8e8e8;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 14px rgba(0,0,0,.05);
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121212;
+    --bg-alt: #181818;
+    --panel: #1c1c1c;
+    --panel-alt: #242424;
+    --ink: #ecece6;
+    --ink-soft: #b8b8ae;
+    --ink-dim: #7a7a72;
+    --line: #33332e;
+    --accent: #2dd4bf;
+    --accent-soft: #134e4a;
+    --accent-ink: #99f6e4;
+    --warn: #fbbf24;
+    --warn-soft: #3a2a08;
+    --danger: #f87171;
+    --danger-soft: #3a1212;
+    --ok: #4ade80;
+    --ok-soft: #0f2f18;
+    --shadow: 0 1px 3px rgba(0,0,0,.5);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+  header.top {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(6px);
+  }
+  .top-inner {
+    max-width: 900px; margin: 0 auto; padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .brand { font-weight: 700; font-size: 15px; letter-spacing: .02em; }
+  .brand small { display: block; font-weight: 500; color: var(--ink-dim); font-size: 12px; }
+  .toggle-btn {
+    background: var(--panel); color: var(--ink); border: 1px solid var(--line);
+    border-radius: 8px; padding: 6px 12px; font-size: 13px; cursor: pointer;
+  }
+  .toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .hero { padding: 44px 0 28px; }
+  .course-strip { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .week-chip {
+    font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--ink-dim); background: var(--panel);
+    text-decoration: none;
+  }
+  a.week-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .week-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  h1 { font-size: 34px; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 10px; }
+  .sub { font-size: 18px; color: var(--ink-soft); max-width: 700px; }
+  .meta { margin-top: 14px; font-size: 13px; color: var(--ink-dim); display: flex; gap: 16px; flex-wrap: wrap; }
+  h2 {
+    font-size: 24px; letter-spacing: -.01em; margin: 56px 0 6px;
+    padding-top: 16px; border-top: 1px solid var(--line);
+  }
+  h2 .num { display: inline-block; margin-right: 10px; color: var(--accent); }
+  h3 { font-size: 18px; margin: 24px 0 8px; }
+  h4 { font-size: 16px; }
+  p { margin: 10px 0; }
+  .lead { font-size: 17px; color: var(--ink-soft); }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 20px; margin: 16px 0; box-shadow: var(--shadow);
+  }
+  .callout {
+    border-left: 4px solid var(--accent); background: var(--accent-soft);
+    padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 16px 0;
+  }
+  .callout.warn { border-left-color: var(--warn); background: var(--warn-soft); }
+  .callout.danger { border-left-color: var(--danger); background: var(--danger-soft); }
+  .callout.ok { border-left-color: var(--ok); background: var(--ok-soft); }
+  .callout strong:first-child { display: block; margin-bottom: 2px; }
+  .callout p { margin: 4px 0; }
+  ul, ol { margin: 10px 0 10px 22px; }
+  li { margin: 6px 0; }
+  strong { font-weight: 650; }
+  a { color: var(--accent); }
+
+  .exercise {
+    background: var(--panel); border: 1px solid var(--line);
+    border-left: 4px solid var(--accent); border-radius: var(--radius);
+    padding: 18px 20px; margin: 20px 0; box-shadow: var(--shadow);
+  }
+  .exercise h3 { margin-top: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .ex-badge {
+    display: inline-block; background: var(--accent); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    padding: 3px 10px; border-radius: 999px; text-transform: uppercase;
+  }
+  .exercise .rm-hint { margin-top: 10px; }
+
+  .grid { display: grid; gap: 14px; margin: 18px 0; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px 18px; box-shadow: var(--shadow);
+  }
+  .card h4 { margin-bottom: 6px; }
+  .card .tag {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
+    border-radius: 999px; padding: 2px 8px; margin-bottom: 8px;
+  }
+  .card p { font-size: 14.5px; color: var(--ink-soft); margin: 6px 0; }
+  .card .example { font-size: 13px; color: var(--ink-dim); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 8px; }
+
+  .flow { display: flex; flex-direction: column; gap: 0; margin: 18px 0; }
+  .flow-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 14px 16px; position: relative;
+  }
+  .flow-row:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+  .flow-row:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+  .flow-row + .flow-row { border-top: none; }
+  .flow-num {
+    flex: 0 0 30px; height: 30px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+  }
+  .flow-body h4 { font-size: 15.5px; }
+  .flow-body p { font-size: 14px; color: var(--ink-soft); margin: 2px 0 0; }
+  .flow-body .use { font-size: 13px; color: var(--ink-dim); margin-top: 6px; }
+</style>
+<style>
+  .term { background: var(--code-bg); border-radius: 10px; overflow: hidden; margin: 16px 0; box-shadow: var(--shadow); }
+  .term-head {
+    display: flex; align-items: center; gap: 6px; padding: 8px 12px;
+    background: #2a2a2a; border-bottom: 1px solid #3a3a3a;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .term-title { color: #aaa; font-size: 12px; margin-left: 8px; font-family: ui-monospace, "Cascadia Code", monospace; }
+  .term pre { padding: 14px 16px; overflow-x: auto; color: var(--code-ink); font-family: ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 13.5px; line-height: 1.55; }
+  .term .cmt { color: #7d7d7d; }
+  .term .k { color: #c792ea; }
+  .term .s { color: #c3e88d; }
+  .term .f { color: #82aaff; }
+  .term-actions { display: flex; gap: 8px; padding: 0 12px 12px; }
+  .copy-btn {
+    background: #333; color: #e8e8e8; border: 1px solid #4a4a4a; border-radius: 7px;
+    padding: 6px 12px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+  }
+  .copy-btn:hover { background: #3d3d3d; border-color: var(--accent); }
+  .copy-btn.copied { background: #14532d; border-color: #22c55e; color: #bbf7d0; }
+
+  .chain { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0; }
+  .chain .step {
+    background: var(--panel-alt); border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 12px; font-size: 13.5px; font-weight: 600;
+  }
+  .chain .step.clock { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .chain .arrow { color: var(--accent); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14.5px; background: var(--panel); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--panel-alt); font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); }
+  tr:last-child td { border-bottom: none; }
+  .table-scroll { overflow-x: auto; }
+  .table-scroll table { min-width: 620px; }
+
+  .diagram { margin: 20px 0; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+
+  .checklist { list-style: none; margin: 16px 0; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 14px; margin: 8px 0; cursor: pointer;
+  }
+  .checklist input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; flex: 0 0 16px; }
+  .checklist label { flex: 1; font-size: 14.5px; }
+  .checklist li.done label { text-decoration: line-through; color: var(--ink-dim); }
+
+  .quiz-item { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin: 12px 0; box-shadow: var(--shadow); }
+  .quiz-q { font-weight: 600; margin-bottom: 10px; }
+  .quiz-opts { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .quiz-opt {
+    border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px;
+    font-size: 14px; cursor: pointer; background: var(--panel-alt); color: var(--ink);
+    text-align: left; transition: all .12s;
+  }
+  .quiz-opt:hover { border-color: var(--accent); }
+  .quiz-opt.correct { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); font-weight: 600; }
+  .quiz-opt.wrong { background: var(--danger-soft); border-color: var(--danger); color: var(--danger); }
+  .quiz-opt:disabled { cursor: default; opacity: .85; }
+  .quiz-explain { display: none; margin-top: 10px; font-size: 14px; color: var(--ink-soft); border-top: 1px dashed var(--line); padding-top: 10px; }
+  .quiz-item.answered .quiz-explain { display: block; }
+
+  .rm-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .rm-table th, .rm-table td { padding: 8px 10px; }
+  .rm-table input, .rm-table select, .rm-table textarea {
+    width: 100%; background: var(--bg-alt); color: var(--ink);
+    border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font-size: 13.5px;
+    font-family: inherit;
+  }
+  .rm-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  .btn {
+    background: var(--accent); color: #fff; border: none; border-radius: 8px;
+    padding: 9px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.ghost { background: var(--panel-alt); color: var(--ink); border: 1px solid var(--line); }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--accent); filter: none; }
+  .btn.danger-ghost { background: var(--danger-soft); color: var(--danger); border: 1px solid var(--danger); }
+  .rm-hint { font-size: 13.5px; color: var(--ink-dim); }
+
+  /* vault tree */
+  .tree {
+    background: var(--panel-alt); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; margin: 14px 0; overflow-x: auto;
+    font-family: ui-monospace, Menlo, monospace; font-size: 13.5px; line-height: 1.7;
+    white-space: pre; color: var(--ink-soft);
+  }
+  .tree b { color: var(--accent); font-weight: 700; }
+
+  /* score badge */
+  .score {
+    display: inline-block; font-size: 12.5px; font-weight: 700; border-radius: 999px;
+    padding: 3px 11px; background: var(--panel-alt); border: 1px solid var(--line); color: var(--ink-dim);
+  }
+  .score.good { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+
+  .nav-row {
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--line);
+  }
+  .nav-link {
+    display: block; text-decoration: none; color: var(--ink);
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 16px; font-size: 14px; box-shadow: var(--shadow); flex: 1 1 240px;
+  }
+  .nav-link:hover { border-color: var(--accent); }
+  .nav-link small { display: block; color: var(--ink-dim); font-size: 12px; margin-bottom: 3px; }
+  .nav-link strong { color: var(--accent); }
+  .nav-link.next { text-align: right; }
+
+  .footer-note { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-dim); font-size: 13px; }
+  code { background: var(--panel-alt); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; font-size: .9em; font-family: ui-monospace, Menlo, monospace; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px; }
+  .pill.yes { background: var(--ok-soft); color: var(--ok); }
+  .pill.no { background: var(--danger-soft); color: var(--danger); }
+  .pill.mid { background: var(--warn-soft); color: var(--warn); }
+  .pill.pick { background: var(--accent); color: #fff; }
+  .src-list { font-size: 14px; }
+  .src-list li { margin: 8px 0; }
+  .src-list a { word-break: break-word; }
+  @media print {
+    .toggle-btn, .copy-btn, .rm-actions .btn:not(.print-keep) { display: none; }
+    body { background: #fff; }
+    .panel, .card, .quiz-item { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">AI Automation for Marketing Executives
+      <small>Ingenious Resources Int'l &middot; Class 2 of 4 &middot; Live Session</small>
+    </div>
+    <button class="toggle-btn" id="themeToggle" aria-label="Toggle light/dark mode">&#9790; Dark mode</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="course-strip">
+      <a class="week-chip" href="../class-01/">Week 1 &middot; Foundations</a>
+      <span class="week-chip active">Week 2 &middot; Context Engineering (today)</span>
+      <span class="week-chip">Week 3 &middot; Workflows</span>
+      <span class="week-chip">Week 4 &middot; Your Agent</span>
+    </div>
+    <h1>Context Engineering: Teaching Your AI Your Brand</h1>
+    <p class="sub">Last week you learned the pipeline. Today you build <strong>step 2</strong>: the context layer. You will leave with a real Brand Context Vault on your own machine, wired into your AI, and proof it works: the same marketing task run before and after, side by side.</p>
+    <div class="meta">
+      <span>&#9201; ~3 hours</span>
+      <span>&#128203; Deliverable: Brand Context Vault (6 notes minimum)</span>
+      <span>&#129520; Tools: Obsidian (free) + your Claude account</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>What changes for you today</strong>
+    <p>You stop writing long prompts. You start building an asset. By the end of this session, a five-word request such as "draft the launch post" produces on-brand work, because everything the model needs to know already lives somewhere it can read. That asset is worth more every week you use it. A prompt you typed last month is worth nothing today.</p>
+  </div>
+  <!-- ============ SECTION 01 ============ -->
+  <h2><span class="num">01</span>Recap: Step 2 Is Where You Live Now</h2>
+  <p class="lead">Class 1 gave you the six-step pipeline. Today we zoom into one box. Everything you do for the next three hours happens inside <strong>step 2, context</strong>, and it is the step you have the most control over.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 760 300" role="img" aria-label="The pipeline with step 2 highlighted as today's focus">
+      <defs>
+        <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"/>
+        </marker>
+      </defs>
+      <g font-family="-apple-system, Segoe UI, sans-serif">
+        <rect x="20" y="20" width="200" height="46" rx="9" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="34" y="40" font-size="12" font-weight="700" fill="var(--ink-soft)">&#9312; YOU GIVE INPUT</text>
+        <text x="34" y="57" font-size="11.5" fill="var(--ink-dim)">Your instruction to the LLM</text>
+
+        <rect x="20" y="82" width="200" height="64" rx="9" fill="var(--accent)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="34" y="103" font-size="12" font-weight="700" fill="#fff">&#9313; CONTEXT GATHERED</text>
+        <text x="34" y="120" font-size="11.5" fill="rgba(255,255,255,.9)">Brand docs, personas, facts</text>
+        <text x="34" y="137" font-size="11.5" font-weight="700" fill="#fff">&#9666; TODAY'S WHOLE SESSION</text>
+
+        <rect x="20" y="162" width="200" height="46" rx="9" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="34" y="182" font-size="12" font-weight="700" fill="var(--ink-soft)">&#9314; MEMORY SEARCHED</text>
+        <text x="34" y="199" font-size="11.5" fill="var(--ink-dim)">Past sessions, preferences</text>
+
+        <rect x="20" y="224" width="200" height="46" rx="9" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="34" y="244" font-size="12" font-weight="700" fill="var(--ink-soft)">&#9315; TOOLS USED</text>
+        <text x="34" y="261" font-size="11.5" fill="var(--ink-dim)">Search, APIs (Week 3)</text>
+
+        <line x1="228" y1="114" x2="288" y2="114" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow2)"/>
+
+        <rect x="296" y="82" width="190" height="64" rx="9" fill="var(--panel)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="310" y="106" font-size="12" font-weight="700" fill="var(--accent)">&#9316; ALL OF IT GOES</text>
+        <text x="310" y="123" font-size="12" font-weight="700" fill="var(--accent)">TO THE MODEL</text>
+        <text x="310" y="140" font-size="11.5" fill="var(--ink-soft)">One combined window</text>
+
+        <line x1="494" y1="114" x2="536" y2="114" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow2)"/>
+
+        <rect x="544" y="82" width="196" height="64" rx="9" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="558" y="106" font-size="12" font-weight="700" fill="var(--ink-soft)">&#9317; OUTPUT</text>
+        <text x="558" y="123" font-size="11.5" fill="var(--ink-dim)">Quality here is capped by</text>
+        <text x="558" y="140" font-size="11.5" font-weight="700" fill="var(--accent)">the quality of &#9313;</text>
+
+        <rect x="296" y="176" width="444" height="94" rx="9" fill="var(--panel-alt)" stroke="var(--line)"/>
+        <text x="312" y="200" font-size="13" font-weight="700" fill="var(--ink)">Why step 2 is your highest-leverage move</text>
+        <text x="312" y="222" font-size="12" fill="var(--ink-soft)">You cannot change the model's brain. You can completely change</text>
+        <text x="312" y="240" font-size="12" fill="var(--ink-soft)">what it knows before it answers. Same brain plus better context</text>
+        <text x="312" y="258" font-size="12" fill="var(--ink-soft)">equals better work, on every tool you will ever use.</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Where today sits in the arc</h3>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Week</th><th>What you build</th><th>Pipeline step</th></tr>
+      <tr><td><strong>1</strong> (done)</td><td>Vocabulary, the pipeline, your Readiness Map</td><td>Seeing the whole flow</td></tr>
+      <tr><td><strong>2</strong> (today)</td><td>Brand Context Vault, wired into your AI</td><td>&#9313; Context</td></tr>
+      <tr><td><strong>3</strong></td><td>Workflow automation with n8n, reading your vault</td><td>&#9315; Tools</td></tr>
+      <tr><td><strong>4</strong></td><td>Your own persistent agent</td><td>&#9314; + &#9315; Memory and autonomy</td></tr>
+    </table>
+    </div>
+    <p class="rm-hint">Bring out your Readiness Map from Class 1. The tasks you ranked top three are the tasks we will test the vault against today.</p>
+  </div>
+
+  <!-- ============ SECTION 02 ============ -->
+  <h2><span class="num">02</span>What "Context" Actually Means</h2>
+  <p class="lead">People use "context" to mean five different things, then wonder why the advice they read does not work. Here are the five, kept strictly separate. You will use these words all day.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="tag">1 of 5</span>
+      <h4>Instructions</h4>
+      <p>What you want done, and the standing rules for how to do it. This includes your typed request and any permanent settings such as project instructions or custom instructions.</p>
+      <p class="example">"Draft a LinkedIn post about the new integration." Plus the standing rule: "Always check the do-not-say list first."</p>
+    </div>
+    <div class="card">
+      <span class="tag">2 of 5</span>
+      <h4>Context</h4>
+      <p>The reference material the model can read <em>while answering this specific request</em>: your voice guide, your persona notes, your product facts. Facts about your world, not commands.</p>
+      <p class="example">Your Brand Voice Guide note. It does not tell the model what to do; it tells the model what is true about you.</p>
+    </div>
+    <div class="card">
+      <span class="tag">3 of 5</span>
+      <h4>Memory</h4>
+      <p>What carries over <em>between</em> sessions without you re-pasting it. Chat history, saved preferences, notes the tool keeps about you. It accumulates by use, not by curation.</p>
+      <p class="example">"Last Tuesday we agreed the healthcare angle was too risky." Memory is a transcript of what happened, not a curated fact sheet.</p>
+    </div>
+    <div class="card">
+      <span class="tag">4 of 5</span>
+      <h4>Tools</h4>
+      <p>The abilities that let the model fetch or change things: web search, a file reader, your CRM. Tools are how new context arrives mid-task rather than being supplied up front.</p>
+      <p class="example">A web search tool pulls today's competitor pricing into the answer. Week 3 is entirely about this.</p>
+    </div>
+    <div class="card">
+      <span class="tag">5 of 5</span>
+      <h4>Retrieval</h4>
+      <p>The selection step: choosing <em>which slice</em> of your knowledge base gets loaded for this request. Search, filtering, or the model reading a specific file by name.</p>
+      <p class="example">You have 80 notes. The request is about email. Retrieval pulls the voice guide, the email tone rules, and one persona. Not all 80.</p>
+    </div>
+    <div class="card" style="border-color: var(--accent);">
+      <span class="tag">The relationship</span>
+      <h4>How they fit together</h4>
+      <p><strong>Instructions</strong> say what to do. <strong>Context</strong> says what is true. <strong>Memory</strong> says what happened before. <strong>Tools</strong> fetch what is missing. <strong>Retrieval</strong> decides what to load.</p>
+      <p class="example">Today you build context and retrieval. Week 3 adds tools. Week 4 adds memory. Instructions you already know.</p>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <strong>The distinction that saves you money and embarrassment</strong>
+    <p><strong>Memory is not a knowledge base.</strong> Memory is a by-product of chatting: it grows on its own, it keeps whatever was said including things you later reversed, and you do not fully control it. A knowledge base is deliberately curated: you decide what goes in, you correct it, you delete what is wrong. When a stale fact keeps resurfacing, the fix is almost always to correct the curated note, not to argue with memory.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 1</span> Name the Layer</h3>
+    <p>Five situations. Which of the five parts is doing the work, or failing? Get these right and every vendor pitch you hear this year becomes readable.</p>
+    <div id="quiz-layers"></div>
+  </div>
+  <!-- ============ SECTION 03 ============ -->
+  <h2><span class="num">03</span>The Context Window, and Why More Is Not Better</h2>
+  <p class="lead">Every model has a limit on how much it can hold in view at once. That limit is the <strong>context window</strong>, measured in tokens (roughly three quarters of a word each, as we covered in Class 1). Two things matter about it, and the second one surprises people.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>Fact 1: it is finite</h4>
+      <p>Everything competes for the same space: your instructions, your pasted documents, the tool results, the conversation so far, and the answer being written. Fill it with noise and there is less room for what matters.</p>
+      <p class="example">Practical effect: paste a 90-page PDF and ask a narrow question, and you have spent your budget on 89 irrelevant pages.</p>
+    </div>
+    <div class="card">
+      <h4>Fact 2: quality degrades before the limit</h4>
+      <p>Anthropic's engineering team documents this directly. They describe an <strong>attention budget</strong> and cite research on <strong>context rot</strong>: as the number of tokens goes up, the model's ability to accurately recall information from that context goes down. It affects every model, gently in some, sharply in others.</p>
+      <p class="example">So "just paste everything, the window is big" is a real mistake, not a stylistic preference. It is a documented failure mode.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The rule the whole session hangs on</strong>
+    <p>Anthropic states the goal as finding <em>"the smallest possible set of high-signal tokens that maximize the likelihood of some desired outcome."</em> Translated for your job: <strong>give the model the tightest possible set of things that are actually true and actually relevant.</strong> Not the biggest pile. The tightest useful set.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Context quality, in the four checks you can actually run</h3>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Check</th><th>Bad</th><th>Good</th></tr>
+      <tr>
+        <td><strong>Relevant</strong></td>
+        <td>Your whole vault dumped in for a single tweet</td>
+        <td>Voice guide plus the one persona the tweet targets</td>
+      </tr>
+      <tr>
+        <td><strong>Current</strong></td>
+        <td>Pricing note last touched 14 months ago, silently wrong</td>
+        <td>Every note carries a last-updated date you can see at a glance</td>
+      </tr>
+      <tr>
+        <td><strong>Consistent</strong></td>
+        <td>Two notes give two different flagship prices; the model picks one at random</td>
+        <td>One note owns each fact. Everything else links to it</td>
+      </tr>
+      <tr>
+        <td><strong>Specific</strong></td>
+        <td>"Our tone is professional yet friendly." True of every company alive</td>
+        <td>"Use customers, never users. Never say seamless. Sentences under 20 words"</td>
+      </tr>
+    </table>
+    </div>
+    <p class="rm-hint">"Professional yet friendly" is the single most common piece of dead weight in a brand document. It is not context, because it excludes nothing. Real context excludes things.</p>
+  </div>
+
+  <div class="callout danger">
+    <strong>On the phrase "prompt engineering is dead"</strong>
+    <p>It is not dead, and anyone who tells you otherwise is selling something. Clear instructions still matter, and Anthropic still publishes prompt engineering guidance. What has changed is where the leverage sits. Anthropic frames context engineering as <em>"the natural progression of prompt engineering"</em>: with capable models, the bigger win now comes from curating what the model knows rather than re-wording what you ask. Both matter. <strong>Context is the one that compounds</strong>, because a better sentence helps once and a better vault helps forever.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 2</span> Fix the Weak Context</h3>
+    <p>Below are four real lines from real brand documents. Each one fails at least one of the four checks. Rewrite each one to be specific enough that it excludes something. Two minutes each, out loud is fine.</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>The weak line</th><th>Which check it fails</th><th>Your rewrite</th></tr>
+      <tr><td>"Our tone is professional yet approachable."</td><td>Specific</td><td class="rm-hint">Name two words you use and two you ban</td></tr>
+      <tr><td>"We target decision makers in mid-market companies."</td><td>Specific</td><td class="rm-hint">Job title, the thing that keeps them up at night, the objection they raise</td></tr>
+      <tr><td>"Pricing starts around the mid range for our market."</td><td>Current, Specific</td><td class="rm-hint">The actual number, plus the date you last checked it</td></tr>
+      <tr><td>"Our product is a comprehensive, best-in-class solution."</td><td>Specific, Consistent</td><td class="rm-hint">What it does, for whom, in one sentence a customer would recognise</td></tr>
+    </table>
+    </div>
+    <p class="rm-hint">Success test: read your rewrite and ask "could a competitor put this exact sentence in their document?" If yes, it is still too vague to be useful context.</p>
+  </div>
+
+  <!-- ============ SECTION 04 ============ -->
+  <h2><span class="num">04</span>Static Context and Dynamic Context</h2>
+  <p class="lead">Context splits cleanly into two kinds, and confusing them is what makes people either paste too much or trust stale facts. Your vault holds the first kind. Weeks 3 and 4 add the second.</p>
+
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-num">S</div>
+      <div class="flow-body">
+        <h4>Static context: the things that are true this quarter</h4>
+        <p>Your brand voice, your personas, your positioning, your product facts, your banned words, your campaign lessons. It changes on the timescale of strategy, not hours. You write it once and maintain it deliberately.</p>
+        <p class="use">Lives in: your vault, loaded up front. This is today's build. It is the part that compounds.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">D</div>
+      <div class="flow-body">
+        <h4>Dynamic context: the things that are true right now</h4>
+        <p>Today's campaign numbers, this morning's competitor announcement, the lead who filled the form ten minutes ago, live inventory. It is stale the moment you write it down, so you never write it down. You fetch it.</p>
+        <p class="use">Lives in: tools and live connections, fetched at the moment of the request. Week 3 builds this with n8n.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warn">
+    <strong>The mistake to avoid all quarter</strong>
+    <p>Never put dynamic facts in your static vault. The instant you type "Q3 spend to date: N2.4m" into a note, you have created a fact that will be wrong next week and will keep being confidently repeated by your AI. Static notes hold <em>where to look</em> and <em>what it means</em>. Numbers that move get fetched, or they get a visible date and an owner.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Sort your own material</h3>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Marketing material</th><th>Static or dynamic</th><th>Where it belongs</th></tr>
+      <tr><td>Brand voice rules</td><td><span class="pill yes">Static</span></td><td>Vault note, loaded every time</td></tr>
+      <tr><td>Buyer persona</td><td><span class="pill yes">Static</span></td><td>Vault note, loaded when relevant</td></tr>
+      <tr><td>Banned words and withdrawn claims</td><td><span class="pill yes">Static</span></td><td>Vault note, loaded every time</td></tr>
+      <tr><td>What last quarter's campaign taught you</td><td><span class="pill yes">Static</span></td><td>Vault note, a retro per campaign</td></tr>
+      <tr><td>This week's ad spend and click rate</td><td><span class="pill no">Dynamic</span></td><td>Fetched from the platform. Week 3</td></tr>
+      <tr><td>Competitor's announcement this morning</td><td><span class="pill no">Dynamic</span></td><td>Web search tool, or a Week 4 scheduled brief</td></tr>
+      <tr><td>Current price list</td><td><span class="pill mid">Both</span></td><td>Vault note with a visible date and a named owner, reviewed monthly</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 3</span> Static or Dynamic</h3>
+    <p>Five items from a real marketing week. Sort each one, then say where it should live. The third one catches nearly everybody.</p>
+    <div id="quiz-sd"></div>
+  </div>
+  <!-- ============ SECTION 05 ============ -->
+  <h2><span class="num">05</span>Choosing the Tool: The Honest Comparison</h2>
+  <p class="lead">You are about to invest hours of your own writing into whichever tool you pick, so the pick matters. I researched the current official documentation for each option rather than trusting reputation. Every claim below is sourced in Section 14. Here is what the evidence actually supports.</p>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">The five criteria that decide it for a marketing knowledge base</h3>
+    <ol>
+      <li><strong>Portability</strong>: can you take your writing out and use it in another tool next year, without a rebuild? Your vault will outlive your current AI subscription.</li>
+      <li><strong>Machine readability</strong>: can an automation read the files directly, as files, so Week 3 and Week 4 can use them?</li>
+      <li><strong>Structure</strong>: can you attach fields such as type, status, and last-updated to each note, so retrieval can filter?</li>
+      <li><strong>Retrieval quality</strong>: how well does the tool itself find the right slice and cite it?</li>
+      <li><strong>Friction for a non-technical user</strong>: how fast can you get from install to a working first note?</li>
+    </ol>
+  </div>
+
+  <div class="table-scroll">
+  <table>
+    <tr>
+      <th>Tool</th>
+      <th>What it actually is</th>
+      <th>Portability</th>
+      <th>Readable by automations</th>
+      <th>Built-in AI retrieval</th>
+      <th>Cost to start</th>
+    </tr>
+    <tr>
+      <td><strong>Obsidian</strong> <span class="pill pick">Course pick</span></td>
+      <td>Notes are plain Markdown files in a folder on your own device, which Obsidian calls a vault</td>
+      <td><span class="pill yes">Highest</span> plain text files, no proprietary format</td>
+      <td><span class="pill yes">Yes</span> they are just files on disk</td>
+      <td><span class="pill no">None built in</span> you pair it with Claude or any model</td>
+      <td>Free, no sign-up required</td>
+    </tr>
+    <tr>
+      <td><strong>Gemini Notebook</strong><br><span class="rm-hint">formerly NotebookLM</span></td>
+      <td>Google web app: upload sources, then ask questions answered from those sources with citations</td>
+      <td><span class="pill mid">Medium</span> your sources stay yours, the notebook does not</td>
+      <td><span class="pill no">No</span> web app, not a folder n8n can read</td>
+      <td><span class="pill yes">Excellent</span> grounded answers with citations, its core strength</td>
+      <td>Free tier: 100 notebooks, up to 50 sources each, 500,000 words per source, 50 chat queries a day</td>
+    </tr>
+    <tr>
+      <td><strong>Notion</strong></td>
+      <td>Hosted workspace with databases, pages and team permissions</td>
+      <td><span class="pill mid">Medium</span> exports to Markdown and CSV, but callout blocks come out as HTML</td>
+      <td><span class="pill mid">Via API</span> not local files, so Week 3 reads it over the network</td>
+      <td><span class="pill mid">Add-on</span> Notion AI, plus official connectors so Claude can search your workspace</td>
+      <td>Free personal plan, paid per member for teams</td>
+    </tr>
+    <tr>
+      <td><strong>Logseq</strong></td>
+      <td>Outliner knowledge base, privacy-first and open source</td>
+      <td><span class="pill yes">High</span> in the file-based version</td>
+      <td><span class="pill yes">Yes</span> in the file-based version</td>
+      <td><span class="pill no">None built in</span></td>
+      <td>Free, open source</td>
+    </tr>
+    <tr>
+      <td><strong>Plain folder plus your editor</strong><br><span class="rm-hint">the credible fifth option</span></td>
+      <td>A folder of .md files, edited in any text editor. No app at all</td>
+      <td><span class="pill yes">Highest</span> identical to Obsidian's storage</td>
+      <td><span class="pill yes">Yes</span></td>
+      <td><span class="pill no">None</span></td>
+      <td>Free, nothing to install</td>
+    </tr>
+  </table>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>The tradeoff nobody tells you about Gemini Notebook</h4>
+      <p>Its retrieval is genuinely the best of the five and the citations are excellent, which makes it superb for interrogating documents you did not write. But Google's own help documents the boundaries: sources are capped per notebook, there are daily query limits, and notebooks cannot be duplicated. Most decisively for this course, it is a web app. Week 3's automation cannot open a notebook the way it opens a file.</p>
+      <p class="example">Verdict: excellent research companion, wrong shape for a vault your automations must read. Use it alongside, not instead.</p>
+    </div>
+    <div class="card">
+      <h4>The tradeoff nobody tells you about Notion</h4>
+      <p>Best-in-class for teams, permissions and shared editing, and Claude has an official connector that can search a connected workspace. But your content lives in Notion's structure, exports are lossy for some block types, and every automation goes through the network and an API key rather than reading a local file.</p>
+      <p class="example">Verdict: the right answer if your marketing team already runs on Notion. Heavier than you need for a one-person vault built today.</p>
+    </div>
+    <div class="card">
+      <h4>The tradeoff nobody tells you about Logseq</h4>
+      <p>Technically strong and genuinely private. The catch is timing: Logseq's own April 2026 announcement confirms the project has split into two products, with the file-based Markdown version continuing as <em>Logseq OG</em>, receiving security and framework updates but <strong>no new features</strong>, while the database version becomes the main line. That is a fine choice for an existing user and an awkward one to start a paid course on this month.</p>
+      <p class="example">Verdict: sound tool, unsettled moment. Not what I will put your client work on today.</p>
+    </div>
+    <div class="card">
+      <h4>The tradeoff nobody tells you about a plain folder</h4>
+      <p>It genuinely works, and it is exactly the same storage format Obsidian uses. What you give up is the connective tissue: clickable links between notes, tag search, a graph view showing gaps, and the properties panel that makes structured fields easy to keep consistent. For a non-technical user maintaining 40 notes, that tissue is the difference between a living vault and a folder nobody opens.</p>
+      <p class="example">Verdict: your fallback if Obsidian will not install. You lose convenience, not portability.</p>
+    </div>
+  </div>
+
+  <div class="callout ok">
+    <strong>The recommendation, and the evidence for it</strong>
+    <p><strong>Obsidian stays the primary tool for this course.</strong> Not from habit. Because of one decisive property that the others cannot match: Obsidian's own documentation states that notes are stored as Markdown-formatted plain text files in a folder on your local file system, and that because they are plain text you can edit and manage them with other text editors and file managers. That is exactly the shape the rest of this course needs. In Week 3, n8n reads those files. In Week 4, your agent reads those files. Nothing needs an API key, nothing needs a network call, nothing breaks if a vendor changes a plan.</p>
+    <p>Structure comes free too: Obsidian's properties are stored in a YAML frontmatter block at the top of each note, so type, status and last-updated are queryable fields rather than prose. Its Bases core plugin builds database-style table views, and its docs confirm all that data still lives in your local Markdown files and their properties. You get database behaviour without a database.</p>
+    <p><strong>What would change my mind:</strong> if your team already runs on Notion, build it there and accept the API path in Week 3. If you never intend to automate and only want to interrogate documents conversationally, Gemini Notebook beats Obsidian at that specific job. Neither is true for you today, so we build in Obsidian.</p>
+  </div>
+
+  <div class="callout warn">
+    <strong>One honest limitation of the pick</strong>
+    <p>Obsidian has no AI retrieval of its own. The vault does not answer questions; it is the library your model reads. That is a real gap compared to Gemini Notebook, and it is why Section 09 wires the vault into Claude rather than stopping at the files. Know what you are choosing: maximum portability and automation-readiness, in exchange for doing the retrieval wiring yourself.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 4</span> Defend the Choice</h3>
+    <p>Your CTO stops you in the corridor: "Why are we writing brand documents in a note-taking app instead of using the AI tool that has search built in?" Answer in three sentences, without saying the word "portability". Then answer the follow-up: "What would make you switch?"</p>
+    <p class="rm-hint">Success: your answer mentions that Week 3 and Week 4 automations need to read files directly, and you can name one situation where the other tool genuinely wins.</p>
+  </div>
+  <!-- ============ SECTION 06 ============ -->
+  <h2><span class="num">06</span>How a Knowledge Base Is Built: Seven Ideas</h2>
+  <p class="lead">Before you touch the keyboard, get the design. These seven ideas are the whole architecture of a vault, and none of them is technical. Read them in order, because each one builds on the last.</p>
+
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-num">1</div>
+      <div class="flow-body">
+        <h4>Markdown: formatting that survives everything</h4>
+        <p>Markdown is plain text with a few punctuation conventions. <code># Heading</code> makes a heading. <code>**bold**</code> makes bold. <code>- item</code> makes a bullet. That is most of it. Because the file stays readable text, a human, a model, and an automation can all read the same file without conversion.</p>
+        <p class="use">Why it matters to you: a Word file is a container you need software to open. A Markdown file is the content itself.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">2</div>
+      <div class="flow-body">
+        <h4>Folders: one shelf per kind of thing</h4>
+        <p>Folders group notes by <em>type</em>, not by campaign or by date. Voice in one folder, personas in another, product facts in another. Type-based folders stay stable for years; campaign-based folders rot within two quarters.</p>
+        <p class="use">The test: if a new note has an obvious home without you thinking, your folders are right.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">3</div>
+      <div class="flow-body">
+        <h4>Links: the connective tissue</h4>
+        <p>Typing <code>[[Persona - Operations Lead]]</code> inside any note creates a clickable link to that note. Obsidian's documentation calls these internal links and notes that linking builds a network of knowledge. It also updates links automatically when you rename a file, which is what stops a vault from decaying.</p>
+        <p class="use">Marketing payoff: your campaign retro links to the persona it targeted, which links to the voice guide it used. One click each way.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">4</div>
+      <div class="flow-body">
+        <h4>Tags: cross-cutting labels</h4>
+        <p>A tag is a keyword starting with a hash, such as <code>#persona</code>, or a list under a <code>tags</code> property. Folders answer "what kind of note is this", tags answer "what else does it touch": a channel, a quarter, a status.</p>
+        <p class="use">Rule of thumb: one folder per note, several tags per note. If you are agonising over which folder, that is a tag.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">5</div>
+      <div class="flow-body">
+        <h4>Properties and YAML frontmatter: the fields that make retrieval possible</h4>
+        <p>At the very top of a note, between two lines of three dashes, you can list fields: <code>type</code>, <code>status</code>, <code>updated</code>, <code>owner</code>. Obsidian's docs confirm properties are stored in this YAML frontmatter block and hold structured data such as text, links, dates, checkboxes and numbers.</p>
+        <p class="use">This is what makes "load only active personas" possible instead of "load everything and hope". It is the single highest-value habit in the vault.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">6</div>
+      <div class="flow-body">
+        <h4>The Index, also called a Map of Content</h4>
+        <p>One note that links to everything and says in one line what each thing is for. It is the front door for a human and the table of contents for a model. When you point an AI at the vault, this is the note it should read first.</p>
+        <p class="use">Without an index, a vault is a pile. With one, it is a library.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">7</div>
+      <div class="flow-body">
+        <h4>Source of truth: one fact, one home</h4>
+        <p>Every fact lives in exactly one note. Everything else links to it. The moment your price appears in three notes, you have three prices, and two of them will be wrong within a quarter.</p>
+        <p class="use">This is the discipline that keeps a vault trustworthy at 200 notes. Duplication is the enemy, not disorganisation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Naming: boring, consistent, and searchable</h3>
+    <p>File names are context too. Anthropic's engineering write-up makes this point about agents reading a file system: folder hierarchies, naming conventions and timestamps all provide signals that help both humans and agents understand how and when to use information. A note called <code>notes2.md</code> tells a model nothing. A note called <code>persona-operations-lead.md</code> tells it who the note is about before it opens it.</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Rule</th><th>Do this</th><th>Not this</th></tr>
+      <tr><td>Lead with the type</td><td><code>persona-operations-lead.md</code></td><td><code>Bola notes.md</code></td></tr>
+      <tr><td>Lowercase, hyphens, no spaces</td><td><code>brand-voice-guide.md</code></td><td><code>Brand Voice Guide FINAL v3.md</code></td></tr>
+      <tr><td>No version numbers in names</td><td><code>product-facts.md</code></td><td><code>product-facts-v2-updated.md</code></td></tr>
+      <tr><td>Dates only where the note is an event</td><td><code>retro-2026-q2-launch.md</code></td><td><code>retro-latest.md</code></td></tr>
+    </table>
+    </div>
+    <p class="rm-hint">Why no version numbers: the note is the current truth. If you need history, the date field in the frontmatter carries it. Two files named v2 and v3 is two sources of truth, which is the problem from idea 7.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Retrieval, in plain terms: how the right slice gets picked</h3>
+    <p>You have 40 notes and a request about one email. Three ways the right ones get loaded, from crudest to best:</p>
+    <div class="chain">
+      <span class="step">Paste everything</span><span class="arrow">&#8594;</span>
+      <span class="step">Wastes the window, invites context rot</span>
+    </div>
+    <div class="chain">
+      <span class="step">You choose the files</span><span class="arrow">&#8594;</span>
+      <span class="step">Accurate, but you do it every single time</span>
+    </div>
+    <div class="chain">
+      <span class="step clock">Index plus properties</span><span class="arrow">&#8594;</span>
+      <span class="step">The model reads the index, sees types and dates</span><span class="arrow">&#8594;</span>
+      <span class="step">Opens only what it needs</span>
+    </div>
+    <p class="rm-hint">The third pattern is what your structure is <em>for</em>. Anthropic describes the same idea as keeping lightweight identifiers such as file paths and loading data into context just in time, rather than pre-processing everything up front. Your index is the list of identifiers. Your properties are the filters.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 5</span> Sort Fifteen Notes</h3>
+    <p>Here are fifteen things a marketing executive owns. Before we build, decide for each: which folder, and one tag. Two minutes, working down the list fast. Instinct is the point.</p>
+    <p><em>Voice rules &middot; the CEO's LinkedIn tone &middot; buyer persona for operations leads &middot; buyer persona for finance leads &middot; competitor A positioning &middot; our differentiators &middot; flagship product facts &middot; the price list &middot; Q2 launch retro &middot; the banned words list &middot; withdrawn claims from last year &middot; email subject lines that worked &middot; the one-line company description &middot; channel tone rules &middot; the customer quote bank</em></p>
+    <p class="rm-hint">Success: every item lands in one of six folders without inventing a seventh, and at least four items get the same tag. If you needed a seventh folder, say which and defend it.</p>
+  </div>
+  <!-- ============ SECTION 07 ============ -->
+  <h2><span class="num">07</span>Pitfalls, Before You Hit Them</h2>
+  <p class="lead">Every one of these has cost somebody a week. You are about to start building, so meet them now rather than in October.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>&#9888; The vault that is really a diary</h4>
+      <p>Notes written as narrative for yourself instead of facts for a reader. "We had a good chat about tone and decided to loosen it up a bit" is a diary entry. "Tone: contractions allowed, sentences under 20 words" is context.</p>
+    </div>
+    <div class="card">
+      <h4>&#9888; Fifty notes, zero used</h4>
+      <p>People build the whole structure and never wire it to the AI, so nothing changes. Six real notes wired in beats fifty notes nobody reads. We wire in at Section 09, deliberately early.</p>
+    </div>
+    <div class="card">
+      <h4>&#9888; Dynamic facts pasted into static notes</h4>
+      <p>Today's spend, this week's follower count, the current lead total. They are wrong by Friday and your AI will repeat them with total confidence. Numbers that move need a date and an owner, or they need fetching.</p>
+    </div>
+    <div class="card">
+      <h4>&#9888; The same fact in four places</h4>
+      <p>You update the price in the product note and forget the pricing note, the FAQ note, and the persona note. Now the model picks one at random. One fact, one home, everything else links.</p>
+    </div>
+    <div class="card">
+      <h4>&#9888; Dumping the whole vault into every request</h4>
+      <p>It feels thorough. It is the documented path to context rot, it costs more tokens, and it makes answers vaguer. Load the slice the task needs.</p>
+    </div>
+    <div class="card">
+      <h4>&#9888; Confidential material in a general tool</h4>
+      <p>Unreleased pricing, customer names, contracts, salary data, anything under NDA. Once it is uploaded you cannot unsee it. Section 12 gives you the rule set. Read it before you upload anything real.</p>
+    </div>
+    <div class="card">
+      <h4>&#9888; No date on anything</h4>
+      <p>Six months on you cannot tell which notes are current. Nobody trusts the vault, so everybody works around it, and it dies. Every note gets an <code>updated</code> field, no exceptions.</p>
+    </div>
+    <div class="card">
+      <h4>&#9888; Perfection before use</h4>
+      <p>Waiting until the voice guide is complete before pointing the AI at it. It will never be complete. It gets good by being corrected, and it can only be corrected once it is in use.</p>
+    </div>
+  </div>
+
+  <!-- ============ SECTION 08 ============ -->
+  <h2><span class="num">08</span>Build It: Exact Setup Steps</h2>
+  <p class="lead">Hands on keyboard from here. Follow along. If you fall behind, say so and we stop, because everything after this point uses what you build now.</p>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Part A: Install Obsidian and create the vault</h3>
+    <ol>
+      <li>Go to <strong>obsidian.md</strong> and click <strong>Download</strong>. Pick your platform: Windows, Mac, or Linux. Obsidian's pricing page states it is free to use with no sign-up required, so there is no account step and no card.</li>
+      <li>Open the installer and complete it as normal. Launch Obsidian.</li>
+      <li>On the welcome screen choose <strong>Create new vault</strong>.</li>
+      <li>Name it <code>brand-context-vault</code>.</li>
+      <li>For location, choose a folder you will find again and that your backup covers. Your Documents folder is fine. <strong>Write the full path on paper now.</strong> You will need it in Week 3 when n8n reads these files.</li>
+      <li>Click <strong>Create</strong>. You now have an empty vault, which on disk is simply a folder holding text files.</li>
+    </ol>
+    <p class="rm-hint">Sanity check: open your normal file manager, navigate to that folder, and confirm you can see it. That folder <em>is</em> your vault. Obsidian is just a comfortable window onto it.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Part B: Create the six folders</h3>
+    <p>In Obsidian's left sidebar, use the <strong>New folder</strong> icon. Create these six, named exactly like this:</p>
+    <div class="tree">brand-context-vault/
+├── <b>index.md</b>              &#8592; the front door, we write this next
+├── 01-voice/            &#8592; how we sound
+├── 02-personas/         &#8592; who we talk to
+├── 03-positioning/      &#8592; competitors and our differentiators
+├── 04-product/          &#8592; what we sell, facts only
+├── 05-campaigns/        &#8592; what we learned, one retro per campaign
+└── 06-guardrails/       &#8592; what we never say</div>
+    <p>Six folders, numbered so they stay in this order on screen. The numbering is for your eyes, and it also tells a model the intended reading order.</p>
+    <p class="rm-hint">Note what is missing: no folder called "misc", "temp", or "2026". Those are where vaults go to die. If a note has no home here, that is a signal the note is not context.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Part C: Learn the four keystrokes you actually need</h3>
+    <div class="table-scroll">
+    <table>
+      <tr><th>To do this</th><th>Press this</th><th>Notes</th></tr>
+      <tr><td>New note</td><td><code>Ctrl+N</code> (Mac: <code>Cmd+N</code>)</td><td>Type the name, press Enter</td></tr>
+      <tr><td>Add a property to a note</td><td><code>Ctrl+;</code> (Mac: <code>Cmd+;</code>)</td><td>Or just type three dashes at the very top of the file</td></tr>
+      <tr><td>Search the whole vault</td><td><code>Ctrl+Shift+F</code> (Mac: <code>Cmd+Shift+F</code>)</td><td>Your retrieval tool while you work</td></tr>
+      <tr><td>Link to another note</td><td>Type <code>[[</code></td><td>A picker appears, choose the note</td></tr>
+    </table>
+    </div>
+    <p class="rm-hint">That is the entire tool for our purposes. Everything else in Obsidian is optional and you can ignore it for months.</p>
+  </div>
+
+  <div class="callout">
+    <strong>Do this now, in front of me</strong>
+    <p>Press <code>Ctrl+N</code>, name the note <code>index</code>, and type three dashes at the top of the file. You should see a properties row appear. That is YAML frontmatter, the thing from idea 5. You have just done the only genuinely unfamiliar action in the whole build.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 6</span> Setup Verification</h3>
+    <p>Tick these off before we go further. If any one fails, we fix it now rather than later.</p>
+    <ul class="checklist" id="setup-check">
+      <li><input type="checkbox" id="s1"><label for="s1">Obsidian opens and my vault is named <code>brand-context-vault</code></label></li>
+      <li><input type="checkbox" id="s2"><label for="s2">I have written down the full folder path on paper</label></li>
+      <li><input type="checkbox" id="s3"><label for="s3">I can see that folder in my computer's file manager, outside Obsidian</label></li>
+      <li><input type="checkbox" id="s4"><label for="s4">All six numbered folders exist, spelled exactly as shown</label></li>
+      <li><input type="checkbox" id="s5"><label for="s5">I created a note called <code>index</code> and got a properties row from typing three dashes</label></li>
+      <li><input type="checkbox" id="s6"><label for="s6">I can use <code>Ctrl+N</code> and <code>[[</code> without looking them up</label></li>
+    </ul>
+    <p class="rm-hint">Your ticks save on this device, so you can close this page and come back.</p>
+  </div>
+  <!-- ============ SECTION 09 ============ -->
+  <h2><span class="num">09</span>The Six Templates</h2>
+  <p class="lead">Six notes. Each one has a copy button, and there is a single download button at the end of the section that gives you all six as a ready-made folder structure. Copy each into the note of that name, then replace the bracketed parts with your own truth. The bracketed examples are from a fictional logistics company so you can see the level of detail expected.</p>
+
+  <div class="callout warn">
+    <strong>Fill these with real specifics, not placeholders</strong>
+    <p>A template filled with "professional yet friendly" is worse than no template, because it looks finished. The test from Section 03 applies to every line you write: could a competitor use this exact sentence? If yes, cut deeper.</p>
+  </div>
+
+  <h3>Template 1: Index (your front door)</h3>
+  <p>This is the note your AI reads first. It says what exists and what each thing is for.</p>
+  <div class="term">
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">index.md</span></div>
+    <pre data-file="brand-context-vault/index.md">---
+title: Brand Context Vault Index
+type: index
+status: active
+updated: 2026-08-13
+owner: [your name]
+---
+
+# Brand Context Vault
+
+The single source of truth for how [Company] talks, who we talk to, and what
+we sell. If a fact is not in here, it is not agreed. If it is in here twice,
+one copy is wrong.
+
+## How to use this vault
+Read this index first. Then open only the notes relevant to the task.
+Do not guess at brand facts. If something is missing, say so and ask.
+
+## What is in here
+
+### 01-voice
+- [[brand-voice-guide]] - how we sound, word by word. Read for anything written.
+- [[channel-tone-rules]] - how the voice shifts per channel.
+
+### 02-personas
+- [[persona-operations-lead]] - primary buyer. Read before any campaign copy.
+- [[persona-finance-lead]] - the approver. Read for anything about cost.
+
+### 03-positioning
+- [[competitor-landscape]] - who we are up against and how we differ.
+
+### 04-product
+- [[product-facts]] - what we actually sell. The only home for prices and specs.
+
+### 05-campaigns
+- [[retro-2026-q2-launch]] - what worked and what failed, with numbers.
+
+### 06-guardrails
+- [[do-not-says]] - banned words, withdrawn claims, topics to avoid.
+  Read this before publishing anything, every time.
+
+## Reading order for common tasks
+- Writing any copy: brand-voice-guide, then the relevant persona, then do-not-says.
+- Pricing or product claims: product-facts, then do-not-says.
+- Competitive positioning: competitor-landscape, then do-not-says.
+- Planning a campaign: the relevant persona, then the most recent retro.
+
+## Maintenance
+- Reviewed monthly by [owner].
+- Every note carries an updated date. Anything older than 6 months is suspect.
+- Corrections from AI output go back into the note that was wrong. Same day.</pre>
+    <div class="term-actions"><button class="copy-btn" data-copy="brand-context-vault/index.md">Copy this template</button></div>
+  </div>
+
+  <h3>Template 2: Brand Voice Guide</h3>
+  <p>The most-used note in the vault. Every piece of writing loads this one.</p>
+  <div class="term">
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">01-voice/brand-voice-guide.md</span></div>
+    <pre data-file="brand-context-vault/01-voice/brand-voice-guide.md">---
+title: Brand Voice Guide
+type: voice
+status: active
+updated: 2026-08-13
+owner: [your name]
+tags: [voice, foundation]
+---
+
+# Brand Voice Guide
+
+## In one sentence
+We sound like [an experienced operations manager explaining something useful to
+a peer]: direct, concrete, never talking down.
+
+## Voice rules, in order of importance
+1. Lead with the outcome, not the feature.
+2. Sentences under 20 words. Break the rule only for rhythm.
+3. Active voice. Name who does the thing.
+4. Concrete numbers over adjectives. "Cuts dispatch time by 40 minutes",
+   not "dramatically faster".
+5. Second person. The reader is "you". We are "we".
+6. Contractions are fine. We are not writing a legal notice.
+
+## Words we use
+| Use this | Not this | Why |
+|---|---|---|
+| customers | users | We sell to businesses with names, not accounts |
+| dispatch | logistics operations | Our buyers say dispatch |
+| costs you | represents an investment | Plain money language |
+| we recommend | best practice dictates | We advise, the client decides |
+
+## Do say
+- "Here is what we found"
+- "This will not work if [honest condition]"
+- "Our customers tell us"
+- Specific numbers with the period they cover
+
+## Never say
+- See [[do-not-says]] for the full banned list. It wins over anything here.
+
+## Tone by situation
+| Situation | Target | Avoid |
+|---|---|---|
+| LinkedIn post | Direct, one clear idea, opinionated | Thought-leader padding |
+| Sales email | Useful in the first line, short | Warm-up paragraphs |
+| Landing page | Outcome first, proof second | Feature lists |
+| Support reply | Plain, accountable, no hedging | Corporate apology voice |
+| Investor update | Precise, numbers first | Optimism without figures |
+
+## Written examples, real and approved
+Good, and why: "Your drivers lose 40 minutes a day to manual check-ins.
+This removes that." Outcome first, concrete number, second person, 12 words.
+
+Bad, and why: "We are excited to announce our innovative solution that
+revolutionises fleet management." Announcement about us, three banned words,
+zero information.
+
+## Sound like, and not like
+- Closer to: [a named publication or brand your reader respects]
+- Not: [a named brand that is too formal], [a named brand that is too casual]</pre>
+    <div class="term-actions"><button class="copy-btn" data-copy="brand-context-vault/01-voice/brand-voice-guide.md">Copy this template</button></div>
+  </div>
+  <h3>Template 3: Buyer Persona</h3>
+  <p>One note per persona. Start with the one who actually signs.</p>
+  <div class="term">
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">02-personas/persona-operations-lead.md</span></div>
+    <pre data-file="brand-context-vault/02-personas/persona-operations-lead.md">---
+title: Persona - Operations Lead
+type: persona
+status: active
+priority: primary
+updated: 2026-08-13
+owner: [your name]
+tags: [persona, primary-buyer]
+---
+
+# Persona: Operations Lead
+
+## Who
+[Bola], [34-48], [Head of Operations] at a [40-200 vehicle distribution
+business] in [Lagos]. Reports to the [MD]. Has [2-5] people under her.
+
+## What her day looks like
+Starts at 6am checking whether last night's dispatches closed. Spends the
+morning on WhatsApp chasing drivers. Firefights until 4pm. Does the actual
+planning after everyone leaves.
+
+## What she is measured on
+- On-time delivery percentage
+- Cost per drop
+- Vehicle downtime
+
+## What keeps her up at night
+- Not knowing where a vehicle is when a customer calls to complain
+- Fuel and maintenance costs she cannot explain to the MD
+- Losing her two best drivers to a competitor
+
+## What she actually says
+Use this language, it is hers, gathered from [3 customer interviews, June 2026]:
+- "I do not need another dashboard, I need to know who is late right now"
+- "The MD asks me why cost per drop went up and I am guessing"
+- "If it takes training, my guys will not use it"
+
+## What she believes before we talk to her
+- Software projects fail here and waste six months
+- Anything foreign-built ignores how business actually works locally
+- The last vendor promised integration and delivered a spreadsheet
+
+## Her objections, and the honest answer
+| Objection | The honest answer |
+|---|---|
+| "We tried this before and it failed" | Ask what failed. Usually adoption, not the tool. Lead with the 2-week pilot. |
+| "My drivers will not use it" | It runs on the phone they already have, over WhatsApp. No app to learn. |
+| "It is too expensive" | Cost per drop framing, not monthly fee framing. See [[product-facts]]. |
+| "I need to ask the MD" | Give her the one-page case she can forward. She is not the final signer. |
+
+## What makes her buy
+A peer at a similar business tells her it worked. Second best: a pilot small
+enough that failure is not career risk.
+
+## Where she actually is
+WhatsApp groups (industry, informal). LinkedIn, reads but rarely posts.
+Not on Twitter. Attends [2 industry events a year].
+
+## How to write for her
+Short. Concrete. Numbers. No jargon, no hype. Respect that she is busy and
+has been sold to badly before. See [[brand-voice-guide]].
+
+## Who else is in the room
+[[persona-finance-lead]] approves the spend and cares about different things.</pre>
+    <div class="term-actions"><button class="copy-btn" data-copy="brand-context-vault/02-personas/persona-operations-lead.md">Copy this template</button></div>
+  </div>
+
+  <h3>Template 4: Product Facts</h3>
+  <p>The only note in the vault allowed to state a price or a specification. Everything else links here.</p>
+  <div class="term">
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">04-product/product-facts.md</span></div>
+    <pre data-file="brand-context-vault/04-product/product-facts.md">---
+title: Product Facts
+type: product
+status: active
+updated: 2026-08-13
+owner: [your name]
+review_cycle: monthly
+tags: [product, source-of-truth]
+---
+
+# Product Facts
+
+> This note is the single source of truth for what we sell, what it does, and
+> what it costs. No other note states a price. If a number appears elsewhere,
+> it is wrong. Anything unverified goes under Not Yet True.
+
+## What it is, in one sentence a customer would recognise
+[A dispatch tracking system that runs over WhatsApp so drivers need no app.]
+
+## What it actually does
+| Capability | Detail | Proof we can show |
+|---|---|---|
+| [Live vehicle status] | [Driver check-in via WhatsApp, updates every stop] | [Demo account] |
+| [Cost per drop reporting] | [Automatic from fuel logs plus distance] | [Sample report] |
+| [Exception alerts] | [Flags a late delivery before the customer calls] | [Screenshot] |
+
+## What it does not do
+Being straight about this closes more deals than hiding it.
+- [No integration with accounting packages yet]
+- [No offline mode. Needs mobile data]
+- [Not built for cold chain compliance]
+
+## Pricing
+| Tier | Price | What is included | Best for |
+|---|---|---|---|
+| [Pilot] | [N x per month] | [Up to 10 vehicles, 2 weeks free] | [First test] |
+| [Standard] | [N x per month] | [Up to 50 vehicles, all reports] | [Most customers] |
+| [Fleet] | [Contact us] | [Unlimited, dedicated support] | [100+ vehicles] |
+
+Last verified against the live price list: [date]. Verified by: [name].
+
+## Proof points we are allowed to use
+| Claim | Evidence | Where it came from | Safe to publish |
+|---|---|---|---|
+| [Cuts check-in time 40 min/day] | [Pilot with 3 customers] | [Pilot report, May 2026] | Yes |
+| [Used by X businesses] | [Current count] | [CRM, verify before use] | Yes, if re-checked |
+
+## Not Yet True
+Things we want to say and cannot yet. Never publish from this list.
+- [Accounting integration. In development, no date committed]
+- [Any market-leader claim. We have no data supporting it]</pre>
+    <div class="term-actions"><button class="copy-btn" data-copy="brand-context-vault/04-product/product-facts.md">Copy this template</button></div>
+  </div>
+  <h3>Template 5: Do-Not-Says</h3>
+  <p>The cheapest note to write and the one that prevents the most embarrassment. Load it before publishing anything, every time.</p>
+  <div class="term">
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">06-guardrails/do-not-says.md</span></div>
+    <pre data-file="brand-context-vault/06-guardrails/do-not-says.md">---
+title: Do-Not-Says
+type: guardrail
+status: active
+updated: 2026-08-13
+owner: [your name]
+tags: [guardrail, always-load]
+---
+
+# Do-Not-Says
+
+> Check this note before publishing anything. It overrides every other note,
+> including the voice guide. When this list and a draft disagree, this wins.
+
+## Banned words and phrases
+Because they are empty, overused, or make us sound like everyone else.
+| Never | Say instead |
+|---|---|
+| seamless | works with, connects to |
+| revolutionary, game-changer | what it actually does |
+| best-in-class, world-class | the specific comparison, with a number |
+| leverage (as a verb) | use |
+| solution (on its own) | name the thing |
+| unlock, supercharge, elevate | the plain verb |
+| we are excited to announce | just say the news |
+| in today's fast-paced world | delete, add nothing |
+
+## Claims we may never make
+Legal, factual or reputational risk.
+- [Any "number one" or "market leader" claim. We have no data.]
+- [Guaranteed savings figures. We can say "in our pilot", never "you will save".]
+- [Naming a competitor's customer.]
+- [Any security or compliance certification we do not hold.]
+- [Delivery dates for features not yet shipped. See Not Yet True in [[product-facts]].]
+
+## Withdrawn claims, do not resurrect
+Things we used to say and stopped. Note the date and the reason, because
+without a reason someone will bring it back.
+| Withdrawn claim | Why | Date |
+|---|---|---|
+| ["Fully automated"] | [Misleading, a human still reviews exceptions] | [2026-03] |
+| ["Works offline"] | [Never shipped. Was on old website copy] | [2026-05] |
+
+## Topics we stay out of
+- [Party politics]
+- [Religion]
+- [Competitor staff or internal problems]
+- [Anything about a named customer without written permission]
+
+## Formatting bans
+- No em dashes. Use a comma, a colon, or a full stop.
+- No emoji in sales emails or landing pages. LinkedIn: one maximum.
+- No exclamation marks in professional copy.
+- No sentence starting with "So," or "Look,".
+
+## How this list grows
+Every time an AI draft or a human draft produces something wrong, the phrase
+gets added here the same day. See Section 11 of the Class 2 handout.
+Last three additions: [phrase, date] / [phrase, date] / [phrase, date]</pre>
+    <div class="term-actions"><button class="copy-btn" data-copy="brand-context-vault/06-guardrails/do-not-says.md">Copy this template</button></div>
+  </div>
+
+  <h3>Template 6: Campaign Retro</h3>
+  <p>One per campaign. This is the note that stops you repeating a mistake next quarter, and it is the note most teams never write.</p>
+  <div class="term">
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">05-campaigns/retro-2026-q2-launch.md</span></div>
+    <pre data-file="brand-context-vault/05-campaigns/retro-2026-q2-launch.md">---
+title: Retro - Q2 2026 Launch
+type: retro
+status: complete
+campaign_start: 2026-04-01
+campaign_end: 2026-06-30
+updated: 2026-08-13
+owner: [your name]
+tags: [retro, launch]
+---
+
+# Retro: [Q2 2026 Launch]
+
+## What we were trying to do
+[Get 40 pilot signups from distribution businesses in Lagos and Ibadan.]
+
+## Who we targeted
+[[persona-operations-lead]] primarily, with [[persona-finance-lead]] as the
+approver in the follow-up sequence.
+
+## Channels and spend
+| Channel | Spend | Result | Cost per signup |
+|---|---|---|---|
+| [LinkedIn ads] | [N x] | [18 signups] | [N y] |
+| [WhatsApp broadcast to existing list] | [0] | [14 signups] | [0] |
+| [Industry event] | [N x] | [6 signups] | [N y] |
+
+## The numbers
+- Target: [40 signups]. Actual: [38].
+- Best performing message: ["Your drivers lose 40 minutes a day"]
+- Worst performing message: ["Transform your logistics operation"]
+
+## What worked, and why we think so
+1. [The specific-number hook beat the transformation hook by 3x on click rate.
+   Same audience, same week, so we trust the comparison.]
+2. [WhatsApp to the existing list cost nothing and converted best. We
+   under-used it.]
+
+## What failed, and why
+1. [The event was a waste at this spend level. Wrong seniority in the room.]
+2. [Finance-lead follow-up email had a 4% reply rate. It was written in the
+   operations voice and talked about time saved, not money.]
+
+## What we changed in the vault because of this
+This is the part that makes the retro worth writing.
+- Added ["Transform your"] to [[do-not-says]].
+- Added the cost framing note to [[persona-finance-lead]].
+- Added the 40-minute number to [[product-facts]] proof points.
+
+## What we do differently next time
+1. [Lead with a number in every hook. No exceptions.]
+2. [Write finance follow-ups from the finance persona, not the ops persona.]
+3. [Skip events below director level until we have a peer referral motion.]
+
+## Assets worth reusing
+- [The 40-minute LinkedIn post. Top performer, reuse the structure.]
+- [The one-page MD case. Forwarded 11 times.]</pre>
+    <div class="term-actions"><button class="copy-btn" data-copy="brand-context-vault/05-campaigns/retro-2026-q2-launch.md">Copy this template</button></div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Take all six with you</h3>
+    <p>This gives you a single zip file containing the full folder structure and all six templates, ready to unzip straight into your vault location. It is generated in your browser, so it works offline and nothing is uploaded anywhere.</p>
+    <div class="rm-actions">
+      <button class="btn" id="dlZip">&#11015; Download starter vault (.zip)</button>
+      <button class="btn ghost" id="copyAll">&#128203; Copy all six as one document</button>
+      <button class="btn ghost print-keep" id="printPage">&#128424; Print / Save as PDF</button>
+    </div>
+    <p class="rm-hint" id="dlStatus">Unzip it, then point Obsidian at the <code>brand-context-vault</code> folder it creates, or drag the folders into the vault you already made.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 7</span> Fill Three Notes for Real <span class="score" id="fillScore">0 of 3 done</span></h3>
+    <p>Twenty five minutes, hands on keyboard, your actual brand. Do these three, in this order. They are ordered by how much value they deliver per minute spent.</p>
+    <ol>
+      <li><strong>do-not-says</strong> first, because it is the fastest and it protects you immediately. Minimum: 8 banned words, 2 claims you may never make, 3 topics you avoid.</li>
+      <li><strong>brand-voice-guide</strong> second. Minimum: the one-sentence description, 5 voice rules, 6 rows in the words table, one good and one bad written example of your own.</li>
+      <li><strong>persona</strong> third, for whoever actually signs. Minimum: what they are measured on, 3 things they actually say in their own words, 3 objections with honest answers.</li>
+    </ol>
+    <p class="rm-hint">Tick each when it passes the competitor test: nothing in the note could be copied and pasted by a rival without being false.</p>
+    <ul class="checklist" id="fill-check">
+      <li><input type="checkbox" id="f1"><label for="f1">do-not-says is filled with my real banned words and claims</label></li>
+      <li><input type="checkbox" id="f2"><label for="f2">brand-voice-guide has my rules, my word table, and my own two examples</label></li>
+      <li><input type="checkbox" id="f3"><label for="f3">One persona is filled with real quotes and real objections</label></li>
+    </ul>
+  </div>
+  <!-- ============ SECTION 10 ============ -->
+  <h2><span class="num">10</span>Wire the Vault Into Your AI</h2>
+  <p class="lead">Files alone change nothing. This is the step people skip, and skipping it is why most vaults die. Ten minutes, and your AI stops guessing.</p>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Step 1: Create a project and load the notes</h3>
+    <ol>
+      <li>In Claude, create a new <strong>project</strong> and name it after your brand. Anthropic's help centre confirms projects are available to all users including free accounts, with free accounts limited to five projects.</li>
+      <li>Add your notes to the project's <strong>knowledge</strong>. Your <code>.md</code> files upload directly, since they are plain text. Start with the three you filled in Exercise 7, plus the index.</li>
+      <li>Set the project instructions. This is the librarian instruction below. Note what it is doing: it is not a personality prompt, it is a routing rule that tells the model which note to read for which job.</li>
+    </ol>
+  </div>
+
+  <div class="term">
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">project-instructions.txt - paste into your project instructions</span></div>
+    <pre data-file="project-instructions.txt">You have my brand context vault in this project's knowledge.
+Treat those notes as the source of truth about my brand. Your training data
+is not a source of truth about my brand.
+
+Before you produce anything:
+1. Read index for what exists and the reading order for this kind of task.
+2. Read brand-voice-guide for how we sound.
+3. Read the relevant persona for who we are talking to.
+4. Read do-not-says last, and apply it over everything else including
+   your own preferences.
+5. For any price, specification or capability claim, use product-facts only.
+
+Rules:
+- If a fact is not in the vault, say so and ask. Do not fill the gap yourself.
+- If two notes disagree, say which two and stop. Do not pick one silently.
+- If the request needs today's live numbers, say so. The vault holds stable
+  facts, not current performance data.
+- Quote the note you relied on when a claim matters.
+
+When I correct your output, tell me which note should change so the correction
+sticks. That matters more than fixing the draft in front of us.</pre>
+    <div class="term-actions"><button class="copy-btn" data-copy="project-instructions.txt">Copy the librarian instruction</button></div>
+  </div>
+
+  <div class="callout">
+    <strong>Why it is written that way</strong>
+    <p>Every line does a specific job. "Your training data is not a source of truth about my brand" stops the model filling gaps with plausible-sounding generic marketing. "If two notes disagree, say which two and stop" turns your inconsistencies into visible errors instead of silent coin flips. "Tell me which note should change" is the feedback loop from Section 11, built into the instruction so you do not have to remember it.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Step 2: Verify the wiring before you trust it</h3>
+    <p>Ask these three questions in the project, in this order. All three must pass.</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Ask this</th><th>Pass looks like</th><th>Fail means</th></tr>
+      <tr>
+        <td>"What is in my vault, and what is each note for?"</td>
+        <td>It lists your actual notes and their purposes</td>
+        <td>The files did not attach, or the index is missing</td>
+      </tr>
+      <tr>
+        <td>"What are five words I never use, and where did you get that?"</td>
+        <td>Your real banned words, pointing at do-not-says</td>
+        <td>It is guessing from generic marketing advice</td>
+      </tr>
+      <tr>
+        <td>"What is our flagship price?" (ask this even if you left it bracketed)</td>
+        <td>The number from product-facts, or "not in the vault, please add it"</td>
+        <td>It invents a plausible number. Fix the instruction before continuing</td>
+      </tr>
+    </table>
+    </div>
+    <p class="rm-hint">That third test is the important one. A vault-fed AI that invents a price is more dangerous than one with no vault at all, because you have started trusting it.</p>
+  </div>
+
+  <div class="callout warn">
+    <strong>Keeping the copies in step</strong>
+    <p>Uploading notes to a project creates a second copy. Your vault stays the original. When you change a note, re-upload it, or the project will keep serving the old version. Set a habit now: <strong>edit in the vault, then push to the project.</strong> Never the other way around, or you will end up with two sources of truth and the problem from idea 7. In Week 3 we remove this friction, because n8n reads the files directly and there is no second copy to maintain.</p>
+  </div>
+
+  <!-- ============ SECTION 11 ============ -->
+  <h2><span class="num">11</span>Prove It Works: The Same Task, Before and After</h2>
+  <p class="lead">This is the moment the session either lands or it does not. We run one identical task twice: once with no context, once against your vault. You judge the difference yourself.</p>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">The test protocol</h3>
+    <ol>
+      <li><strong>Pick one real task</strong> from your Class 1 Readiness Map. Something you actually have to write this month.</li>
+      <li><strong>Run A, cold.</strong> Open a brand new chat <em>outside</em> the project. Paste the task in the shortest possible form: one sentence, no context, no explanation.</li>
+      <li><strong>Run B, warm.</strong> Open a chat <em>inside</em> your project. Paste the exact same sentence. Change nothing.</li>
+      <li><strong>Score both</strong> on the five checks below, before discussing it. Write the numbers down.</li>
+    </ol>
+    <div class="term">
+      <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">the-test-task.txt - use the same words in both runs</span></div>
+      <pre data-file="the-test-task.txt">Write a LinkedIn post announcing [the real thing you are announcing].</pre>
+      <div class="term-actions"><button class="copy-btn" data-copy="the-test-task.txt">Copy the test task</button></div>
+    </div>
+    <p class="rm-hint">Keep the request deliberately thin. The whole point is to prove that context, not phrasing, is carrying the quality. If you write a long careful prompt for run A, you have tested the wrong thing.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Score both runs, then compare</h3>
+    <p>Fill this in as we go. It saves on this device, and it is the evidence you show your MD when they ask what the course bought you.</p>
+    <div class="rm-actions">
+      <button class="btn ghost" id="scoreReset">Reset scores</button>
+    </div>
+    <div class="table-scroll">
+      <table class="rm-table" id="scoreTable">
+        <thead>
+          <tr>
+            <th>Check</th>
+            <th style="width:110px;">Run A, cold</th>
+            <th style="width:110px;">Run B, vault</th>
+            <th>What you noticed</th>
+          </tr>
+        </thead>
+        <tbody id="scoreBody"></tbody>
+      </table>
+    </div>
+    <p class="rm-hint" id="scoreSummary"></p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 8</span> Read the Difference Out Loud</h3>
+    <p>Do not just note that run B is better. Say precisely <em>why</em>, using the vocabulary from Section 02. Answer these four:</p>
+    <ol>
+      <li>Which specific fact appeared in B that A could not have known?</li>
+      <li>Which banned word or phrase did A use that B avoided?</li>
+      <li>Did B get anything <em>wrong</em> that A got right? Be honest, it happens when a note is thin.</li>
+      <li>If B is still not good enough, which note is thin, and what exact line would fix it?</li>
+    </ol>
+    <p class="rm-hint">Success: you can name the note responsible for each improvement. That skill is the whole session in one sentence, and it is what you will use every week from now on.</p>
+  </div>
+  <!-- ============ SECTION 12 ============ -->
+  <h2><span class="num">12</span>The Correction Loop: Every Fix Becomes Permanent</h2>
+  <p class="lead">This is the habit that separates a vault that compounds from a folder that rots. It takes thirty seconds per correction and it is the highest-return thirty seconds in your week.</p>
+
+  <div class="callout ok">
+    <strong>The rule</strong>
+    <p>When you correct an AI's output, you have two choices. Fix the draft, and fix it again next month. Or fix the <strong>note</strong>, and never fix it again. <em>A correction you only make in the chat is a correction you will make forever.</em></p>
+  </div>
+
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-num">1</div>
+      <div class="flow-body">
+        <h4>Notice the correction you are about to make</h4>
+        <p>You are mid-edit, deleting a word or fixing a claim. Stop for a second. That edit is information the vault does not have yet.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">2</div>
+      <div class="flow-body">
+        <h4>Name the note that should have prevented it</h4>
+        <p>Wrong word: do-not-says. Wrong audience assumption: the persona. Wrong claim: product-facts. Wrong tone for the channel: channel-tone-rules. There is almost always exactly one right home.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">3</div>
+      <div class="flow-body">
+        <h4>Write one line into that note, today</h4>
+        <p>Not a rewrite. One line. "Never say seamless" takes four seconds and pays out for years. Update the <code>updated</code> date while you are there.</p>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">4</div>
+      <div class="flow-body">
+        <h4>Re-upload the changed note to the project</h4>
+        <p>Otherwise the model keeps reading the old version and you will conclude the loop does not work. Edit in the vault, push to the project.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Worked examples from real sessions</h3>
+    <div class="table-scroll">
+    <table>
+      <tr><th>The correction you made</th><th>The weak instinct</th><th>The vault fix</th></tr>
+      <tr>
+        <td>Deleted "seamless integration"</td>
+        <td>Add "avoid buzzwords" to the next prompt</td>
+        <td>Add <code>seamless</code> to the banned table in do-not-says</td>
+      </tr>
+      <tr>
+        <td>Rewrote the opening because it flattered the reader</td>
+        <td>Say "be more direct" next time</td>
+        <td>Add a voice rule: "no warm-up. First line carries information"</td>
+      </tr>
+      <tr>
+        <td>Fixed a price the model invented</td>
+        <td>Correct it in the chat and move on</td>
+        <td>Put the real number in product-facts. This is a source-of-truth gap, and it is urgent</td>
+      </tr>
+      <tr>
+        <td>Changed the angle because finance cares about cost, not time</td>
+        <td>Mention it in every finance prompt from now on</td>
+        <td>Add the cost framing to persona-finance-lead</td>
+      </tr>
+      <tr>
+        <td>Cut a claim you cannot actually prove</td>
+        <td>Remember not to use it</td>
+        <td>Add to the Not Yet True list in product-facts, with the reason</td>
+      </tr>
+    </table>
+    </div>
+    <p class="rm-hint">Pattern to notice: the weak instinct always puts the fix in a prompt, which is disposable. The vault fix puts it somewhere permanent. Same effort, completely different half-life.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 9</span> Convert Your Own Corrections</h3>
+    <p>Go back to run B from Section 11. Find three things you would change about that output. For each one, write down the note name and the exact line you will add. Then actually add them, now, while I watch.</p>
+    <p class="rm-hint">Success: three notes have a new line each, three <code>updated</code> dates changed, and the notes are re-uploaded. You have just run the full loop once, which means you can run it forever.</p>
+  </div>
+
+  <!-- ============ SECTION 13 ============ -->
+  <h2><span class="num">13</span>Hygiene, Privacy and Permissions</h2>
+  <p class="lead">A vault is a liability as well as an asset. Two things will hurt you: facts that quietly go stale, and material that should never have been uploaded. Both are preventable with rules you set today.</p>
+
+  <h3>Context hygiene: keeping it true</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>Every note carries a date and an owner</h4>
+      <p>The <code>updated</code> and <code>owner</code> fields are not decoration. They are how you and your model both judge whether a fact can still be trusted. A note with no date is a rumour.</p>
+    </div>
+    <div class="card">
+      <h4>Monthly review, fifteen minutes</h4>
+      <p>Sort by <code>updated</code>, oldest first. Anything over six months: confirm, correct, or mark <code>status: archive</code>. Do not delete history, retire it, so nobody resurrects a withdrawn claim.</p>
+    </div>
+    <div class="card">
+      <h4>Handling conflicts on purpose</h4>
+      <p>When two notes disagree, the librarian instruction makes the model say so rather than choose. Then you fix it properly: decide which note owns the fact, delete the duplicate, and link to the owner instead.</p>
+    </div>
+    <div class="card">
+      <h4>Archive rather than delete</h4>
+      <p>Set <code>status: archive</code> and leave the note in place with the reason it was retired. This is exactly what the withdrawn claims table is for. Deleted context comes back as somebody's "good idea" next quarter.</p>
+    </div>
+  </div>
+
+  <div class="callout danger">
+    <strong>Security and privacy, the rules that are not negotiable</strong>
+    <p><strong>Never put in a vault you upload:</strong> customer names or contact details, contracts, unreleased pricing you are not ready to leak, salary or HR data, anything under NDA, API keys or passwords, or personal data belonging to identifiable people.</p>
+    <p><strong>What to do instead:</strong> your vault holds patterns, not records. "Operations leads at 40 to 200 vehicle businesses object to training time" is context. "Bola Adeyemi at [named company] said this on 3 June" is a customer record, and it belongs in your CRM under whatever consent you actually have. Anonymise the quote, keep the insight.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Permissions: who can read what</h3>
+    <p>Three separate questions people collapse into one, which is how leaks happen.</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Question</th><th>What actually governs it</th><th>Your move today</th></tr>
+      <tr>
+        <td>Who can read the files?</td>
+        <td>Your device and whatever syncs it. Obsidian's docs state notes are stored locally on your file system, and its pricing page states your data is stored locally on your device and inaccessible to them, with Sync secured by end-to-end encryption if you enable it.</td>
+        <td>Decide now whether this folder is backed up or synced, and to where. Write it down.</td>
+      </tr>
+      <tr>
+        <td>Who can read the uploaded copy?</td>
+        <td>Your AI account and its plan terms. On Claude, project sharing with colleagues is a Team and Enterprise capability.</td>
+        <td>Check your own plan's terms before uploading anything sensitive. Do not assume.</td>
+      </tr>
+      <tr>
+        <td>What can a connected AI reach?</td>
+        <td>Its permissions in the source system. Anthropic's connector documentation is explicit: Claude inherits each person's permissions, so if someone cannot access a file, channel or record in the source system, the connector cannot reach it from Claude either.</td>
+        <td>Grant the narrowest access that works. Review it when people change roles.</td>
+      </tr>
+    </table>
+    </div>
+    <p class="rm-hint">Practical version for a one-person marketing function: keep one vault with no confidential records in it, and never upload anything you would not email to a colleague outside your department.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 10</span> The Audit</h3>
+    <p>Open every note you wrote today and check three things. Fix what fails before you leave.</p>
+    <ol>
+      <li><strong>Confidentiality:</strong> is there a real customer name, a real contract term, or a real person's contact detail anywhere? Remove or anonymise it now.</li>
+      <li><strong>Dates:</strong> does every note have an <code>updated</code> field with today's date and an <code>owner</code>?</li>
+      <li><strong>Duplication:</strong> does any fact, especially a price, appear in two notes? Pick the owner, delete the other, put a link there instead.</li>
+    </ol>
+    <p class="rm-hint">This audit is your monthly ritual, not a one-off. Fifteen minutes a month keeps the vault trustworthy for years.</p>
+  </div>
+  <!-- ============ SECTION 14 ============ -->
+  <h2><span class="num">14</span>Deliverable, Homework and Sources</h2>
+  <p class="lead">You should be leaving with a working vault, not notes about a vault. Here is the standard, and here is what Week 3 needs from you.</p>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Today's deliverable is done when all of these are true</h3>
+    <ul class="checklist" id="deliverable">
+      <li><input type="checkbox" id="d1"><label for="d1">Obsidian is installed and <code>brand-context-vault</code> exists, with the six numbered folders</label></li>
+      <li><input type="checkbox" id="d2"><label for="d2">I know the full folder path and have it written where I will find it in Week 3</label></li>
+      <li><input type="checkbox" id="d3"><label for="d3"><code>index</code> is written and links to every note I have created</label></li>
+      <li><input type="checkbox" id="d4"><label for="d4"><code>do-not-says</code> has at least 8 banned words, 2 forbidden claims and 3 off-limits topics, all real</label></li>
+      <li><input type="checkbox" id="d5"><label for="d5"><code>brand-voice-guide</code> has my rules, my word table, and my own good and bad examples</label></li>
+      <li><input type="checkbox" id="d6"><label for="d6">One <code>persona</code> note is filled with real quotes and real objections</label></li>
+      <li><input type="checkbox" id="d7"><label for="d7">Every note has <code>type</code>, <code>status</code>, <code>updated</code> and <code>owner</code> in its frontmatter</label></li>
+      <li><input type="checkbox" id="d8"><label for="d8">A Claude project exists, holds my notes, and has the librarian instruction</label></li>
+      <li><input type="checkbox" id="d9"><label for="d9">All three verification questions passed, including the invented-price test</label></li>
+      <li><input type="checkbox" id="d10"><label for="d10">I ran the same task cold and vault-fed, and scored both</label></li>
+      <li><input type="checkbox" id="d11"><label for="d11">I converted at least 3 corrections into permanent vault lines and re-uploaded</label></li>
+      <li><input type="checkbox" id="d12"><label for="d12">I ran the audit: no confidential records, every note dated, no duplicated facts</label></li>
+    </ul>
+    <p class="rm-hint" id="delivProgress">Progress saves on this device.</p>
+  </div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>&#128218; Homework for Week 3</h4>
+      <p>Week 3 is n8n, and it will read the files you built today directly off your disk. That only works if the vault is genuinely populated, so this homework is load-bearing.</p>
+      <ul style="font-size:14.5px;">
+        <li>Fill the remaining three templates: <strong>product-facts</strong>, one <strong>campaign retro</strong>, and a second <strong>persona</strong></li>
+        <li>Run the correction loop on <strong>every</strong> AI task you do this week. Target: 10 new lines in the vault by Week 3</li>
+        <li>Confirm every note has all four frontmatter fields. Week 3 filters on <code>type</code> and <code>status</code>, so a missing field is a broken workflow</li>
+        <li>Bring your vault path written down, and bring the vault on the laptop you will have in class</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>&#9881; Week 3 prerequisites, from your setup guide</h4>
+      <ul style="font-size:14.5px;">
+        <li>Install <strong>Docker Desktop</strong>, free for personal use. n8n runs in it</li>
+        <li>Have a <strong>Claude API key</strong> ready from the Anthropic console</li>
+        <li>Have login access to at least 2 marketing tools you use daily</li>
+        <li>Bring 1 manual workflow you repeat that touches 3 or more tools</li>
+      </ul>
+      <p class="example">If Docker will not install on your machine, tell me before Week 3, not during it. There is a fallback, but it needs setting up in advance.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>What Week 3 does with what you built today</strong>
+    <p>Today you built static context and loaded it by hand. Next week, an n8n workflow reads those same files automatically, adds <em>dynamic</em> context by fetching something live, sends both to the model, and delivers the result somewhere useful without you being in the room. Your vault stops being a document you consult and becomes a component in a system. Everything you wrote today is the input to that.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Sources</h3>
+    <p class="rm-hint">Every factual claim about a tool in this handout comes from that vendor's own documentation, checked on 13 August 2026. Verify anything you plan to repeat in a meeting, and re-check plan limits before you rely on them, because they change.</p>
+    <ul class="src-list">
+      <li><strong>Context engineering, context rot, attention budget, just-in-time retrieval, naming as signal:</strong> Anthropic Engineering, "Effective context engineering for AI agents". <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">anthropic.com/engineering/effective-context-engineering-for-ai-agents</a></li>
+      <li><strong>Obsidian stores notes as local plain-text Markdown in a vault, editable by other tools:</strong> Obsidian Help, How Obsidian stores data. <a href="https://help.obsidian.md/data-storage">help.obsidian.md/data-storage</a></li>
+      <li><strong>Properties are stored in YAML frontmatter and hold structured data:</strong> Obsidian Help, Properties. <a href="https://help.obsidian.md/properties">help.obsidian.md/properties</a></li>
+      <li><strong>Internal links build a network of notes, links auto-update on rename:</strong> Obsidian Help, Internal links. <a href="https://help.obsidian.md/links">help.obsidian.md/links</a></li>
+      <li><strong>Tags via hash or the tags property:</strong> Obsidian Help, Tags. <a href="https://help.obsidian.md/tags">help.obsidian.md/tags</a></li>
+      <li><strong>Bases gives database-style views, data stays in local Markdown and properties:</strong> Obsidian Help, Introduction to Bases. <a href="https://obsidian.md/help/bases">obsidian.md/help/bases</a></li>
+      <li><strong>Free without limits, no sign-up required; local storage; Sync uses end-to-end encryption:</strong> Obsidian Pricing. <a href="https://obsidian.md/pricing">obsidian.md/pricing</a></li>
+      <li><strong>Download for Windows, Mac, Linux, iOS, Android:</strong> Obsidian Download. <a href="https://obsidian.md/download">obsidian.md/download</a></li>
+      <li><strong>Gemini Notebook, formerly NotebookLM: 100 notebooks, up to 50 sources each, 500,000 words per source, 50 chat queries and 3 audio generations daily, 200MB per local upload, no notebook duplication:</strong> Google, Gemini Notebook Help, Frequently asked questions. <a href="https://support.google.com/notebooklm/answer/16269187">support.google.com/notebooklm/answer/16269187</a></li>
+      <li><strong>Gemini Notebook product overview:</strong> <a href="https://notebooklm.google/">notebooklm.google</a></li>
+      <li><strong>Notion exports to Markdown and CSV, with callout blocks exported as HTML:</strong> Notion Help, Export your content. <a href="https://www.notion.com/help/export-your-content">notion.com/help/export-your-content</a></li>
+      <li><strong>Notion plans and per-member pricing:</strong> Notion Pricing. <a href="https://www.notion.com/pricing">notion.com/pricing</a></li>
+      <li><strong>Logseq splits into two products: Logseq OG keeps file-based Markdown with security and framework updates but no new features; the database version becomes the main line:</strong> Logseq, "Big update: Logseq is splitting into two versions", 24 April 2026. <a href="https://logseq.io/page/b2ad9ce1-9cb7-4436-8083-54cb4516d324/df4dc09d-0a12-4c87-904e-22a9bf4c350a">logseq.io announcement</a></li>
+      <li><strong>Logseq positioning, privacy-first and open source:</strong> <a href="https://logseq.com/">logseq.com</a> and <a href="https://docs.logseq.com/">docs.logseq.com</a></li>
+      <li><strong>Claude projects available to all users including free accounts, free limited to five projects; project knowledge and instructions; sharing on Team and Enterprise:</strong> Claude Help Centre, What are projects?. <a href="https://support.claude.com/en/articles/9517075-what-are-projects">support.claude.com/en/articles/9517075-what-are-projects</a></li>
+      <li><strong>Connectors inherit each person's permissions from the connected service:</strong> Claude Help Centre, Use connectors to extend Claude's capabilities. <a href="https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities">support.claude.com/en/articles/11176164</a></li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Session checklist</h3>
+    <ul class="checklist" id="checklist">
+      <li><input type="checkbox" id="c1"><label for="c1">I can explain the difference between instructions, context, memory, tools and retrieval</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">I can explain why more context is not automatically better, using context rot</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">I can sort any piece of marketing material into static or dynamic, and say where it belongs</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">I can defend the Obsidian choice, and name what would make me switch</label></li>
+      <li><input type="checkbox" id="c5"><label for="c5">I can explain frontmatter, links, tags and the index in my own words</label></li>
+      <li><input type="checkbox" id="c6"><label for="c6">My vault exists, is populated with real content, and is wired into my AI</label></li>
+      <li><input type="checkbox" id="c7"><label for="c7">I proved the difference myself with the before and after test</label></li>
+      <li><input type="checkbox" id="c8"><label for="c8">I know the correction loop and have run it at least three times</label></li>
+      <li><input type="checkbox" id="c9"><label for="c9">I know what never goes in the vault, and my audit came back clean</label></li>
+      <li><input type="checkbox" id="c10"><label for="c10">I know exactly what to bring to Week 3, including my vault path</label></li>
+    </ul>
+    <p class="rm-hint">Checklist progress is saved on this device.</p>
+  </div>
+
+  <div class="nav-row">
+    <a class="nav-link" href="../class-01/">
+      <small>&#8592; Previous</small>
+      <strong>Class 1: The Foundations</strong>
+      <span class="rm-hint" style="display:block;">Vocabulary, the pipeline, your Readiness Map</span>
+    </a>
+    <a class="nav-link next" href="../">
+      <small>Course home &#8594;</small>
+      <strong>All four weeks</strong>
+      <span class="rm-hint" style="display:block;">Class 3: workflow automation with n8n</span>
+    </a>
+  </div>
+
+  <div class="footer-note">
+    <p><strong>AI Automation for Marketing Executives</strong>, Class 2 of 4 &middot; Ingenious Resources Int'l. Next class: <em>n8n workflow automation, where your vault gets read automatically and dynamic context arrives.</em> This handout works offline; your scores and checklists are saved in this browser only.</p>
+  </div>
+
+</div>
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Theme ---------- */
+  var THEME_KEY = "ssc-theme";
+  function applyTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    var btn = document.getElementById("themeToggle");
+    if (btn) btn.innerHTML = t === "dark" ? "&#9728; Light mode" : "&#9790; Dark mode";
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(THEME_KEY); } catch(e){}
+  applyTheme(saved || "light");
+  document.getElementById("themeToggle").addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-theme");
+    var next = cur === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try { localStorage.setItem(THEME_KEY, next); } catch(e){}
+  });
+
+  /* ---------- Quiz builder ---------- */
+  function buildQuiz(containerId, questions){
+    var quizEl = document.getElementById(containerId);
+    if (!quizEl) return;
+    questions.forEach(function(item, i){
+      var div = document.createElement("div");
+      div.className = "quiz-item";
+      var q = document.createElement("div");
+      q.className = "quiz-q";
+      q.textContent = (i+1) + ". " + item.q;
+      div.appendChild(q);
+      var opts = document.createElement("div");
+      opts.className = "quiz-opts";
+      item.opts.forEach(function(opt, oi){
+        var b = document.createElement("button");
+        b.className = "quiz-opt";
+        b.textContent = opt;
+        b.addEventListener("click", function(){
+          if (div.classList.contains("answered")) return;
+          div.classList.add("answered");
+          var btns = opts.querySelectorAll(".quiz-opt");
+          btns[item.answer].classList.add("correct");
+          if (oi !== item.answer) b.classList.add("wrong");
+          for (var j = 0; j < btns.length; j++) btns[j].disabled = true;
+        });
+        opts.appendChild(b);
+      });
+      div.appendChild(opts);
+      var ex = document.createElement("div");
+      ex.className = "quiz-explain";
+      ex.innerHTML = "<strong>Why:</strong> " + item.explain;
+      div.appendChild(ex);
+      quizEl.appendChild(div);
+    });
+  }
+
+  /* Exercise 1 - name the layer */
+  var QUIZ_LAYERS = [
+    { q: "Your AI writes a great post but calls your buyers 'users', which you banned six months ago. Your voice guide says so, but you did not attach it to this chat. What failed?",
+      opts: ["Retrieval - the right note was not loaded", "Memory - it forgot the rule", "Tools - nothing connected", "Instructions - your request was unclear"],
+      answer: 0,
+      explain: "The context existed in your vault, but nothing selected and loaded it for this request. That selection step is retrieval. Having the note is not the same as the model reading it." },
+    { q: "You tell your AI on Monday that you are focusing on the finance persona this quarter. On Thursday, in a new chat, it has no idea. Which part is missing?",
+      opts: ["Retrieval", "Context", "Memory - nothing carries between sessions", "Instructions"],
+      answer: 2,
+      explain: "Carrying information across sessions without you re-pasting it is memory. Week 4 builds this properly. Note the fix if it is a stable fact: write it into the vault, so it becomes context rather than relying on memory." },
+    { q: "Your AI needs this morning's competitor announcement to write a response. Nothing in your vault mentions it, and it happened two hours ago. What does it need?",
+      opts: ["A bigger context window", "A tool that can fetch live information", "More memory", "A longer prompt"],
+      answer: 1,
+      explain: "This is dynamic context. It cannot live in a static vault because it did not exist when you wrote the vault. The model needs a tool, such as web search, to fetch it at the moment of the request. Week 3." },
+    { q: "You paste your entire 60-note vault in for a one-line tweet. The output is somehow vaguer than usual. Why?",
+      opts: ["The model got lazy", "Too much irrelevant context degraded recall and buried the signal", "The vault is badly written", "You needed a better prompt"],
+      answer: 1,
+      explain: "Context rot. Anthropic documents that recall accuracy drops as token count rises, and every irrelevant note spends part of the attention budget. Load the slice the task needs, not everything you own." },
+    { q: "Your project instruction says 'always check the do-not-say list before publishing'. Which of the five parts is that sentence?",
+      opts: ["Context", "Memory", "Retrieval", "Instructions - it is a standing rule about how to work"],
+      answer: 3,
+      explain: "It tells the model what to DO, so it is an instruction. The list itself is context. Keeping these two separate is what stops your notes turning into a pile of commands and your instructions turning into a pile of facts." }
+  ];
+
+  /* Exercise 3 - static or dynamic */
+  var QUIZ_SD = [
+    { q: "Your brand's banned words list. Static or dynamic?",
+      opts: ["Static - vault note, load every time", "Dynamic - fetch it live", "Neither", "Both equally"],
+      answer: 0,
+      explain: "Static, and it should be loaded on every single writing task. It changes a few times a year, and it is the cheapest protection you own." },
+    { q: "Yesterday's ad click-through rate. Static or dynamic?",
+      opts: ["Static - write it in the campaign note", "Dynamic - fetch from the platform", "Static, if you update it weekly", "Neither"],
+      answer: 1,
+      explain: "Dynamic. Write it into a note and you have created a fact that is wrong tomorrow and will be repeated confidently forever. Fetch it. Week 3 shows how." },
+    { q: "Your current price list. Static or dynamic?",
+      opts: ["Purely static, it rarely changes", "Purely dynamic, always fetch it", "Static with a visible date and a named owner, reviewed monthly", "It does not belong in a vault at all"],
+      answer: 2,
+      explain: "The one that catches everybody. Prices are stable enough to be static and consequential enough that a stale one is dangerous. So: one note owns it, it carries a date and an owner, and it gets reviewed on a cycle." },
+    { q: "What you learned from last quarter's campaign. Static or dynamic?",
+      opts: ["Dynamic - performance data changes", "Static - the lesson is permanent even though the numbers are historical", "Neither, it is memory", "It should be deleted after the quarter"],
+      answer: 1,
+      explain: "Static. The campaign is closed, so its numbers are now history rather than live data, and the lesson is exactly the kind of durable fact a vault exists to hold. This is why retros are so valuable as context." },
+    { q: "The name of the lead who filled your form ten minutes ago. Where does it belong?",
+      opts: ["In a vault note about recent leads", "In your CRM, fetched when needed. Not in the vault", "In your persona note as an example", "In the campaign retro"],
+      answer: 1,
+      explain: "Dynamic AND personal data. It fails on both counts: it is stale within hours, and it is an identifiable person's record. Vaults hold patterns, systems of record hold people." }
+  ];
+
+  buildQuiz("quiz-layers", QUIZ_LAYERS);
+  buildQuiz("quiz-sd", QUIZ_SD);
+  /* ---------- Template registry: read straight from the page ---------- */
+  function templateText(file){
+    var el = document.querySelector('pre[data-file="' + file + '"]');
+    return el ? el.textContent : "";
+  }
+  function allTemplates(){
+    var out = [];
+    var nodes = document.querySelectorAll("pre[data-file]");
+    for (var i = 0; i < nodes.length; i++){
+      var f = nodes[i].getAttribute("data-file");
+      if (f.indexOf("brand-context-vault/") === 0){
+        out.push({ name: f, content: nodes[i].textContent });
+      }
+    }
+    return out;
+  }
+
+  /* ---------- Copy buttons ---------- */
+  function copyText(text, btn, okLabel){
+    var done = function(){
+      var old = btn.textContent;
+      btn.textContent = okLabel || "Copied";
+      btn.classList.add("copied");
+      setTimeout(function(){ btn.textContent = old; btn.classList.remove("copied"); }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); } catch(e){ alert("Copy failed. Select the text manually."); }
+      document.body.removeChild(ta);
+    }
+  }
+  var copyBtns = document.querySelectorAll(".copy-btn");
+  for (var ci = 0; ci < copyBtns.length; ci++){
+    (function(btn){
+      btn.addEventListener("click", function(){
+        copyText(templateText(btn.getAttribute("data-copy")), btn, "Copied to clipboard");
+      });
+    })(copyBtns[ci]);
+  }
+
+  var copyAllBtn = document.getElementById("copyAll");
+  if (copyAllBtn){
+    copyAllBtn.addEventListener("click", function(){
+      var t = allTemplates(), parts = [];
+      parts.push("BRAND CONTEXT VAULT - STARTER TEMPLATES");
+      parts.push("AI Automation for Marketing Executives, Class 2, Ingenious Resources Int'l");
+      parts.push("");
+      for (var i = 0; i < t.length; i++){
+        parts.push("=========================================================");
+        parts.push("FILE: " + t[i].name);
+        parts.push("=========================================================");
+        parts.push("");
+        parts.push(t[i].content);
+        parts.push("");
+      }
+      copyText(parts.join("\n"), copyAllBtn, "All six copied");
+    });
+  }
+
+  var printBtn = document.getElementById("printPage");
+  if (printBtn) printBtn.addEventListener("click", function(){ window.print(); });
+
+  /* ---------- Zip writer (store only, no dependencies) ---------- */
+  function makeCrcTable(){
+    var t = new Uint32Array(256), c, n, k;
+    for (n = 0; n < 256; n++){
+      c = n;
+      for (k = 0; k < 8; k++){ c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1); }
+      t[n] = c >>> 0;
+    }
+    return t;
+  }
+  var CRC_TABLE = makeCrcTable();
+  function crc32(bytes){
+    var c = 0xFFFFFFFF;
+    for (var i = 0; i < bytes.length; i++){ c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8); }
+    return (c ^ 0xFFFFFFFF) >>> 0;
+  }
+  function strBytes(s){
+    var out = [], i, cp;
+    for (i = 0; i < s.length; i++){
+      cp = s.charCodeAt(i);
+      if (cp < 0x80){ out.push(cp); }
+      else if (cp < 0x800){ out.push(0xC0 | (cp >> 6), 0x80 | (cp & 63)); }
+      else if (cp >= 0xD800 && cp <= 0xDBFF && i + 1 < s.length){
+        var lo = s.charCodeAt(i + 1);
+        var full = 0x10000 + ((cp - 0xD800) << 10) + (lo - 0xDC00);
+        out.push(0xF0 | (full >> 18), 0x80 | ((full >> 12) & 63), 0x80 | ((full >> 6) & 63), 0x80 | (full & 63));
+        i++;
+      }
+      else { out.push(0xE0 | (cp >> 12), 0x80 | ((cp >> 6) & 63), 0x80 | (cp & 63)); }
+    }
+    return new Uint8Array(out);
+  }
+  function buildZip(files){
+    var chunks = [], central = [], offset = 0;
+    function u16(v){ return [v & 255, (v >> 8) & 255]; }
+    function u32(v){ return [v & 255, (v >> 8) & 255, (v >> 16) & 255, (v >>> 24) & 255]; }
+    files.forEach(function(f){
+      var nameB = strBytes(f.name), dataB = strBytes(f.content), crc = crc32(dataB);
+      var local = [].concat(u32(0x04034b50), u16(20), u16(0x0800), u16(0), u16(0), u16(0),
+        u32(crc), u32(dataB.length), u32(dataB.length), u16(nameB.length), u16(0));
+      chunks.push(new Uint8Array(local), nameB, dataB);
+      central.push([].concat(u32(0x02014b50), u16(20), u16(20), u16(0x0800), u16(0), u16(0), u16(0),
+        u32(crc), u32(dataB.length), u32(dataB.length), u16(nameB.length), u16(0), u16(0), u16(0), u16(0),
+        u32(0), u32(offset), Array.prototype.slice.call(nameB)));
+      offset += local.length + nameB.length + dataB.length;
+    });
+    var cdBytes = [];
+    central.forEach(function(c){ cdBytes = cdBytes.concat(c); });
+    var end = [].concat(u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length),
+      u32(cdBytes.length), u32(offset), u16(0));
+    chunks.push(new Uint8Array(cdBytes), new Uint8Array(end));
+    var total = 0, i;
+    for (i = 0; i < chunks.length; i++) total += chunks[i].length;
+    var out = new Uint8Array(total), pos = 0;
+    for (i = 0; i < chunks.length; i++){ out.set(chunks[i], pos); pos += chunks[i].length; }
+    return out;
+  }
+
+  var dlBtn = document.getElementById("dlZip");
+  if (dlBtn){
+    dlBtn.addEventListener("click", function(){
+      var status = document.getElementById("dlStatus");
+      try {
+        var files = allTemplates();
+        var readme = "BRAND CONTEXT VAULT - STARTER TEMPLATES\n" +
+          "AI Automation for Marketing Executives, Class 2\n" +
+          "Ingenious Resources Int'l\n\n" +
+          "HOW TO USE\n" +
+          "1. Unzip this folder somewhere your backup covers.\n" +
+          "2. Open Obsidian, choose Open folder as vault, and pick brand-context-vault.\n" +
+          "   Or drag these folders into the vault you already created in class.\n" +
+          "3. Replace every [bracketed] part with your own truth. Delete what does not apply.\n" +
+          "4. Keep the frontmatter fields at the top of each note: type, status, updated, owner.\n" +
+          "5. Upload the filled notes to your AI project, then run the three verification\n" +
+          "   questions from Section 10 of the handout.\n\n" +
+          "THE RULE THAT MATTERS MOST\n" +
+          "One fact, one home. When you correct AI output, fix the note, not just the draft.\n";
+        files.push({ name: "brand-context-vault/README.txt", content: readme });
+        var bytes = buildZip(files);
+        var blob = new Blob([bytes], { type: "application/zip" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "brand-context-vault-starter.zip";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+        if (status) status.innerHTML = "Downloaded <code>brand-context-vault-starter.zip</code> with " + files.length + " files. Unzip it, then open the folder as a vault in Obsidian.";
+      } catch(err){
+        if (status) status.textContent = "Download did not work in this browser. Use the Copy all six button instead, or copy each template individually.";
+      }
+    });
+  }
+  /* ---------- Before / after score table ---------- */
+  var SCORE_KEY = "ssc-c2-scores";
+  var CHECKS = [
+    { k: "brand", label: "Sounds like us, not like generic AI" },
+    { k: "audience", label: "Speaks to the right person specifically" },
+    { k: "facts", label: "Facts and claims are correct" },
+    { k: "banned", label: "Avoided every banned word" },
+    { k: "usable", label: "Usable with light editing, not a rewrite" }
+  ];
+  var scores = {};
+  function loadScores(){
+    try {
+      var raw = localStorage.getItem(SCORE_KEY);
+      scores = raw ? JSON.parse(raw) : {};
+    } catch(e){ scores = {}; }
+  }
+  function saveScores(){
+    try { localStorage.setItem(SCORE_KEY, JSON.stringify(scores)); } catch(e){}
+  }
+  function mkScoreSelect(current){
+    var s = document.createElement("select");
+    var vals = ["", "1", "2", "3", "4", "5"];
+    vals.forEach(function(v){
+      var op = document.createElement("option");
+      op.value = v;
+      op.textContent = v === "" ? "-" : v;
+      if (v === current) op.selected = true;
+      s.appendChild(op);
+    });
+    return s;
+  }
+  function renderScores(){
+    var body = document.getElementById("scoreBody");
+    if (!body) return;
+    body.innerHTML = "";
+    CHECKS.forEach(function(c){
+      var row = scores[c.k] || { a: "", b: "", note: "" };
+      scores[c.k] = row;
+      var tr = document.createElement("tr");
+
+      var tdL = document.createElement("td");
+      tdL.textContent = c.label;
+      tr.appendChild(tdL);
+
+      var tdA = document.createElement("td");
+      var selA = mkScoreSelect(row.a);
+      selA.addEventListener("change", function(){ row.a = selA.value; saveScores(); summarise(); });
+      tdA.appendChild(selA);
+      tr.appendChild(tdA);
+
+      var tdB = document.createElement("td");
+      var selB = mkScoreSelect(row.b);
+      selB.addEventListener("change", function(){ row.b = selB.value; saveScores(); summarise(); });
+      tdB.appendChild(selB);
+      tr.appendChild(tdB);
+
+      var tdN = document.createElement("td");
+      var inp = document.createElement("input");
+      inp.type = "text";
+      inp.placeholder = "e.g. B used the real 40-minute number";
+      inp.value = row.note || "";
+      inp.addEventListener("input", function(){ row.note = inp.value; saveScores(); });
+      tdN.appendChild(inp);
+      tr.appendChild(tdN);
+
+      body.appendChild(tr);
+    });
+    summarise();
+  }
+  function summarise(){
+    var el = document.getElementById("scoreSummary");
+    if (!el) return;
+    var sumA = 0, sumB = 0, nA = 0, nB = 0;
+    CHECKS.forEach(function(c){
+      var r = scores[c.k] || {};
+      if (r.a){ sumA += parseInt(r.a, 10); nA++; }
+      if (r.b){ sumB += parseInt(r.b, 10); nB++; }
+    });
+    if (!nA && !nB){ el.textContent = "Score each check 1 to 5 for both runs. 25 is a perfect score."; return; }
+    var txt = "Cold run: " + sumA + " of 25. Vault run: " + sumB + " of 25.";
+    if (nA === CHECKS.length && nB === CHECKS.length){
+      var diff = sumB - sumA;
+      if (diff > 0) txt += " The vault added " + diff + " points. That gap is what you built today.";
+      else if (diff === 0) txt += " No gap yet. That means the notes are still too thin or too generic. Which one, and what line would fix it?";
+      else txt += " The cold run scored higher, which means something in the vault is actively misleading the model. Find it now, that is the most valuable finding of the session.";
+    }
+    el.textContent = txt;
+  }
+  loadScores();
+  renderScores();
+  var srBtn = document.getElementById("scoreReset");
+  if (srBtn){
+    srBtn.addEventListener("click", function(){
+      if (confirm("Clear both sets of scores?")){
+        scores = {};
+        saveScores();
+        renderScores();
+      }
+    });
+  }
+
+  /* ---------- Checklists, saved per device ---------- */
+  function wireChecklist(id, onChange){
+    var root = document.getElementById(id);
+    if (!root) return;
+    var items = root.querySelectorAll("li");
+    for (var i = 0; i < items.length; i++){
+      (function(li){
+        var cb = li.querySelector("input");
+        if (!cb) return;
+        var key = "ssc-c2-" + cb.id;
+        try {
+          if (localStorage.getItem(key) === "1"){ cb.checked = true; li.classList.add("done"); }
+        } catch(e){}
+        cb.addEventListener("change", function(){
+          li.classList.toggle("done", cb.checked);
+          try { localStorage.setItem(key, cb.checked ? "1" : "0"); } catch(e){}
+          if (onChange) onChange();
+        });
+      })(items[i]);
+    }
+    if (onChange) onChange();
+  }
+
+  function countDone(id){
+    var root = document.getElementById(id);
+    if (!root) return [0, 0];
+    var boxes = root.querySelectorAll("input[type=checkbox]");
+    var done = 0;
+    for (var i = 0; i < boxes.length; i++){ if (boxes[i].checked) done++; }
+    return [done, boxes.length];
+  }
+
+  wireChecklist("setup-check");
+  wireChecklist("fill-check", function(){
+    var c = countDone("fill-check");
+    var badge = document.getElementById("fillScore");
+    if (badge){
+      badge.textContent = c[0] + " of " + c[1] + " done";
+      badge.classList.toggle("good", c[0] === c[1] && c[1] > 0);
+    }
+  });
+  wireChecklist("deliverable", function(){
+    var c = countDone("deliverable");
+    var el = document.getElementById("delivProgress");
+    if (el){
+      if (c[0] === c[1] && c[1] > 0){
+        el.textContent = "All " + c[1] + " done. Your deliverable is complete. Progress saves on this device.";
+      } else {
+        el.textContent = c[0] + " of " + c[1] + " complete. Progress saves on this device.";
+      }
+    }
+  });
+  wireChecklist("checklist");
+})();
+</script>
+</body>
+</html>
