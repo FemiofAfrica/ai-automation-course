@@ -20,142 +20,155 @@ This is not a theory course. Every week ends with a working artifact the student
 ## Week 1: Foundations of AI Automation — What You're Actually Working With
 
 **Session Length:** ~3 hours
-**Objective:** By the end of this session, the student understands exactly what every AI term means, how the pieces fit together, and can look at any marketing task and map it to the right automation approach — without relying on vendor marketing.
+**Objective:** By the end of this session, the student can explain how an AI system turns an instruction into an output, distinguish the major components without vendor jargon, and map real marketing work to the right automation approach.
 
-### Part 1: The Vocabulary Every Marketing Exec Needs (60 min)
+### Teaching Flow
 
-**1.1 What Is a Model?**
-- Plain English: a model is a pattern-recognition machine trained on data. It doesn't "think" — it predicts the next most likely word/pixel/action based on what it's seen before.
-- Analogy: Like a new hire who's read the entire internet. Brilliant but needs clear instructions, has no context on your brand yet, and can hallucinate confidently.
-- Model types relevant to marketing: text models (Claude, GPT), image models (DALL-E, Midjourney), embedding models (for search/similarity).
+The session runs in one direction: **architecture → vocabulary → automation mechanics → safe use → application**. Exercises appear immediately after the concepts they test.
 
-**1.2 What Is an LLM?**
-- Large Language Model = a text model scaled up enough to hold conversations, follow instructions, and generate coherent long-form content.
-- Key properties: context window (how much it can "see" at once), token limits, temperature (creativity vs. precision).
-- Demo: The same prompt, different models (Claude vs. GPT vs. Gemini) — show how output quality varies.
-- No jargon hand-waving. Show the token counter. Show a context window overflow. Make it tangible.
+### Part 1: The Mental Model — One Pipeline, Every Tool (25 min)
 
-**1.3 What Is an API?**
-- Plain English: an API is a waiter. You give it an order (structured request), it brings back what the kitchen (the model/service) made.
-- Why it matters for marketers: APIs let one tool talk to another. Claude API lets your marketing stack *programmatically* generate content. n8n uses APIs to connect 200+ tools.
-- Analogy: APIs are the difference between copying data manually between spreadsheets and having Google Sheets auto-sync with your CRM.
-- Show a real API call (curl or n8n HTTP node) — simple, visual, no code required to understand.
+Start with the architecture before introducing individual terms.
 
-**1.4 What Is a Webhook?**
-- Plain English: a webhook is a phone that rings when something happens. "When a new lead fills out the form, call this URL and tell it the lead details."
-- Analogy: An API is "go get data from this place." A webhook is "call me when something happens." Pull vs. push.
-- Marketing examples: form submission → webhook triggers n8n → Claude enriches lead → Slack notification.
-- Live demo: Show a webhook in action (form submit → n8n receives it → logs it). Students see the trigger happen in real time.
-
-**1.5 What Is an AI Agent / Agent Harness?**
-- Plain English: an AI agent is an LLM with tools, memory, and autonomy. It doesn't just answer one question — it can be given a goal ("monitor competitors and brief me weekly") and execute multi-step work independently, using tools (web search, APIs, file system) along the way.
-- Analogy: Claude.ai is a brilliant intern you have to hand-hold with every prompt. Hermes Agent is that same intern, after 6 months, who knows your brand, works without supervision, and tells you when something needs your attention.
-- Agent harness: the software that wraps the LLM with tools, memory, skills, and multi-platform delivery.
-- Key distinction: Chat UI (Claude.ai, ChatGPT) vs. Agent (persistent, autonomous, tool-using).
-
-**Quick Vocabulary Quiz:** 5 scenarios, students identify which concept applies. Low stakes, high retention.
-
-### Part 2: The Input-to-Output Pipeline — How AI Agents Actually Work (20 min)
-
-**The Big Picture — Why This Matters Before Anything Else:**
-
-Before we talk about tools, workflows, or automation layers, you need to understand one thing: the architecture is the same every time. Whether you're using Claude.ai for a single task or a multi-agent system running 24/7 — the input-to-output pipeline is identical. Every week of this course teaches you how to optimize one part of this pipeline.
-
-Here's the foundational flow:
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                 THE AGENT PIPELINE (every interaction)          │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ① YOU GIVE                           ⑥ MODEL PRODUCES         │
-│     INPUT ─────────────────────────┐      ┌─── OUTPUT            │
-│                                    │      │   (response,         │
-│                                    ▼      │    content,           │
-│  ② AGENT GATHERS                ┌──────┐  │    action)            │
-│     CONTEXT                     │      │  │                      │
-│     (brand vault,               │  LLM │──┘                      │
-│      projects, docs)            │      │                         │
-│                                  │      │                          │
-│  ③ AGENT SEARCHES               └──────┘                          │
-│     MEMORY                           ▲                            │
-│      (past sessions,             ④ + ⑤  → LLM                  │
-│      user preferences,                (context + tools            │
-│      learned corrections)              + skills + MCP             │
-│                                       = augmented input)          │
-│  ④ AGENT USES TOOLS                                                │
-│     (skills, plugins,                                               │
-│      MCP servers)                                                    │
-│                                                                     │
-│  ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ │
-│  The LLM is the brain. Everything else feeds the brain.          │
-│                                                                   │
-└─────────────────────────────────────────────────────────────────┘
+```text
+Instruction → harness adds context, memory, and tools → LLM interprets
+            → model produces output → harness returns or acts on it
 ```
 
-**The Simple Analogy: The Marketing Operations Center**
+The learner should be able to distinguish these roles:
 
-Imagine you're briefing a senior marketing analyst (the LLM). You walk into their office and say "Write a LinkedIn post about our new feature." Here's what actually happens:
+- **The user** provides the goal or instruction through an interface.
+- **The harness** packages the instruction, supplies system guidance, retrieves context or memory, and exposes tools.
+- **The LLM** interprets the assembled input and decides what to generate or do next.
+- **Tools** perform specific external actions such as searching, reading files, updating a CRM, or sending a message.
+- **The harness** returns the result, invokes approved actions, or continues an agentic loop.
 
-| Pipeline Step | In Human Terms | In AI Terms |
-|---|---|---|
-| **① You give input** | You say: "Write a LinkedIn post about the new analytics dashboard" | The prompt — your instruction to the agent |
-| **② Gather context** | Analyst opens the brand book, persona guide, and product specs on their desk | Agent loads brand vault docs, project files, reference material |
-| **③ Search memory** | Analyst remembers: "Last time we launched a feature, the CTO persona responded best to 'time saved' messaging" | Agent searches session history + persistent memory for relevant past learnings |
-| **④ Use tools/skills/MCP** | Analyst opens LinkedIn, checks character limits, pulls the analytics dashboard screenshot from Google Drive | Agent runs a skill (LinkedIn post format), calls MCP tools (Google Drive, image analyzer, web search) |
-| **⑤ All flows to LLM** | Analyst sits down with all gathered material — brand guide, past notes, tool outputs — and starts writing | Everything — context, memory, tool results — is packed into the LLM's input context window |
-| **⑥ Model produces output** | Analyst hands back a finished post | The LLM generates the response — text, JSON, action, or decision |
+Introduce the agentic loop at a high level: **plan → act → observe → adjust**, repeated until the goal is met or a stop condition is reached.
 
-**Why This Pipeline Is the Skeleton of the Entire Course:**
+**Exercise 1 — Diagnose the Weak Step:** Give four weak-output scenarios. The student identifies whether the problem is the instruction, missing context, missing memory, unavailable tools, or model capability.
 
-Every week of this course teaches you how to make one part of this pipeline more powerful:
+### Part 2: The Vocabulary — Seven Words That Unlock Everything (40 min)
 
-| Course Week | What You Learn | Which Pipeline Step It Optimizes |
-|---|---|---|
-| **Week 1 (today)** | The vocabulary + this pipeline | Understanding the whole flow |
-| **Week 2: Context Engineering** | Building your brand vault, voice guides, persona docs, campaign histories | **Step ②** — giving the agent richer context so it produces better output |
-| **Week 3: n8n Workflows** | Connecting tools, automating multi-step marketing tasks, reading/writing context on the fly | **Step ④** — giving the agent tools to act in the real world (send emails, update CRM, post to social) |
-| **Week 4: Hermes Agents** | Persistent memory, skills that load automatically, multi-platform autonomous operation | **Steps ③ + ④** — agent remembers past sessions and runs skills without you re-explaining everything |
+**2.1 Model and LLM**
+- A model is a pattern-learning system trained to produce predictions or outputs.
+- An LLM is a model specialized in language at a scale that supports instruction-following, conversation, analysis, and generation.
+- Relevant limitations: hallucinations, finite context windows, and non-deterministic output.
 
-**Key Insight:** A better prompt helps Step ①. A richer brand vault helps Step ②. Persistent memory helps Step ③. Powerful tools and skills help Step ④. A smarter model helps Step ⑥. **The best automation systems improve ALL steps** — not just one.
+**2.2 API and Webhook**
+- An **API** is a structured way for one system to request data or an action from another system.
+- A **webhook** sends data to another system when a specified event occurs.
+- Executive shorthand: API = “ask another system”; webhook = “tell me when this happens.”
 
-**Quick Comprehension Check (2 min):**
-- "I spent 10 minutes writing the perfect prompt but Claude still produced generic copy" — which pipeline step is weak? (Answer: Step ② — the agent lacked brand context)
-- "My agent gives good output but can't actually send the email or post to LinkedIn" — which step is weak? (Answer: Step ④ — no tools connected)
-- "Every session I have to re-explain who our target audience is" — which step is weak? (Answer: Step ③ — memory isn't persisting between sessions)
+**2.3 Agent and Harness**
+- An **agent** is a system that uses a model, instructions, context, memory, and tools to pursue a goal through one or more steps.
+- A **harness** is the software environment that assembles those capabilities around the model.
+- Do not conflate the model with the product interface or agent wrapped around it.
 
-**The Takeaway:** Every time you interact with an AI agent — whether it's Claude.ai, ChatGPT, or your own Hermes instance — this pipeline is running behind the scenes. Understanding it means you can diagnose *why* an output is weak and know exactly *which lever* to pull to fix it. That's what the rest of this course teaches.
+**2.4 MCP**
+- Model Context Protocol is an open standard for connecting AI applications to external data and tools through a common interface.
+- Use the “USB-C for AI connections” analogy, while making clear that MCP is connection infrastructure—not the model, tool, or agent itself.
 
-### Part 3: The Four-Layer Automation Stack (40 min)
+**Exercise 2 — Vocabulary Check:** Present short marketing scenarios and have the student identify the model, harness, API, webhook, agent, or MCP connection involved.
 
-1. **Chat & Reasoning** (Claude.ai, ChatGPT) — ad-hoc analysis, drafting, brainstorming
-2. **Workflow Automation** (n8n) — connecting your tools end-to-end, no code
-3. **Autonomous Agents** (Hermes Agent) — persistent AI assistants that learn, remember, and execute
-4. **Orchestration** (multi-agent systems) — coordinating multiple AI agents working together
+### Part 3: How Automation Actually Works (35 min)
 
-For each layer:
-- What it is in plain terms
-- A real marketing use case
-- What it costs (free/paid/open-source)
-- The marketing maturity curve: where is your org?
+Use the reusable framework **Trigger → Action → Check**:
 
-**Exercise:** Map 10 real marketing tasks to the right layer. Honesty corner: what NOT to automate.
+1. **Trigger:** What starts the process?
+2. **Action:** What work does the process perform?
+3. **Check:** How do we verify success or surface failure?
 
-### Part 4: Quick-Build Deliverable (50 min)
+Cover three trigger types:
 
-**Deliverable: Automation Readiness Map**
-A structured document where the student:
-1. Lists their top 10 recurring marketing tasks/processes
-2. Maps each to the appropriate automation layer (or "don't automate")
-3. Identifies which foundational tools they're missing (API access, webhook capability, etc.)
-4. Ranks by ROI priority (time saved × frequency × strategic value)
+- **Manual:** A person clicks a button or submits a request.
+- **Event-based:** A form is submitted, a lead changes stage, or a complaint is logged.
+- **Scheduled:** Work starts at a chosen time or interval.
 
-Delivered as: A template they fill out during the session and leave with as their action plan for the next 3 weeks of the course.
+Explain a **cron job** conceptually as a recurring, time-based background trigger. Do not teach cron-expression syntax. Example: every Monday at 8:00 a workflow gathers campaign metrics, creates a brief, checks that all sources responded, and alerts the marketing lead if anything failed.
+
+Teach fail-loud design before students build:
+
+- Record what happened in logs.
+- Retry safe transient failures.
+- Alert a named owner when retries fail.
+- Use human approval before high-risk public or customer-facing actions.
+- Never treat “the workflow ran” as proof that the business result was correct.
+
+**Exercise 3 — What Starts It?:** For five marketing processes, the student identifies the trigger type and writes the action, success check, and failure alert.
+
+### Part 4: Pitfalls Before You Hit Them (15 min)
+
+- Models can hallucinate confidently; verification is part of the workflow.
+- Chat sessions do not automatically provide durable organizational memory.
+- Context windows are finite; more context also consumes more tokens.
+- The same request can produce different outputs across runs and models.
+- Customer data, credentials, and confidential campaign information require deliberate handling.
+- Automations can fail silently unless checks, logs, alerts, and ownership are designed in.
+- Not every task should be automated—especially ambiguous, high-stakes judgment with no review step.
+
+### Part 5: The Habits That Transfer Across Models and Harnesses (25 min)
+
+Teach four briefing habits that remain useful across most capable models:
+
+1. State the role, audience, and goal.
+2. Specify the desired output shape.
+3. Give one clear job at a time.
+4. Ask for assumptions, uncertainties, and verification—not hidden chain-of-thought.
+
+Use a reusable brief:
+
+```text
+Goal:
+Audience:
+Relevant context:
+Constraints:
+Required output:
+Success criteria:
+```
+
+**Exercise 4 — Transfer Test:** The student gives the same structured marketing brief to two available models or harnesses, compares the outputs, and explains which differences came from the model, supplied context, or available tools.
+
+### Part 6: The Four-Layer Automation Stack (20 min)
+
+1. **Chat and Reasoning** — ad-hoc analysis, drafting, and brainstorming.
+2. **Workflow Automation** — repeatable steps connecting systems.
+3. **Autonomous Agents** — goal-directed systems that can iterate, use tools, and respond to observations.
+4. **Orchestration** — coordinating multiple workflows or agents with shared controls.
+
+For each layer, cover a marketing example, required oversight, likely failure mode, and the maturity needed to use it responsibly.
+
+### Part 7: The Money — Tokens, API Cost, and Rate Limits (10 min)
+
+- Tokens are chunks of input and output text processed by a model.
+- Chat subscriptions may hide per-request pricing; APIs usually meter input and output usage.
+- Larger context, repeated documents, long outputs, and high-volume workflows increase cost.
+- Rate limits constrain how much work can be processed within a period.
+- Every production automation needs a usage budget, throughput expectation, and failure policy.
+
+### Part 8: Quick-Build Deliverable — Automation Readiness Map (40 min)
+
+The student:
+
+1. Lists 10 recurring marketing tasks or processes.
+2. Maps each to chat, workflow, agent, orchestration, or “do not automate.”
+3. Defines its trigger, action, success check, and failure alert.
+4. Identifies missing access, data, context, APIs, webhooks, or approval controls.
+5. Ranks opportunities by frequency, time saved, strategic value, risk, and expected cost.
+
+**Exercise 5 — Build the Map:** Complete at least five rows during class. The deliverable is not complete until each chosen automation has a success check and named human owner.
+
+### Part 9: Week 2 Preview — RAG and Organizational Context (5 min)
+
+Introduce retrieval-augmented generation as an **open-book process**: retrieve relevant organizational documents first, then supply them to the model as context before it answers. Contrast this with asking the model a closed-book question from training alone.
+
+Keep this conceptual. Embeddings, indexing, and retrieval implementation belong to Week 2.
 
 ### Homework for Week 2
-- Get a Claude.ai account (Pro tier recommended, $20/mo)
-- Bring 3 real marketing challenges you'd like Claude to help with
-- Complete any gaps in the Automation Readiness Map
+
+- Complete all 10 rows of the Automation Readiness Map.
+- Bring three real marketing challenges and the source documents needed to solve them.
+- Collect one brand voice guide, one buyer persona, and two examples of strong past content for the Week 2 context-vault exercise.
+- Confirm access to at least one capable chat model; a paid plan is helpful but not required for the foundational work.
 
 ---
 
