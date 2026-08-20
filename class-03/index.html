@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Automation for Marketing Executives, Class 3: The Marketing Intelligence Harness</title>
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --bg-alt: #ffffff;
+    --panel: #ffffff;
+    --panel-alt: #f0f0ec;
+    --ink: #1a1a1a;
+    --ink-soft: #55554f;
+    --ink-dim: #8a8a82;
+    --line: #d9d9d2;
+    --accent: #0f766e;
+    --accent-soft: #ccfbf1;
+    --accent-ink: #134e4a;
+    --warn: #b45309;
+    --warn-soft: #fef3c7;
+    --danger: #b91c1c;
+    --danger-soft: #fee2e2;
+    --ok: #15803d;
+    --ok-soft: #dcfce7;
+    --code-bg: #1e1e1e;
+    --code-ink: #e8e8e8;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 14px rgba(0,0,0,.05);
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #121212;
+    --bg-alt: #181818;
+    --panel: #1c1c1c;
+    --panel-alt: #242424;
+    --ink: #ecece6;
+    --ink-soft: #b8b8ae;
+    --ink-dim: #7a7a72;
+    --line: #33332e;
+    --accent: #2dd4bf;
+    --accent-soft: #134e4a;
+    --accent-ink: #99f6e4;
+    --warn: #fbbf24;
+    --warn-soft: #3a2a08;
+    --danger: #f87171;
+    --danger-soft: #3a1212;
+    --ok: #4ade80;
+    --ok-soft: #0f2f18;
+    --shadow: 0 1px 3px rgba(0,0,0,.5);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+  header.top {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(6px);
+  }
+  .top-inner {
+    max-width: 900px; margin: 0 auto; padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .brand { font-weight: 700; font-size: 15px; letter-spacing: .02em; }
+  .brand small { display: block; font-weight: 500; color: var(--ink-dim); font-size: 12px; }
+  .toggle-btn {
+    background: var(--panel); color: var(--ink); border: 1px solid var(--line);
+    border-radius: 8px; padding: 6px 12px; font-size: 13px; cursor: pointer;
+  }
+  .toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .hero { padding: 44px 0 28px; }
+  .course-strip { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .week-chip {
+    font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+    border: 1px solid var(--line); color: var(--ink-dim); background: var(--panel);
+    text-decoration: none;
+  }
+  a.week-chip:hover { border-color: var(--accent); color: var(--accent); }
+  .week-chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+  h1 { font-size: 34px; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 10px; }
+  .sub { font-size: 18px; color: var(--ink-soft); max-width: 720px; }
+  .meta { margin-top: 14px; font-size: 13px; color: var(--ink-dim); display: flex; gap: 16px; flex-wrap: wrap; }
+  h2 {
+    font-size: 24px; letter-spacing: -.01em; margin: 56px 0 6px;
+    padding-top: 16px; border-top: 1px solid var(--line);
+  }
+  h2 .num { display: inline-block; margin-right: 10px; color: var(--accent); }
+  h3 { font-size: 18px; margin: 24px 0 8px; }
+  h4 { font-size: 16px; }
+  p { margin: 10px 0; }
+  .lead { font-size: 17px; color: var(--ink-soft); }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 20px; margin: 16px 0; box-shadow: var(--shadow);
+  }
+  .callout {
+    border-left: 4px solid var(--accent); background: var(--accent-soft);
+    padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 16px 0;
+  }
+  .callout.warn { border-left-color: var(--warn); background: var(--warn-soft); }
+  .callout.danger { border-left-color: var(--danger); background: var(--danger-soft); }
+  .callout.ok { border-left-color: var(--ok); background: var(--ok-soft); }
+  .callout strong:first-child { display: block; margin-bottom: 2px; }
+  .callout p { margin: 4px 0; }
+  ul, ol { margin: 10px 0 10px 22px; }
+  li { margin: 6px 0; }
+  strong { font-weight: 650; }
+  a { color: var(--accent); }
+
+  .exercise {
+    background: var(--panel); border: 1px solid var(--line);
+    border-left: 4px solid var(--accent); border-radius: var(--radius);
+    padding: 18px 20px; margin: 20px 0; box-shadow: var(--shadow);
+  }
+  .exercise h3 { margin-top: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .ex-badge {
+    display: inline-block; background: var(--accent); color: #fff;
+    font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    padding: 3px 10px; border-radius: 999px; text-transform: uppercase;
+  }
+  .exercise .rm-hint { margin-top: 10px; }
+
+  .grid { display: grid; gap: 14px; margin: 18px 0; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 16px 18px; box-shadow: var(--shadow);
+  }
+  .card h4 { margin-bottom: 6px; }
+  .card .tag {
+    display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
+    border-radius: 999px; padding: 2px 8px; margin-bottom: 8px;
+  }
+  .card p { font-size: 14.5px; color: var(--ink-soft); margin: 6px 0; }
+  .card .example { font-size: 13px; color: var(--ink-dim); border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 8px; }
+
+  .flow { display: flex; flex-direction: column; gap: 0; margin: 18px 0; }
+  .flow-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 14px 16px; position: relative;
+  }
+  .flow-row:first-child { border-radius: var(--radius) var(--radius) 0 0; }
+  .flow-row:last-child { border-radius: 0 0 var(--radius) var(--radius); }
+  .flow-row + .flow-row { border-top: none; }
+  .flow-num {
+    flex: 0 0 30px; height: 30px; border-radius: 50%;
+    background: var(--accent); color: #fff; font-weight: 700; font-size: 14px;
+    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+  }
+  .flow-body h4 { font-size: 15.5px; }
+  .flow-body p { font-size: 14px; color: var(--ink-soft); margin: 2px 0 0; }
+  .flow-body .use { font-size: 13px; color: var(--ink-dim); margin-top: 6px; }
+
+  .term { background: var(--code-bg); border-radius: 10px; overflow: hidden; margin: 16px 0; box-shadow: var(--shadow); }
+  .term-head {
+    display: flex; align-items: center; gap: 6px; padding: 8px 12px;
+    background: #2a2a2a; border-bottom: 1px solid #3a3a3a;
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .term-title { color: #aaa; font-size: 12px; margin-left: 8px; font-family: ui-monospace, "Cascadia Code", monospace; }
+  .term pre { padding: 14px 16px; overflow-x: auto; color: var(--code-ink); font-family: ui-monospace, "Cascadia Code", Menlo, monospace; font-size: 13.5px; line-height: 1.55; }
+  .term .cmt { color: #7d7d7d; }
+  .term-actions { display: flex; gap: 8px; padding: 0 12px 12px; flex-wrap: wrap; }
+  .copy-btn {
+    background: #333; color: #e8e8e8; border: 1px solid #4a4a4a; border-radius: 7px;
+    padding: 6px 12px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+  }
+  .copy-btn:hover { background: #3d3d3d; border-color: var(--accent); }
+  .copy-btn.copied { background: #14532d; border-color: #22c55e; color: #bbf7d0; }
+
+  .chain { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0; }
+  .chain .step {
+    background: var(--panel-alt); border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 12px; font-size: 13.5px; font-weight: 600;
+  }
+  .chain .step.clock { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .chain .arrow { color: var(--accent); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14.5px; background: var(--panel); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--panel-alt); font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); }
+  tr:last-child td { border-bottom: none; }
+  .table-scroll { overflow-x: auto; }
+  .table-scroll table { min-width: 620px; }
+
+  .diagram { margin: 20px 0; }
+  .diagram svg { width: 100%; height: auto; display: block; }
+
+  .checklist { list-style: none; margin: 16px 0; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 10px; padding: 12px 14px; margin: 8px 0; cursor: pointer;
+  }
+  .checklist input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; flex: 0 0 16px; }
+  .checklist label { flex: 1; font-size: 14.5px; }
+  .checklist li.done label { text-decoration: line-through; color: var(--ink-dim); }
+
+  .quiz-item { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin: 12px 0; box-shadow: var(--shadow); }
+  .quiz-q { font-weight: 600; margin-bottom: 10px; }
+  .quiz-opts { display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .quiz-opt {
+    border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px;
+    font-size: 14px; cursor: pointer; background: var(--panel-alt); color: var(--ink);
+    text-align: left; transition: all .12s;
+  }
+  .quiz-opt:hover { border-color: var(--accent); }
+  .quiz-opt.correct { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); font-weight: 600; }
+  .quiz-opt.wrong { background: var(--danger-soft); border-color: var(--danger); color: var(--danger); }
+  .quiz-opt:disabled { cursor: default; opacity: .85; }
+  .quiz-explain { display: none; margin-top: 10px; font-size: 14px; color: var(--ink-soft); border-top: 1px dashed var(--line); padding-top: 10px; }
+  .quiz-item.answered .quiz-explain { display: block; }
+
+  .tree {
+    background: var(--panel-alt); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; margin: 14px 0; overflow-x: auto;
+    font-family: ui-monospace, Menlo, monospace; font-size: 13.5px; line-height: 1.7;
+    white-space: pre; color: var(--ink-soft);
+  }
+  .tree b { color: var(--accent); font-weight: 700; }
+
+  .score {
+    display: inline-block; font-size: 12.5px; font-weight: 700; border-radius: 999px;
+    padding: 3px 11px; background: var(--panel-alt); border: 1px solid var(--line); color: var(--ink-dim);
+  }
+  .score.good { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); }
+
+  .btn {
+    background: var(--accent); color: #fff; border: none; border-radius: 8px;
+    padding: 9px 16px; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.ghost { background: var(--panel-alt); color: var(--ink); border: 1px solid var(--line); }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--accent); filter: none; }
+  .rm-actions { display: flex; gap: 10px; flex-wrap: wrap; margin: 12px 0; }
+  .rm-hint { font-size: 13.5px; color: var(--ink-dim); }
+
+  .agenda { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+  .agenda th, .agenda td { padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .agenda .t { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 650; color: var(--accent); width: 70px; }
+  .agenda .d { white-space: nowrap; text-align: right; color: var(--ink-dim); width: 96px; }
+
+  .nav-row {
+    display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--line);
+  }
+  .nav-link {
+    display: block; text-decoration: none; color: var(--ink);
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 16px; font-size: 14px; box-shadow: var(--shadow); flex: 1 1 240px;
+  }
+  .nav-link:hover { border-color: var(--accent); }
+  .nav-link small { display: block; color: var(--ink-dim); font-size: 12px; margin-bottom: 3px; }
+  .nav-link strong { color: var(--accent); }
+  .nav-link.next { text-align: right; }
+
+  .footer-note { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--ink-dim); font-size: 13px; }
+  code { background: var(--panel-alt); border: 1px solid var(--line); border-radius: 4px; padding: 1px 6px; font-size: .9em; font-family: ui-monospace, Menlo, monospace; }
+  .pill { display: inline-block; font-size: 12px; font-weight: 700; border-radius: 999px; padding: 2px 10px; }
+  .pill.yes { background: var(--ok-soft); color: var(--ok); }
+  .pill.no { background: var(--danger-soft); color: var(--danger); }
+  .pill.mid { background: var(--warn-soft); color: var(--warn); }
+  .pill.pick { background: var(--accent); color: #fff; }
+  .src-list { font-size: 14px; }
+  .src-list li { margin: 8px 0; }
+  .src-list a { word-break: break-word; }
+  .field { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 8px 0; }
+  .field input { flex: 1 1 260px; background: var(--bg-alt); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font-size: 14px; }
+  @media print {
+    .toggle-btn, .copy-btn, .rm-actions .btn:not(.print-keep) { display: none; }
+    body { background: #fff; }
+    .panel, .card, .quiz-item { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">AI Automation for Marketing Executives
+      <small>Ingenious Resources Int'l &middot; Class 3 of 4 &middot; Live Session</small>
+    </div>
+    <button class="toggle-btn" id="themeToggle" aria-label="Toggle light/dark mode">&#9790; Dark mode</button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="course-strip">
+      <a class="week-chip" href="../class-01/">Week 1 &middot; Foundations</a>
+      <a class="week-chip" href="../class-02/">Week 2 &middot; Context Engineering</a>
+      <span class="week-chip active">Week 3 &middot; The Intelligence Harness (today)</span>
+      <a class="week-chip" href="../weeks/week-04/">Week 4 &middot; Operating System</a>
+    </div>
+    <h1>The Marketing Intelligence Harness</h1>
+    <p class="sub">Today you build a Claude Code marketing harness that reads your brand vault, pulls real Instagram and Facebook data through Composio, writes a weekly insights report, and delivers it to you automatically. By the end of this session you have a marketing employee that works while you sleep.</p>
+    <div class="meta">
+      <span>&#9201; ~3 hours</span>
+      <span>&#128203; Deliverable: a weekly report that runs and delivers itself</span>
+      <span>&#129520; Tools: Claude Code + your Class 2 vault + Composio</span>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>What changed from the plan you were given</strong>
+    <p>Earlier outlines slotted n8n into this week and Hermes into Week 4. We are not doing that. You build this week's harness with Claude Code as the agent, because it is the tool you can run on your own laptop and the one whose skills system fits a weekly report cleanly. Week 4 becomes the hardening and expansion of this same operating system, not a different product. No Hermes install required. Everything you build today carries straight into Week 4.</p>
+  </div>
+
+  <!-- ============ AGENDA ============ -->
+  <h2><span class="num">00</span>Agenda with Timings</h2>
+  <p class="lead">About three hours. The first block is recovery, not a repeat of Class 2. If your vault is already solid, the gate takes five minutes. If it is not, we spend the full twenty five and you leave with it working.</p>
+  <table class="agenda">
+    <tr><th class="t">Time</th><th>Block</th><th class="d">Length</th></tr>
+    <tr><td class="t">00:00</td><td>Recap plus readiness gate and vault recovery</td><td class="d">25 min</td></tr>
+    <tr><td class="t">00:25</td><td>The harness architecture, one diagram, one analogy, diagnosis drill</td><td class="d">25 min</td></tr>
+    <tr><td class="t">00:50</td><td>Install the instruction file and the weekly report skill</td><td class="d">25 min</td></tr>
+    <tr><td class="t">01:15</td><td>Connect Composio to Instagram and Facebook, then verify</td><td class="d">30 min</td></tr>
+    <tr><td class="t">01:45</td><td>Pull raw data and find the missing metrics before analysis</td><td class="d">20 min</td></tr>
+    <tr><td class="t">02:05</td><td>Run the report by hand and critique whether it is grounded</td><td class="d">20 min</td></tr>
+    <tr><td class="t">02:25</td><td>Run a near term test schedule and confirm delivery</td><td class="d">20 min</td></tr>
+    <tr><td class="t">02:45</td><td>Switch to the weekly production schedule, final checklist, homework</td><td class="d">15 min</td></tr>
+  </table>
+
+  <!-- ============ SECTION 01 ============ -->
+  <h2><span class="num">01</span>Recap and Readiness Gate</h2>
+  <p class="lead">Two weeks ago you learned the pipeline. Last week you built a Brand Context Vault. This week that vault becomes the memory of a running system. But first we confirm the vault actually exists and is populated. A harness with an empty vault produces confident nonsense.</p>
+
+  <div class="callout warn">
+    <strong>Femi's note from last class</strong>
+    <p>We ended around setting up your vault, and I gave you a Claude Code prompt to create the vault and start adding information. If that prompt did not finish, this is where we find out and fix it. We do not re-teach Class 2. We verify, repair, and move on.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">The gate has four steps. All four must pass.</h3>
+    <div class="flow">
+      <div class="flow-row">
+        <div class="flow-num">1</div>
+        <div class="flow-body">
+          <h4>Confirm Claude Code can open the vault</h4>
+          <p>Open a terminal in your vault folder and run <code>claude</code>. Ask it to list the files it can see. If it sees your notes, the path is correct. If it says the folder is empty, you are in the wrong directory.</p>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-num">2</div>
+        <div class="flow-body">
+          <h4>Confirm the required notes exist</h4>
+          <p>The harness needs at minimum: Index, Brand Voice, one Buyer Persona, Product Facts, Do-Not-Says, and one Campaign Retro or Insights note. Check the list below.</p>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-num">3</div>
+        <div class="flow-body">
+          <h4>Run the repair prompt if anything is missing</h4>
+          <p>The repair prompt below creates only the missing pieces. It never overwrites notes you already wrote, so running it on a healthy vault is safe.</p>
+        </div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-num">4</div>
+        <div class="flow-body">
+          <h4>Run a context test</h4>
+          <p>Ask Claude a brand specific question it could only answer from the vault. If it answers from the vault, the gate is passed and we build.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 1</span> Vault Readiness Check and Repair</h3>
+    <p>Tick each required note as you find it. If any is missing, run the repair prompt in step 3, then re-check. Do not proceed until every box is ticked.</p>
+    <ul class="checklist" id="vault-check">
+      <li><input type="checkbox" id="v1"><label for="v1"><code>index.md</code> exists and links to the other notes</label></li>
+      <li><input type="checkbox" id="v2"><label for="v2"><code>brand-voice-guide.md</code> (or similar) exists</label></li>
+      <li><input type="checkbox" id="v3"><label for="v3">At least one <code>persona</code> note exists</label></li>
+      <li><input type="checkbox" id="v4"><label for="v4"><code>product-facts.md</code> exists</label></li>
+      <li><input type="checkbox" id="v5"><label for="v5"><code>do-not-says.md</code> exists</label></li>
+      <li><input type="checkbox" id="v6"><label for="v6">One campaign retro or insights note exists</label></li>
+      <li><input type="checkbox" id="v7"><label for="v7">Claude Code, opened in the vault folder, lists these files</label></li>
+    </ul>
+
+    <h4 style="margin-top:18px;">Repair prompt, copy and run inside the vault folder</h4>
+    <p>This prompt tells Claude Code to create only what is missing, without touching what you have. It is safe to run even if the vault is already complete.</p>
+    <div class="term">
+      <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">vault-repair.md - paste into Claude Code, run from the vault root</span></div>
+      <pre data-file="vault-repair.md">Read the vault I have open. Check for these six notes and create
+only the ones that are missing, using the same frontmatter style
+(--- type/status/updated/owner ---) as any existing note:
+
+1. index.md - a front door that links to every other note and states
+   the reading order for common tasks.
+2. brand-voice-guide.md - voice rules, a banned-words table, and tone
+   by channel. If a voice note exists under another name, link it from
+   index instead of creating a duplicate.
+3. A persona note - one buyer persona with real quotes and objections.
+   If one exists, do not create another.
+4. product-facts.md - the single source of truth for what you sell and
+   any price. If one exists, do not duplicate it.
+5. do-not-says.md - banned words, forbidden claims, off-limits topics.
+   If one exists, do not duplicate it.
+6. One retro or insights note - what worked and what failed on a past
+   campaign, with numbers.
+
+Rules:
+- NEVER overwrite an existing note. If a note covers the topic under a
+  different name, link it from index and skip creation.
+- NEVER invent facts. Where a value is unknown, write [to be filled by
+  owner] and set owner to the human.
+- Keep every note under 500 words. Link between notes, do not copy facts.
+- Report which notes you created and which already existed.</pre>
+      <div class="term-actions"><button class="copy-btn" data-copy="vault-repair.md">Copy the repair prompt</button></div>
+    </div>
+
+    <h4 style="margin-top:18px;">Context test, the real proof</h4>
+    <p>With Claude Code open in the vault, ask it one question only your vault can answer. Example:</p>
+    <div class="term">
+      <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">context-test.md</span></div>
+      <pre data-file="context-test.md">Name one word our brand never uses, and tell me which note that
+rule lives in. Then summarise, in your own words, who our primary
+buyer persona is and the single objection that blocks them.</pre>
+      <div class="term-actions"><button class="copy-btn" data-copy="context-test.md">Copy the context test</button></div>
+    </div>
+    <p class="rm-hint">Pass looks like: it quotes your actual banned word and your actual persona, citing the note names. Fail looks like: generic marketing advice, or "I don't have that information." If it fails, your notes are not where Claude Code is looking, or they are empty.</p>
+  </div>
+
+  <!-- ============ SECTION 02 ============ -->
+  <h2><span class="num">02</span>The Harness Architecture</h2>
+  <p class="lead">A harness is the software that wraps a model with everything it needs to do a job without you in the room. Claude Code is the harness. Your vault is its memory. Composio is its hands on Meta. A skill is its written procedure. The schedule is its alarm clock. Learn these nine layers now, because when something breaks next week, you will diagnose it by layer.</p>
+
+  <div class="diagram">
+    <svg viewBox="0 0 760 470" role="img" aria-label="The marketing intelligence harness, nine layers">
+      <defs>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent)"/>
+        </marker>
+      </defs>
+      <g font-family="-apple-system, Segoe UI, sans-serif">
+        <rect x="20" y="20" width="240" height="64" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="34" y="42" font-size="12" font-weight="700" fill="var(--accent)">1 MODEL / BRAIN</text>
+        <text x="34" y="62" font-size="11.5" fill="var(--ink-soft)">Claude, the reasoning engine</text>
+        <text x="34" y="78" font-size="11.5" fill="var(--ink-soft)">behind every step</text>
+
+        <rect x="20" y="100" width="240" height="64" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="34" y="122" font-size="12" font-weight="700" fill="var(--ink-soft)">2 INSTRUCTIONS</text>
+        <text x="34" y="142" font-size="11.5" fill="var(--ink-soft)">CLAUDE.md, the standing rules</text>
+
+        <rect x="20" y="180" width="240" height="64" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="34" y="202" font-size="12" font-weight="700" fill="var(--ink-soft)">3 CONTEXT / VAULT</text>
+        <text x="34" y="222" font-size="11.5" fill="var(--ink-soft)">your brand facts, read per task</text>
+
+        <rect x="20" y="260" width="240" height="64" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="34" y="282" font-size="12" font-weight="700" fill="var(--ink-soft)">4 SKILLS</text>
+        <text x="34" y="302" font-size="11.5" fill="var(--ink-soft)">reusable procedures, the binder</text>
+
+        <rect x="20" y="340" width="240" height="64" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="34" y="362" font-size="12" font-weight="700" fill="var(--ink-soft)">5 TOOLS / MCP</text>
+        <text x="34" y="382" font-size="11.5" fill="var(--ink-soft)">Composio reaches Meta for you</text>
+
+        <rect x="500" y="20" width="240" height="64" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="514" y="42" font-size="12" font-weight="700" fill="var(--ink-soft)">6 PERMISSIONS</text>
+        <text x="514" y="62" font-size="11.5" fill="var(--ink-soft)">what it may and may not do</text>
+
+        <rect x="500" y="100" width="240" height="64" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="514" y="122" font-size="12" font-weight="700" fill="var(--ink-soft)">7 MEMORY / STATE</text>
+        <text x="514" y="142" font-size="11.5" fill="var(--ink-soft)">run log, last status, errors</text>
+
+        <rect x="500" y="180" width="240" height="64" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="514" y="202" font-size="12" font-weight="700" fill="var(--ink-soft)">8 TRIGGER / SCHEDULE</text>
+        <text x="514" y="222" font-size="11.5" fill="var(--ink-soft)">the alarm clock, weekly</text>
+
+        <rect x="500" y="260" width="240" height="64" rx="10" fill="var(--panel)" stroke="var(--line)" stroke-width="1.5"/>
+        <text x="514" y="282" font-size="12" font-weight="700" fill="var(--ink-soft)">9 OUTPUT / DELIVERY</text>
+        <text x="514" y="302" font-size="11.5" fill="var(--ink-soft)">report saved and sent to you</text>
+
+        <rect x="290" y="180" width="180" height="120" rx="10" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="304" y="208" font-size="13" font-weight="700" fill="var(--accent-ink)">The loop, weekly</text>
+        <text x="304" y="230" font-size="11.5" fill="var(--ink-soft)">trigger -> skill + vault</text>
+        <text x="304" y="248" font-size="11.5" fill="var(--ink-soft)">-> Composio data</text>
+        <text x="304" y="266" font-size="11.5" fill="var(--ink-soft)">-> rank + explain</text>
+        <text x="304" y="284" font-size="11.5" fill="var(--ink-soft)">-> write + deliver</text>
+
+        <line x1="260" y1="52" x2="290" y2="220" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah3)"/>
+        <line x1="260" y1="132" x2="290" y2="210" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah3)"/>
+        <line x1="260" y1="212" x2="290" y2="215" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah3)"/>
+        <line x1="260" y1="292" x2="290" y2="235" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah3)"/>
+        <line x1="260" y1="372" x2="290" y2="255" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah3)"/>
+        <line x1="470" y1="220" x2="500" y2="52" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah3)"/>
+        <line x1="470" y1="235" x2="500" y2="132" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah3)"/>
+        <line x1="470" y1="240" x2="500" y2="212" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah3)"/>
+        <line x1="470" y1="245" x2="500" y2="292" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah3)"/>
+        <line x1="470" y1="250" x2="500" y2="372" stroke="var(--accent)" stroke-width="1.5" marker-end="url(#ah3)"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="callout ok">
+    <strong>The one analogy: your marketing deputy</strong>
+    <p>Picture a deputy you hired and seated in your office. The <strong>brain</strong> is their judgment. The <strong>instructions</strong> are the desk card that says "always check the banned list before publishing." The <strong>vault</strong> is the filing cabinet of everything they know about your brand. The <strong>skills</strong> are the procedure binders: "here is exactly how we write the Monday report." The <strong>tools</strong> are the phone to Instagram and Facebook. The <strong>permissions</strong> are the keycard that opens the cabinet but not the safe. The <strong>memory</strong> is the notebook where they record what ran and what broke. The <strong>schedule</strong> is the alarm clock set for Monday 8am. The <strong>delivery</strong> is the courier who drops the finished report on your desk. Nine layers, one employee.</p>
+  </div>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <span class="tag">1 Brain</span>
+      <h4>Model</h4>
+      <p>Claude does the reasoning. You pick the model in Claude Code. For a report that reads files and writes prose, Sonnet class is the right daily driver. You do not change this per run.</p>
+    </div>
+    <div class="card">
+      <span class="tag">2 Instructions</span>
+      <h4>CLAUDE.md</h4>
+      <p>The standing rules for this project, written once in a file called CLAUDE.md. "Treat the vault as source of truth. Never invent metrics. Save reports to reports/weekly/." Loads every session.</p>
+    </div>
+    <div class="card">
+      <span class="tag">3 Context</span>
+      <h4>Vault</h4>
+      <p>Your Class 2 notes. The skill tells Claude which notes to read for a report, so it loads only the slice it needs, not the whole vault.</p>
+    </div>
+    <div class="card">
+      <span class="tag">4 Skills</span>
+      <h4>Procedure binder</h4>
+      <p>A folder with a SKILL.md that says how to build the weekly report. Reusable, version controlled, and shareable. This is the heart of the build.</p>
+    </div>
+    <div class="card">
+      <span class="tag">5 Tools</span>
+      <h4>Composio MCP</h4>
+      <p>Composio connects Claude Code to Instagram Business and your Facebook Page through managed OAuth. No API keys in your files. The tools arrive as Meta data calls.</p>
+    </div>
+    <div class="card">
+      <span class="tag">6 Permissions</span>
+      <h4>Approval boundaries</h4>
+      <p>Claude Code asks before risky actions. The skill pre-approves the safe ones (read vault, write report) and leaves destructive ones (post to social) for you to approve.</p>
+    </div>
+    <div class="card">
+      <span class="tag">7 Memory</span>
+      <h4>State</h4>
+      <p>The harness writes a run log: what it pulled, what it found, whether delivery succeeded. Next week's run can see last week's, so it notices trends and failures.</p>
+    </div>
+    <div class="card">
+      <span class="tag">8 Trigger</span>
+      <h4>Schedule</h4>
+      <p>Claude Code's own scheduler is session scoped and expires in seven days, so for a weekly job we use your laptop's scheduler (cron on Mac, Task Scheduler on Windows). Laptop must be on and online.</p>
+    </div>
+    <div class="card">
+      <span class="tag">9 Delivery</span>
+      <h4>Output</h4>
+      <p>The report is written as a dated Markdown file into reports/weekly/, then emailed to you through a connected Composio email toolkit if available, or flagged for you to collect.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Diagnose by layer, the table you will actually use</h3>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Symptom</th><th>Weak layer</th><th>First fix</th></tr>
+      <tr><td>Report is generic, sounds like any brand</td><td>3 Context</td><td>The skill is not loading the voice or persona note. Check the read steps in SKILL.md.</td></tr>
+      <tr><td>Report invents follower counts</td><td>2 or 5</td><td>Either instructions allow guessing, or Composio is not connected. Never let it fill gaps.</td></tr>
+      <tr><td>"No connected account" error</td><td>5 Tools</td><td>Run the Composio connect step again for that app. OAuth expired or never approved.</td></tr>
+      <tr><td>Claude asks to post to Instagram</td><td>6 Permissions</td><td>Tighten allowed-tools. Reporting only, no publishing, unless you deliberately add it.</td></tr>
+      <tr><td>Runs once, never again</td><td>8 Trigger</td><td>You used Claude Code's in-session loop. Move the job to the OS scheduler.</td></tr>
+      <tr><td>Report written but you never saw it</td><td>9 Delivery</td><td>Check the delivery step and the run log. Email toolkit may not be connected.</td></tr>
+      <tr><td>Same mistake as last week</td><td>7 Memory</td><td>The run log is not being read, or the vault note that should hold the lesson is missing.</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 2</span> Label the Layer and Diagnose</h3>
+    <p>Two checks. For each fault, name the layer, then name the fix. Get these right and you can maintain this thing without Femi.</p>
+    <div id="quiz-layers"></div>
+  </div>
+
+  <!-- ============ SECTION 03 ============ -->
+  <h2><span class="num">03</span>Install the Instruction File and the Skill</h2>
+  <p class="lead">Two files turn a chat tool into a system. CLAUDE.md holds the standing rules. The skill holds the procedure. Both live in or next to your vault so they travel with it.</p>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Step A: CLAUDE.md at the vault root</h3>
+    <p>Create a file called <code>CLAUDE.md</code> in your vault folder. This is the instruction layer. Keep it short and imperative.</p>
+    <div class="term">
+      <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">CLAUDE.md - project instructions, lives at the vault root</span></div>
+      <pre data-file="CLAUDE.md"># Project: [Brand] Marketing Harness
+
+You are the marketing analyst for [Brand]. Your brand context vault is
+the folder this file lives in. Treat the vault as the source of truth.
+Your training data is not a source of truth about this brand.
+
+Rules:
+- Before any report, read index.md, then brand-voice-guide.md, then the
+  relevant persona, then do-not-says.md.
+- Never invent a metric. If Meta returns no data for a window, write
+  "no data" for that metric. Real numbers only.
+- Save every weekly report to reports/weekly/ with the date in the filename.
+- Append a one line status to reports/weekly/run-log.md after every run:
+  date, what was pulled, delivery result or error.
+- For any price, claim, or capability, use product-facts.md only.
+- If a fact is missing from the vault, say so and ask. Do not fill the gap.
+- Do not post to social or send external messages unless the human approves
+  that specific action in the session.</pre>
+      <div class="term-actions"><button class="copy-btn" data-copy="CLAUDE.md">Copy CLAUDE.md</button></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Step B: the weekly report skill</h3>
+    <p>Create <code>.claude/skills/weekly-marketing-insights/SKILL.md</code>. The path is exact: a folder <code>.claude/skills/</code>, then a folder named after the skill, then <code>SKILL.md</code> inside it. Claude Code discovers skills in this location automatically. The frontmatter tells Claude when to use it and which tools it may use without asking.</p>
+    <div class="term">
+      <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">.claude/skills/weekly-marketing-insights/SKILL.md</span></div>
+      <pre data-file=".claude/skills/weekly-marketing-insights/SKILL.md">---
+name: weekly-marketing-insights
+description: Build the weekly Instagram and Facebook insights report for
+  [Brand]. Use when the human asks for the weekly social report, a top
+  performing posts roundup, or when a schedule fires the Monday report.
+  Reads the brand vault, pulls Meta data through Composio, ranks posts,
+  explains what worked, and writes a dated Markdown report to reports/weekly/.
+allowed-tools: Read, Write, Edit, Glob, Grep, mcp__composio__INSTAGRAM_*,
+  mcp__composio__FACEBOOK_*
+---
+
+# Weekly Marketing Insights Report
+
+## Inputs
+- Vault root: the folder containing this project's CLAUDE.md.
+- Window: the 7 days ending today, unless the human specifies dates.
+
+## Steps
+1. Read index.md, brand-voice-guide.md, the primary persona, and
+   do-not-says.md from the vault.
+2. Compute the window: now minus 7 days, and the YYYY-MM-DD strings.
+3. Pull data through Composio (Instagram Business + Facebook Page):
+   - Instagram: account info, account insights (reach, engagement), the
+     media list for the window, and per post insights.
+   - Facebook: page insights for the window and the page posts.
+   - Use the exact argument names from the Composio Meta reference.
+     Instagram takes integer unix timestamps. Facebook takes string dates.
+4. Validate. If a metric is absent in the window, write "no data". Do not
+   substitute an estimate. If follower_count is suppressed (under 100),
+   use the user info call for followers_count.
+5. Rank posts by the metrics present. Name the top performer, link it, and
+   explain specifically why it worked using the data, not flattery.
+6. List what is not working with blunt reasons tied to the numbers.
+7. Write a replication playbook: 3 to 5 concrete actions to repeat the win.
+8. Write action items with named owners. If owners are unknown, name the
+   role (for example "brand lead") and flag it for the human.
+9. Write the report to reports/weekly/<brand>-social-<YYYY-MM-DD>.md using
+   the exact headings below. Keep it under 500 words.
+10. Append a line to reports/weekly/run-log.md: date, posts pulled,
+    delivery status or error.
+
+## Report structure (exact headings)
+# <Brand> Social Report, <start> to <end>
+## Snapshot
+## Top Performers
+## What's not working
+## Replication playbook
+## Action items
+
+## Rules
+- Real numbers only. "no data" when a metric is absent. Never invent.
+- Match the brand voice from the vault. Respect do-not-says.
+- If Composio returns "no connected account" for a toolkit, stop and tell
+  the human which connection is missing. Do not fake the section.</pre>
+      <div class="term-actions"><button class="copy-btn" data-copy=".claude/skills/weekly-marketing-insights/SKILL.md">Copy the skill</button></div>
+    </div>
+    <p class="rm-hint">The <code>allowed-tools</code> line pre-approves reading and writing plus the Composio Meta tools, so a scheduled run does not stall on a permission prompt. If your Composio tool names differ, run <code>/composio list</code> in Claude Code and copy the exact prefixes. The skill is scoped to reporting only, no posting.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 3</span> Install One Instruction File and One Skill</h3>
+    <p>Create both files in the right places. Then open Claude Code in the vault and run <code>/weekly-marketing-insights</code> (it may say it cannot pull data yet, that is fine). Confirm Claude reads the vault notes and knows the report structure. Tick when done.</p>
+    <ul class="checklist" id="install-check">
+      <li><input type="checkbox" id="i1"><label for="i1"><code>CLAUDE.md</code> exists at the vault root and loads when I open Claude Code there</label></li>
+      <li><input type="checkbox" id="i2"><label for="i2"><code>.claude/skills/weekly-marketing-insights/SKILL.md</code> exists at the exact path</label></li>
+      <li><input type="checkbox" id="i3"><label for="i3">Running <code>/weekly-marketing-insights</code> shows Claude knows the report headings and reads my vault</label></li>
+      <li><input type="checkbox" id="i4"><label for="i4">The skill is scoped to reporting, with no post or send tools pre-approved</label></li>
+    </ul>
+  </div>
+
+  <!-- ============ SECTION 04 ============ -->
+  <h2><span class="num">04</span>Connect Composio to Instagram and Facebook</h2>
+  <p class="lead">Composio is the bridge that lets Claude Code call Meta without you writing API code or storing tokens. You install the plugin, then connect each app with a real OAuth approval. This is the one step that must happen on the student's machine with the student's account, so we set it up live and verify before building anything on top of it.</p>
+
+  <div class="callout warn">
+    <strong>Account prerequisites, read before connecting</strong>
+    <p>Instagram must be a <strong>Business or Creator account</strong> linked to a <strong>Facebook Page</strong>. A personal Instagram profile will not return insights. The Facebook side must be a <strong>Page</strong>, not a personal profile. Both should sit under the same Meta Business Manager. If either is wrong, Composio connects but returns empty data, and you will waste the rest of the class guessing why.</p>
+  </div>
+
+  <div class="flow">
+    <div class="flow-row">
+      <div class="flow-num">1</div>
+      <div class="flow-body">
+        <h4>Install the Composio plugin in Claude Code</h4>
+        <p>Run these two commands inside Claude Code. The first adds Composio's marketplace, the second installs the plugin. Claude Code may ask you to reload plugins.</p>
+        <div class="term">
+          <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">claude-code commands</span></div>
+          <pre data-file="composio-install.txt">/plugin marketplace add ComposioHQ/composio-plugin-cc
+/plugin install composio@composio</pre>
+          <div class="term-actions"><button class="copy-btn" data-copy="composio-install.txt">Copy install commands</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">2</div>
+      <div class="flow-body">
+        <h4>Connect Instagram Business</h4>
+        <p>In Claude Code, run the connect command for instagram. It opens an OAuth link in your browser. You approve it personally. Claude Code confirms the connection.</p>
+        <div class="term">
+          <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">claude-code command</span></div>
+          <pre data-file="composio-ig.txt">/composio-connect instagram</pre>
+          <div class="term-actions"><button class="copy-btn" data-copy="composio-ig.txt">Copy IG connect</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">3</div>
+      <div class="flow-body">
+        <h4>Connect your Facebook Page</h4>
+        <p>Same pattern for facebook. Approve the Page you want reported on, not your personal profile.</p>
+        <div class="term">
+          <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">claude-code command</span></div>
+          <pre data-file="composio-fb.txt">/composio-connect facebook</pre>
+          <div class="term-actions"><button class="copy-btn" data-copy="composio-fb.txt">Copy FB connect</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-num">4</div>
+      <div class="flow-body">
+        <h4>Verify before you build on it</h4>
+        <p>Ask Claude Code to confirm the connections and pull one real fact. If it returns a follower count or account name, the bridge works. This is the verification call the brief requires, done before any report is written.</p>
+        <div class="term">
+          <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">verification prompt</span></div>
+          <pre data-file="composio-verify.txt">List my connected Instagram Business account and its follower
+count, and my connected Facebook Page and its page likes. Tell me
+which toolkit returned data and which returned "no connected account".</pre>
+          <div class="term-actions"><button class="copy-btn" data-copy="composio-verify.txt">Copy verification prompt</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout danger">
+    <strong>Secret handling, the rule that is not negotiable</strong>
+    <p>Composio manages the OAuth tokens for you. They are never in your vault, your CLAUDE.md, your skill, your screenshots, or this course repo. If any step asks you to paste a token into a file, stop. That is not how this works. Least privilege applies: you connected only instagram and facebook. Do not connect every app Composio offers "just in case."</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">When one toolkit connects and the other does not</h3>
+    <p>This is the most common failure and it is easy. If verification says Instagram returned data but Facebook returned "no connected account", run only the facebook connect again. The two connections are independent. Do not reinstall the plugin. Do not rebuild the skill. Connect the missing one and re-verify.</p>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+      <tr><td>Both say no connected account</td><td>Plugin not installed or not reloaded</td><td>Run the two install commands, then <code>/reload-plugins</code></td></tr>
+      <tr><td>One account missing</td><td>OAuth not completed for that app</td><td>Run that app's <code>/composio-connect</code> again and approve in browser</td></tr>
+      <tr><td>Connected but empty data</td><td>Personal account, not Business, or no posts in window</td><td>Convert to Business, link to a Page, widen the date window</td></tr>
+      <tr><td>Token rejected later</td><td>Composio session expired</td><td>Re-run the connect command; OAuth refreshes</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 4</span> Connect and Verify Instagram and Facebook</h3>
+    <p>Complete the four steps and confirm the verification prompt returns a real follower count or page likes from at least one account. If one account is missing, use the recovery row above. Tick only when verification shows real data, not "no connected account."</p>
+    <ul class="checklist" id="composio-check">
+      <li><input type="checkbox" id="c1"><label for="c1">Composio plugin installed and reloaded in Claude Code</label></li>
+      <li><input type="checkbox" id="c2"><label for="c2">Instagram Business connected and approved in my browser</label></li>
+      <li><input type="checkbox" id="c3"><label for="c3">Facebook Page connected and approved in my browser</label></li>
+      <li><input type="checkbox" id="c4"><label for="c4">Verification prompt returned real data from at least one account</label></li>
+    </ul>
+  </div>
+
+  <!-- ============ SECTION 05 ============ -->
+  <h2><span class="num">05</span>Pull Raw Data and Find the Missing Metrics</h2>
+  <p class="lead">Before any analysis, look at what actually came back. Meta suppresses and deprecates metrics, and a report that quietly drops a number is worse than one that says "no data." Train your eye on the gaps now.</p>
+
+  <div class="callout warn">
+    <strong>The quirks that will bite you, from the local Composio Meta reference</strong>
+    <p>These are the documented behaviours of the Meta toolkits through Composio. The tool names below are the canonical Composio slugs; in the Claude Code plugin they appear under the composio MCP namespace, so confirm exact names with <code>/composio list</code> and adapt if yours differ.</p>
+    <ul>
+      <li><strong>Instagram</strong> tools take integer unix timestamps for <code>since</code>/<code>until</code>. Facebook insights take <strong>string</strong> dates like <code>-7 days</code> or <code>now</code>. Mix them up and you get a 400.</li>
+      <li>Metrics are <strong>silently omitted</strong> when there is no data in the window. The response tells you which were requested versus returned. Report what is present, say "no data" for the rest.</li>
+      <li><code>follower_count</code> is <strong>suppressed under 100 followers</strong>. Use the user info call for <code>followers_count</code> at any size.</li>
+      <li>Facebook per post engagement (reactions, comments, shares) comes from the <strong>post object</strong>, not from post insights. The old post impression metrics were deprecated in November 2025 and return nothing.</li>
+      <li>Wrong argument name returns a 400 naming the exact field you missed. Copy the name from the reference, do not guess.</li>
+    </ul>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 5</span> Inspect Raw Data, Name the Gaps</h3>
+    <p>Run the data pull (the skill does this, or ask Claude to list the raw returned metrics). Write down which metrics came back and which were absent. Specifically note: did follower_count show, or was it suppressed? Did Facebook post engagement come from the post object? Tick when you can state the gaps plainly.</p>
+    <ul class="checklist" id="data-check">
+      <li><input type="checkbox" id="d1"><label for="d1">I can list which Meta metrics returned data for the window</label></li>
+      <li><input type="checkbox" id="d2"><label for="d2">I identified at least one metric that was absent or suppressed, and said "no data" for it</label></li>
+      <li><input type="checkbox" id="d3"><label for="d3">I confirmed whether follower_count showed or was suppressed under 100</label></li>
+      <li><input type="checkbox" id="d4"><label for="d4">Facebook post engagement came from the post object, not deprecated insights</label></li>
+    </ul>
+  </div>
+
+  <!-- ============ SECTION 06 ============ -->
+  <h2><span class="num">06</span>Run the Report by Hand and Critique It</h2>
+  <p class="lead">Now the full loop, manually. You invoke the skill, it reads the vault, pulls the data, ranks, explains, and writes the file. Your job is to judge whether the recommendations are grounded in the numbers or in thin air.</p>
+
+  <div class="term">
+    <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">manual run - in Claude Code, at the vault root</span></div>
+    <pre data-file="manual-run.txt">/weekly-marketing-insights</pre>
+    <div class="term-actions"><button class="copy-btn" data-copy="manual-run.txt">Copy the run command</button></div>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Critique checklist, the grounding test</h3>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Check</th><th>Pass</th><th>Fail</th></tr>
+      <tr><td>Every number traces to Meta or the vault</td><td>Cites a real figure</td><td>"Engagement was strong" with no number</td></tr>
+      <tr><td>"no data" appears where data was absent</td><td>Honest gaps</td><td>Silently dropped or estimated</td></tr>
+      <tr><td>Top performer has a link</td><td>Permalink present</td><td>Named but unclickable</td></tr>
+      <tr><td>Why it worked is specific</td><td>Ties to a metric</td><td>"Great content" platitude</td></tr>
+      <tr><td>Action items have owners</td><td>Named or role named</td><td>"Someone should"</td></tr>
+      <tr><td>Voice matches the vault</td><td>Respects do-not-says</td><td>Uses a banned word</td></tr>
+      <tr><td>Under 500 words</td><td>Tight</td><td>Bloated, repeats itself</td></tr>
+    </table>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 6</span> Run and Critique</h3>
+    <p>Run the report. Open the file it wrote in reports/weekly/. Score it against the grounding test above. If it invented a metric or dropped a gap, tell Claude which note or which rule should change, and fix it. Tick when the report passes every row.</p>
+    <ul class="checklist" id="run-check">
+      <li><input type="checkbox" id="r1"><label for="r1">The report file exists in reports/weekly/ with today's date</label></li>
+      <li><input type="checkbox" id="r2"><label for="r2">Every claim traces to a real Meta number or a vault fact</label></li>
+      <li><input type="checkbox" id="r3"><label for="r3">Absent metrics are marked "no data", not estimated</label></li>
+      <li><input type="checkbox" id="r4"><label for="r4">Top post has a permalink and a specific reason</label></li>
+      <li><input type="checkbox" id="r5"><label for="r5">Action items name an owner or a role</label></li>
+    </ul>
+  </div>
+
+  <!-- ============ SECTION 07 ============ -->
+  <h2><span class="num">07</span>Schedule a Test Run and Verify Delivery</h2>
+  <p class="lead">The finish line is not "a report can be generated." It is "a report arrives every week without you." Claude Code's own scheduler is session scoped and expires in seven days, so for a durable weekly job we use your laptop's scheduler. We test with a run a few minutes out, confirm delivery, then set the real Monday cadence.</p>
+
+  <div class="callout warn">
+    <strong>Why not Claude Code's built in scheduler for production</strong>
+    <p>Claude Code's scheduled tasks live inside the current session and stop when you start a new one. The docs state they are restored on resume only if unexpired, with a seven day expiry. For a weekly report that must survive restarts and weekends, that is not durable enough. The reliable route on a student laptop is the operating system scheduler: cron on macOS and Linux, Task Scheduler on Windows. Honest caveat: laptop based automation only runs when the machine is on and connected. State that plainly to the student.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">The safe non-interactive run command</h3>
+    <p>This launcher runs Claude Code headless: it prints the result and exits, pre-approving the safe tools so it does not stall. It assumes the vault is the current directory or the path is set. The skill name is passed as the prompt.</p>
+    <div class="term">
+      <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">run-report.sh - macOS and Linux launcher</span></div>
+      <pre data-file="run-report.sh">#!/usr/bin/env bash
+# Run the weekly marketing report headless.
+# Usage: ./run-report.sh
+set -euo pipefail
+cd "/path/to/your/brand-context-vault" || exit 1
+claude -p "/weekly-marketing-insights" \
+  --allowedTools "Read,Write,Edit,Glob,Grep,mcp__composio__INSTAGRAM_*,mcp__composio__FACEBOOK_*" \
+  --add-dir "/path/to/your/brand-context-vault"</pre>
+      <div class="term-actions"><button class="copy-btn" data-copy="run-report.sh">Copy the launcher</button></div>
+    </div>
+    <p class="rm-hint">Replace the two <code>/path/to/your/brand-context-vault</code> strings with your real vault path. On Windows use the schtasks command in the starter pack instead of this script. The <code>--allowedTools</code> list must match the tools your skill uses, or the run will pause for approval.</p>
+  </div>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Test schedule, a few minutes out</h3>
+    <p>On macOS or Linux, add a temporary cron line that fires in about three minutes, then check reports/weekly/ and the run log. This proves the chain before you trust the weekly one.</p>
+    <div class="term">
+      <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">test cron (macOS / Linux)</span></div>
+      <pre data-file="test-cron.txt"># Show current crontab, then add a test line 3 minutes out
+crontab -l
+( crontab -l; echo "$(date -v+3M +'%M %H * * *') /path/to/your/brand-context-vault/run-report.sh >> /path/to/your/brand-context-vault/reports/weekly/cron.out 2>&1" ) | crontab -
+# After it fires, check:
+ls -t /path/to/your/brand-context-vault/reports/weekly/
+tail -n 20 /path/to/your/brand-context-vault/reports/weekly/cron.out</pre>
+      <div class="term-actions"><button class="copy-btn" data-copy="test-cron.txt">Copy test cron</button></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Delivery: the visible finish line</strong>
+    <p>Default recommendation: email the report to your own address through a connected Composio email toolkit (Gmail, for example). If that connection is not set up, the fallback is honest: the report is written to the vault and the run log is flagged "not delivered." That fallback does not meet the full delivery acceptance criterion, so we name it clearly and the student connects email as the last live step. Do not invent the student's email address. Put it in the field below and in the scheduler, never in a committed file.</p>
+    <div class="field">
+      <label for="emailField" style="font-size:14px;font-weight:600;">Your delivery email:</label>
+      <input id="emailField" type="email" placeholder="you@yourcompany.com" autocomplete="off">
+    </div>
+    <p class="rm-hint">The email itself is supplied by the human at run time, from the connected email toolkit, and is never written into CLAUDE.md, the skill, the repo, or this handout.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 7</span> Test Run and Confirm Delivery</h3>
+    <p>Set the near term test schedule, wait for it to fire, then confirm a report landed in reports/weekly/ and the run log shows a result. If delivery is the email fallback, confirm the report is at least written and the log says "not delivered" honestly. Tick when the chain ran end to end.</p>
+    <ul class="checklist" id="test-check">
+      <li><input type="checkbox" id="t1"><label for="t1">A scheduled test run fired without me starting Claude Code</label></li>
+      <li><input type="checkbox" id="t2"><label for="t2">A dated report appeared in reports/weekly/</label></li>
+      <li><input type="checkbox" id="t3"><label for="t3">run-log.md shows the run status (delivered or honestly "not delivered")</label></li>
+      <li><input type="checkbox" id="t4"><label for="t4">If email was connected, the report reached my inbox</label></li>
+    </ul>
+  </div>
+
+  <!-- ============ SECTION 08 ============ -->
+  <h2><span class="num">08</span>The Weekly Production Schedule</h2>
+  <p class="lead">Swap the test cron for the real one. Monday morning, before the student is at their desk. Then the system is live.</p>
+
+  <div class="panel">
+    <h3 style="margin-top:0;">Production schedule</h3>
+    <div class="table-scroll">
+    <table>
+      <tr><th>Platform</th><th>Setup</th><th>Cadence</th></tr>
+      <tr><td>macOS / Linux (cron)</td><td>Edit the crontab with the line below</td><td>Every Monday 08:00 local</td></tr>
+      <tr><td>Windows (Task Scheduler)</td><td><code>schtasks</code> command in the starter pack</td><td>Every Monday 08:00 local</td></tr>
+    </table>
+    </div>
+    <div class="term">
+      <div class="term-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="term-title">production cron (macOS / Linux)</span></div>
+      <pre data-file="prod-cron.txt"># Weekly marketing report, every Monday at 08:00 local time
+0 8 * * 1 /path/to/your/brand-context-vault/run-report.sh >> /path/to/your/brand-context-vault/reports/weekly/cron.out 2>&1</pre>
+      <div class="term-actions"><button class="copy-btn" data-copy="prod-cron.txt">Copy production cron</button></div>
+    </div>
+    <p class="rm-hint">Replace the path. On Windows, the starter pack includes the <code>schtasks</code> command that creates the same Monday 08:00 job. Remember: the laptop must be awake and online at 08:00 Monday, or the run is skipped. A server or a cloud runner would remove that constraint, but that is a Week 4 hardening topic.</p>
+  </div>
+
+  <div class="exercise">
+    <h3><span class="ex-badge">Exercise 8</span> Convert to the Weekly Schedule</h3>
+    <p>Replace the test cron with the production line (or create the Windows task). Confirm the line is in the crontab with <code>crontab -l</code>. Tick when the weekly job is in place and the test run from Exercise 7 already proved the chain.</p>
+    <ul class="checklist" id="prod-check">
+      <li><input type="checkbox" id="p1"><label for="p1">Production cron (or Windows task) is installed for Monday 08:00</label></li>
+      <li><input type="checkbox" id="p2"><label for="p2"><code>crontab -l</code> shows the weekly line with my real path</label></li>
+      <li><input type="checkbox" id="p3"><label for="p3">The end to end chain was already proven by the Exercise 7 test run</label></li>
+    </ul>
+  </div>
+
+  <!-- ============ MARKETING PACK ============ -->
+  <h2><span class="num">09</span>Your Marketing Pack: What This Harness Can Grow Into</h2>
+  <p class="lead">You now have one skill in a harness that can hold many. The local marketing library includes a 12 month marketing plan skill and a 139 idea library. Those are capability extensions, not part of this week's build. Do not bolt them on today. A harness with one solid, verified skill beats a harness with five half wired ones.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <span class="tag">Installed today</span>
+      <h4>weekly-marketing-insights</h4>
+      <p>The only skill this class installs. It reads the vault, pulls Meta data, writes the report, and logs the run. Verified end to end before we leave.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Optional later</span>
+      <h4>marketing-plan</h4>
+      <p>A 12 month, AARRR structured plan for a specific client. Add it as a second skill when the student wants strategy artifacts, not just weekly analytics. It reads the same vault.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Optional later</span>
+      <h4>marketing-ideas</h4>
+      <p>A 139 idea library to spark tactics. Useful as reference context for the insights skill's replication playbook, but not a standalone weekly job. Resist dumping it in.</p>
+    </div>
+    <div class="card">
+      <span class="tag">Week 4</span>
+      <h4>Operating system hardening</h4>
+      <p>Next class expands this same harness: more skills, a memory layer that spans runs, failure alerts, and a path off the laptop if uptime matters. Same vault, same Claude Code, more surface.</p>
+    </div>
+  </div>
+
+  <!-- ============ TROUBLESHOOTING ============ -->
+  <h2><span class="num">10</span>Troubleshooting Decision Tree</h2>
+  <p class="lead">When the Monday report does not show up, walk this tree top to bottom. Each branch names the layer from Section 02.</p>
+  <div class="tree"><b>Report missing on Monday?</b>
+├── Laptop was off or asleep at 08:00?  <b>Layer 8</b> -> wake it, run manually, note the skip in run-log
+├── cron line present?  <b>Layer 8</b> -> <code>crontab -l</code>; if absent, reinstall production cron
+├── Claude Code opened in wrong folder?  <b>Layer 3</b> -> check cd path in run-report.sh
+├── "No connected account" in run-log?  <b>Layer 5</b> -> reconnect that app with /composio-connect
+├── Permission prompt stalled the run?  <b>Layer 6</b> -> align --allowedTools with the skill's tools
+├── Report written but empty sections?  <b>Layer 5/3</b> -> Meta returned no data; should say "no data", not blank
+├── Report off-brand?  <b>Layer 3</b> -> skill not loading voice/persona; fix read steps
+├── Report invents numbers?  <b>Layer 2</b> -> tighten CLAUDE.md; never guess
+├── Same mistake two weeks running?  <b>Layer 7</b> -> the lesson was not written to a vault note
+└── Email never arrived?  <b>Layer 9</b> -> email toolkit not connected; report is in vault, log says not delivered</div>
+
+  <!-- ============ STARTER PACK ============ -->
+  <h2><span class="num">11</span>The Starter Pack</h2>
+  <p class="lead">Everything from this class as files you can drop into your vault: the instruction file, the skill, the report template, the launcher, the schedules, the output folder, the run log, and a secrets safe .gitignore. Generated in your browser, works offline, nothing uploaded.</p>
+  <div class="panel">
+    <h3 style="margin-top:0;">What is in the pack</h3>
+    <div class="tree">marketing-harness-starter/
+├── CLAUDE.md                              <b>Layer 2 instructions</b>
+├── .claude/skills/weekly-marketing-insights/
+│   └── SKILL.md                           <b>Layer 4 the procedure</b>
+├── reports/weekly/
+│   ├── README.md                          <b>Layer 9 output folder</b>
+│   └── run-log.md                         <b>Layer 7 state</b>
+├── report-template.md                     <b>the exact report schema</b>
+├── run-report.sh                          <b>macOS / Linux launcher</b>
+├── com.femi.weekly-report.plist           <b>macOS LaunchAgent</b>
+├── schedule-windows.txt                   <b>Windows schtasks command</b>
+├── .gitignore                             <b>secrets rules</b>
+└── README.txt                             how to install</div>
+    <div class="rm-actions">
+      <button class="btn" id="dlZip">&#11015; Download starter pack (.zip)</button>
+      <button class="btn ghost" id="copyAll">&#128203; Copy all files as one document</button>
+      <button class="btn ghost print-keep" id="printPage">&#128424; Print / Save as PDF</button>
+    </div>
+    <p class="rm-hint" id="dlStatus">Unzip into your vault folder. The hidden <code>.claude</code> folder lands alongside CLAUDE.md. Replace every <code>[Brand]</code> and <code>/path/to/...</code> with your real values. Never put a token or your email in these files.</p>
+  </div>
+
+  <!-- hidden pack assets, collected by the ZIP builder -->
+  <div id="pack-assets" style="display:none;">
+    <pre data-pack="report-template.md"># <Brand> Social Report, <start> to <end>
+## Snapshot
+Followers, page follows, 7 day reach total with daily trend, posts per platform.
+State "no data" for any metric Meta did not return.
+
+## Top Performers
+Top post: metrics, permalink, what it was. Why it worked, tied to the numbers.
+Runner ups with their metrics.
+
+## What's not working
+Weak posts with blunt reasons drawn from the data, not opinion.
+
+## Replication playbook
+3 to 5 numbered, concrete actions to repeat the win and close the gaps.
+
+## Action items
+3 to 5 bullets, each with a named owner or role.
+Keep the whole report under 500 words. Real numbers only.</pre>
+    <pre data-pack="reports/weekly/README.md"># reports/weekly
+
+This folder holds the dated weekly social reports and the run log.
+
+- One report per week: <brand>-social-<YYYY-MM-DD>.md
+- run-log.md: one line per run, date, what was pulled, delivery status or error.
+
+Do not edit old reports. If a number was wrong, write a new report and note the
+correction in run-log.md. This folder is the Layer 9 output and Layer 7 state.</pre>
+    <pre data-pack="reports/weekly/run-log.md"># Run log
+
+One line per run. Append, never rewrite.
+
+- 2026-01-01: pulled IG + FB, top post = reel X, delivered to email. ok
+- 2026-01-08: FB returned no connected account, report written with IG only, not delivered. reconnect FB.</pre>
+    <pre data-pack="run-report.sh">#!/usr/bin/env bash
+# Weekly marketing report, headless.
+set -euo pipefail
+cd "/path/to/your/brand-context-vault" || exit 1
+claude -p "/weekly-marketing-insights" \
+  --allowedTools "Read,Write,Edit,Glob,Grep,mcp__composio__INSTAGRAM_*,mcp__composio__FACEBOOK_*" \
+  --add-dir "/path/to/your/brand-context-vault"</pre>
+    <pre data-pack="com.femi.weekly-report.plist"><?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.femi.weekly-report</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/path/to/your/brand-context-vault/run-report.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key><integer>8</integer>
+    <key>Minute</key><integer>0</integer>
+    <key>Weekday</key><integer>1</integer>
+  </dict>
+  <key>WorkingDirectory</key>
+  <string>/path/to/your/brand-context-vault</string>
+</dict>
+</plist>
+# Install: launchctl load ~/Library/LaunchAgents/com.femi.weekly-report.plist
+# The laptop must be awake at 08:00 Monday. Set "Wake on LAN" or a power schedule if needed.</pre>
+    <pre data-pack="schedule-windows.txt">REM Windows Task Scheduler. Run in an elevated Command Prompt once.
+REM Creates a Monday 08:00 job that runs the report headless.
+
+schtasks /Create /TN "WeeklyMarketingReport" /TR "cmd.exe /c cd /d C:\path\to\your\brand-context-vault && claude -p \"/weekly-marketing-insights\" --allowedTools \"Read,Write,Edit,Glob,Grep,mcp__composio__INSTAGRAM_*,mcp__composio__FACEBOOK_*\" --add-dir \"C:\path\to\your\brand-context-vault\"" /SC WEEKLY /D MON /ST 08:00
+
+REM The machine must be on and online at 08:00 Monday or the run is skipped.
+REM List it: schtasks /Query /TN "WeeklyMarketingReport"
+REM Remove it: schtasks /Delete /TN "WeeklyMarketingReport" /F</pre>
+    <pre data-pack=".gitignore"># Secrets and local state, never commit these.
+.env
+*.local
+reports/weekly/cron.out
+# Claude Code local session state
+.claude/settings.local.json
+# Keep the skill, ignore local overrides
+.claude/skills/*/references/*.local.md</pre>
+    <pre data-pack="README.txt">MARKETING HARNESS STARTER PACK
+AI Automation for Marketing Executives, Class 3
+Ingenious Resources Int'l
+
+HOW TO INSTALL
+1. Unzip into your brand-context-vault folder so CLAUDE.md and the .claude
+   folder sit next to your existing notes.
+2. Open CLAUDE.md. Replace [Brand] with your brand name.
+3. Open .claude/skills/weekly-marketing-insights/SKILL.md. Replace [Brand].
+4. Edit run-report.sh: replace both /path/to/your/brand-context-vault strings
+   with your real vault path. Make it executable: chmod +x run-report.sh
+5. Connect Composio (see the handout Section 04) before the first run.
+6. Test with a cron line a few minutes out, then install the weekly schedule.
+
+WHAT NEVER GOES IN THESE FILES
+- API tokens or OAuth secrets (Composio manages those)
+- Your delivery email address (supplied at run time from the email toolkit)
+- Customer names or confidential records (keep them out of the vault too)
+
+THE RULE THAT MATTERS MOST
+One fact, one home in the vault. When the report is wrong, fix the note, not
+just the draft. The harness only ever gets as smart as the vault underneath it.</pre>
+  </div>
+
+  <!-- ============ FINAL CHECKLIST ============ -->
+  <h2><span class="num">12</span>Final Verification Checklist</h2>
+  <p class="lead">You leave when all of these are true. This is the same list Femi uses to sign off the class.</p>
+  <ul class="checklist" id="deliverable">
+    <li><input type="checkbox" id="dl1"><label for="dl1">Vault passed the readiness gate: index, voice, persona, product, do-not-says, one retro</label></li>
+    <li><input type="checkbox" id="dl2"><label for="dl2">CLAUDE.md installed at the vault root and loads in Claude Code</label></li>
+    <li><input type="checkbox" id="dl3"><label for="dl3">.claude/skills/weekly-marketing-insights/SKILL.md installed at the exact path</label></li>
+    <li><input type="checkbox" id="dl4"><label for="dl4">Composio connected to Instagram Business and Facebook Page, verified with real data</label></li>
+    <li><input type="checkbox" id="dl5"><label for="dl5">Raw data inspected; missing or suppressed metrics identified and marked "no data"</label></li>
+    <li><input type="checkbox" id="dl6"><label for="dl6">Manual report run, critiqued, every claim grounded in a real number or vault fact</label></li>
+    <li><input type="checkbox" id="dl7"><label for="dl7">Near term test schedule fired and delivered (or honestly flagged not delivered)</label></li>
+    <li><input type="checkbox" id="dl8"><label for="dl8">Weekly production schedule installed for Monday 08:00</label></li>
+    <li><input type="checkbox" id="dl9"><label for="dl9">No token, no email, no secret lives in any file, the skill, or this handout</label></li>
+  </ul>
+  <p class="rm-hint" id="delivProgress">Progress saves on this device.</p>
+
+  <!-- ============ HOMEWORK ============ -->
+  <h2><span class="num">13</span>Homework and the Maintenance Routine</h2>
+  <div class="grid grid-2">
+    <div class="card">
+      <h4>&#128221; Homework before Week 4</h4>
+      <ul style="font-size:14.5px;">
+        <li>Let the weekly report run twice. Read both. Note one thing it got wrong.</li>
+        <li>Fix that wrong thing in the vault note responsible, not in the draft. That is the correction loop, now automatic.</li>
+        <li>If delivery is still the vault only fallback, connect a Composio email toolkit so the report reaches your inbox.</li>
+        <li>Bring the last two reports and your run log to Week 4.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>&#9851; The monthly maintenance routine</h4>
+      <ul style="font-size:14.5px;">
+        <li>Open run-log.md. Any "not delivered" or "no connected account" line is a broken connection, fix it.</li>
+        <li>Skim the vault for notes older than six months. Confirm, correct, or archive.</li>
+        <li>Watch the reports for a repeated wrong call. That is a vault gap, not a model gap.</li>
+        <li>Keep Composio connections alive. Reconnect if a toolkit expires.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout ok">
+    <strong>What Week 4 does with what you built today</strong>
+    <p>Today you built a working marketing employee: a vault, an instruction file, one verified skill, a Meta connection, and a weekly schedule. Week 4 does not replace this. It hardens it. We add more skills, a memory layer that spans runs, failure alerts that page you, and, if uptime matters, a path off the laptop and onto something that runs while it is closed. Same vault, same Claude Code, bigger surface. Everything you did in the last three hours is the foundation Week 4 builds on.</p>
+  </div>
+
+  <!-- ============ SOURCES ============ -->
+  <h2><span class="num">14</span>Sources</h2>
+  <p class="lead">Every factual claim about a tool in this handout comes from that vendor's own documentation, checked against the current official docs. Verify anything you plan to repeat in a meeting, and re-check before you rely on it, because these products change.</p>
+  <ul class="src-list">
+    <li><strong>Claude Code skills: location, frontmatter (name, description, allowed-tools, disable-model-invocation), Agent Skills standard:</strong> Anthropic, Claude Code Docs, Extend Claude with skills. <a href="https://code.claude.com/docs/en/skills">code.claude.com/docs/en/skills</a></li>
+    <li><strong>Claude Code scheduled tasks are session scoped, restored on resume if unexpired, seven day expiry, minimum interval one minute:</strong> Anthropic, Claude Code Docs, Run prompts on a schedule. <a href="https://code.claude.com/docs/en/scheduled-tasks">code.claude.com/docs/en/scheduled-tasks</a></li>
+    <li><strong>Claude Code headless mode with -p / --print and --allowedTools for non-interactive runs:</strong> Anthropic, Claude Code Docs (non-interactive usage). <a href="https://code.claude.com/docs/en/scheduled-tasks">code.claude.com/docs/en/scheduled-tasks</a> and the Claude Code overview.</li>
+    <li><strong>Composio Claude Code plugin: install via /plugin marketplace add ComposioHQ/composio-plugin-cc then /plugin install composio@composio; connect apps with /composio-connect:</strong> Composio Docs, Claude Code Plugin. <a href="https://docs.composio.dev/docs/claude-code-plugin">docs.composio.dev/docs/claude-code-plugin</a></li>
+    <li><strong>Composio Meta toolkits (instagram, facebook): argument names, IG integer timestamps vs FB string dates, metric suppression under 100 followers, November 2025 deprecations, per post engagement from post objects:</strong> local course reference, composio-meta-insights.md (hermes-mcp-setup skill). Confirm exact tool slugs with /composio list in your session.</li>
+    <li><strong>Meta account requirements: Instagram Business or Creator account linked to a Facebook Page; Page insights and posts:</strong> Meta for Developers, Instagram Graph API and Facebook Graph API documentation. <a href="https://developers.facebook.com/docs/instagram-api">developers.facebook.com/docs/instagram-api</a></li>
+    <li><strong>Brand vault format (frontmatter, links, index, do-not-says):</strong> Class 2 handout and Obsidian Help, Properties. <a href="https://help.obsidian.md/properties">help.obsidian.md/properties</a></li>
+  </ul>
+
+  <div class="footer-note">
+    <p><strong>AI Automation for Marketing Executives</strong>, Class 3 of 4 &middot; Ingenious Resources Int'l. Next class: <em>the marketing operating system, hardening and expanding the harness you built today.</em> This handout works offline; your checklists are saved in this browser only.</p>
+  </div>
+
+  <div class="nav-row">
+    <a class="nav-link" href="../class-02/">
+      <small>&#8592; Previous</small>
+      <strong>Class 2: Context Engineering</strong>
+      <span class="rm-hint" style="display:block;">Your Brand Context Vault, wired into your AI</span>
+    </a>
+    <a class="nav-link next" href="../weeks/week-04/">
+      <small>Course &middot; Week 4 &#8594;</small>
+      <strong>The Operating System</strong>
+      <span class="rm-hint" style="display:block;">Hardening and expanding this harness</span>
+    </a>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Theme ---------- */
+  var THEME_KEY = "ssc3-theme";
+  function applyTheme(t){
+    document.documentElement.setAttribute("data-theme", t);
+    var btn = document.getElementById("themeToggle");
+    if (btn) btn.innerHTML = t === "dark" ? "&#9728; Light mode" : "&#9790; Dark mode";
+  }
+  var saved = null;
+  try { saved = localStorage.getItem(THEME_KEY); } catch(e){}
+  applyTheme(saved || "light");
+  document.getElementById("themeToggle").addEventListener("click", function(){
+    var cur = document.documentElement.getAttribute("data-theme");
+    var next = cur === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try { localStorage.setItem(THEME_KEY, next); } catch(e){}
+  });
+
+  /* ---------- Quiz builder ---------- */
+  function buildQuiz(containerId, questions){
+    var quizEl = document.getElementById(containerId);
+    if (!quizEl) return;
+    questions.forEach(function(item, i){
+      var div = document.createElement("div");
+      div.className = "quiz-item";
+      var q = document.createElement("div");
+      q.className = "quiz-q";
+      q.textContent = (i+1) + ". " + item.q;
+      div.appendChild(q);
+      var opts = document.createElement("div");
+      opts.className = "quiz-opts";
+      item.opts.forEach(function(opt, oi){
+        var b = document.createElement("button");
+        b.className = "quiz-opt";
+        b.textContent = opt;
+        b.addEventListener("click", function(){
+          if (div.classList.contains("answered")) return;
+          div.classList.add("answered");
+          var btns = opts.querySelectorAll(".quiz-opt");
+          btns[item.answer].classList.add("correct");
+          if (oi !== item.answer) b.classList.add("wrong");
+          for (var j = 0; j < btns.length; j++) btns[j].disabled = true;
+        });
+        opts.appendChild(b);
+      });
+      div.appendChild(opts);
+      var ex = document.createElement("div");
+      ex.className = "quiz-explain";
+      ex.innerHTML = "<strong>Why:</strong> " + item.explain;
+      div.appendChild(ex);
+      quizEl.appendChild(div);
+    });
+  }
+
+  /* Exercise 2 - label the layer and diagnose */
+  var QUIZ_LAYERS = [
+    { q: "The Monday report is generic and could be any brand. The vault has a strong voice guide. What layer is weak?",
+      opts: ["3 Context, the skill is not loading the voice note", "1 Brain, Claude is too weak", "9 Delivery, the email is wrong", "6 Permissions, tools are blocked"],
+      answer: 0,
+      explain: "The vault holds the voice, but the report ignored it. That means the skill's read steps are not loading brand-voice-guide.md before writing. Context layer, specifically retrieval inside the skill." },
+    { q: "Claude asks you to approve a post to Instagram before it will continue. You only wanted reports. Which layer is misconfigured?",
+      opts: ["5 Tools, Composio is down", "6 Permissions, posting was pre-approved or not scoped out", "8 Trigger, the schedule is wrong", "7 Memory, the log is missing"],
+      answer: 1,
+      explain: "Posting is a destructive action. The skill should pre-approve only reading and writing, and leave posting for you to approve each time. If it is prompting, either allowed-tools is too broad or the instruction to never post unaided is missing." },
+    { q: "The report ran once on Friday and never again, even though you set a weekly schedule. What happened?",
+      opts: ["8 Trigger, you used Claude Code's in-session loop which expires", "2 Instructions, CLAUDE.md is wrong", "4 Skills, the skill deleted itself", "3 Context, the vault moved"],
+      answer: 0,
+      explain: "Claude Code's built in scheduler lives in the session and expires in seven days. For a durable weekly job you must use the OS scheduler (cron or Task Scheduler), which is what Section 07 and 08 set up." },
+    { q: "The report is beautifully written but the follower count is a confident guess. Which layer failed first?",
+      opts: ["2 Instructions, CLAUDE.md allowed guessing", "9 Delivery, wrong inbox", "1 Brain, model hallucinated", "4 Skills, procedure missing"],
+      answer: 0,
+      explain: "The instruction layer must forbid inventing metrics. 'Never invent a metric, write no data' belongs in CLAUDE.md. Without it, even a connected tool's absence becomes a fib. Fix the instruction, then the behaviour." }
+  ];
+  buildQuiz("quiz-layers", QUIZ_LAYERS);
+
+  /* ---------- Template + pack registry ---------- */
+  function textOf(attr, val){
+    var el = document.querySelector("pre[" + attr + '="' + val + '"]');
+    return el ? el.textContent : "";
+  }
+  function visibleTemplates(){
+    var out = [], nodes = document.querySelectorAll("pre[data-file]");
+    for (var i = 0; i < nodes.length; i++){
+      var f = nodes[i].getAttribute("data-file");
+      if (f.indexOf("brand-context-vault/") === 0) continue; // none here, safety
+      out.push({ name: f, content: nodes[i].textContent });
+    }
+    return out;
+  }
+  function packTemplates(){
+    var out = [], nodes = document.querySelectorAll("pre[data-pack]");
+    for (var i = 0; i < nodes.length; i++){
+      out.push({ name: nodes[i].getAttribute("data-pack"), content: nodes[i].textContent });
+    }
+    return out;
+  }
+
+  /* ---------- Copy buttons ---------- */
+  function copyText(text, btn, okLabel){
+    var done = function(){
+      var old = btn.textContent;
+      btn.textContent = okLabel || "Copied";
+      btn.classList.add("copied");
+      setTimeout(function(){ btn.textContent = old; btn.classList.remove("copied"); }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, function(){ fallback(); });
+    } else { fallback(); }
+    function fallback(){
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.style.position = "fixed"; ta.style.left = "-9999px";
+      document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); done(); } catch(e){ alert("Copy failed. Select the text manually."); }
+      document.body.removeChild(ta);
+    }
+  }
+  var copyBtns = document.querySelectorAll(".copy-btn");
+  for (var ci = 0; ci < copyBtns.length; ci++){
+    (function(btn){
+      btn.addEventListener("click", function(){
+        copyText(textOf("data-copy", btn.getAttribute("data-copy")), btn, "Copied to clipboard");
+      });
+    })(copyBtns[ci]);
+  }
+
+  var copyAllBtn = document.getElementById("copyAll");
+  if (copyAllBtn){
+    copyAllBtn.addEventListener("click", function(){
+      var t = packTemplates(), parts = [];
+      parts.push("MARKETING HARNESS STARTER PACK - ALL FILES");
+      parts.push("AI Automation for Marketing Executives, Class 3, Ingenious Resources Int'l");
+      parts.push("");
+      for (var i = 0; i < t.length; i++){
+        parts.push("=========================================================");
+        parts.push("FILE: " + t[i].name);
+        parts.push("=========================================================");
+        parts.push("");
+        parts.push(t[i].content);
+        parts.push("");
+      }
+      copyText(parts.join("\n"), copyAllBtn, "All files copied");
+    });
+  }
+
+  var printBtn = document.getElementById("printPage");
+  if (printBtn) printBtn.addEventListener("click", function(){ window.print(); });
+
+  /* ---------- Zip writer (store only, no dependencies) ---------- */
+  function makeCrcTable(){
+    var t = new Uint32Array(256), c, n, k;
+    for (n = 0; n < 256; n++){
+      c = n;
+      for (k = 0; k < 8; k++){ c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1); }
+      t[n] = c >>> 0;
+    }
+    return t;
+  }
+  var CRC_TABLE = makeCrcTable();
+  function crc32(bytes){
+    var c = 0xFFFFFFFF;
+    for (var i = 0; i < bytes.length; i++){ c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8); }
+    return (c ^ 0xFFFFFFFF) >>> 0;
+  }
+  function strBytes(s){
+    var out = [], i, cp;
+    for (i = 0; i < s.length; i++){
+      cp = s.charCodeAt(i);
+      if (cp < 0x80){ out.push(cp); }
+      else if (cp < 0x800){ out.push(0xC0 | (cp >> 6), 0x80 | (cp & 63)); }
+      else if (cp >= 0xD800 && cp <= 0xDBFF && i + 1 < s.length){
+        var lo = s.charCodeAt(i + 1);
+        var full = 0x10000 + ((cp - 0xD800) << 10) + (lo - 0xDC00);
+        out.push(0xF0 | (full >> 18), 0x80 | ((full >> 12) & 63), 0x80 | ((full >> 6) & 63), 0x80 | (full & 63));
+        i++;
+      }
+      else { out.push(0xE0 | (cp >> 12), 0x80 | ((cp >> 6) & 63), 0x80 | (cp & 63)); }
+    }
+    return new Uint8Array(out);
+  }
+  function buildZip(files){
+    var chunks = [], central = [], offset = 0;
+    function u16(v){ return [v & 255, (v >> 8) & 255]; }
+    function u32(v){ return [v & 255, (v >> 8) & 255, (v >> 16) & 255, (v >>> 24) & 255]; }
+    files.forEach(function(f){
+      var nameB = strBytes(f.name), dataB = strBytes(f.content), crc = crc32(dataB);
+      var local = [].concat(u32(0x04034b50), u16(20), u16(0x0800), u16(0), u16(0), u16(0),
+        u32(crc), u32(dataB.length), u32(dataB.length), u16(nameB.length), u16(0));
+      chunks.push(new Uint8Array(local), nameB, dataB);
+      central.push([].concat(u32(0x02014b50), u16(20), u16(20), u16(0x0800), u16(0), u16(0), u16(0),
+        u32(crc), u32(dataB.length), u32(dataB.length), u16(nameB.length), u16(0), u16(0), u16(0), u16(0),
+        u32(0), u32(offset), Array.prototype.slice.call(nameB)));
+      offset += local.length + nameB.length + dataB.length;
+    });
+    var cdBytes = [];
+    central.forEach(function(c){ cdBytes = cdBytes.concat(c); });
+    var end = [].concat(u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length),
+      u32(cdBytes.length), u32(offset), u16(0));
+    chunks.push(new Uint8Array(cdBytes), new Uint8Array(end));
+    var total = 0, i;
+    for (i = 0; i < chunks.length; i++) total += chunks[i].length;
+    var out = new Uint8Array(total), pos = 0;
+    for (i = 0; i < chunks.length; i++){ out.set(chunks[i], pos); pos += chunks[i].length; }
+    return out;
+  }
+
+  var dlBtn = document.getElementById("dlZip");
+  if (dlBtn){
+    dlBtn.addEventListener("click", function(){
+      var status = document.getElementById("dlStatus");
+      try {
+        var files = packTemplates();
+        var bytes = buildZip(files);
+        var blob = new Blob([bytes], { type: "application/zip" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url; a.download = "marketing-harness-starter.zip";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+        if (status) status.innerHTML = "Downloaded <code>marketing-harness-starter.zip</code> with " + files.length + " files. Unzip into your vault, then replace the placeholders.";
+      } catch(err){
+        if (status) status.textContent = "Download did not work in this browser. Use the Copy all files button instead.";
+      }
+    });
+  }
+
+  /* ---------- Checklists, saved per device ---------- */
+  function wireChecklist(id, onChange){
+    var root = document.getElementById(id);
+    if (!root) return;
+    var items = root.querySelectorAll("li");
+    for (var i = 0; i < items.length; i++){
+      (function(li){
+        var cb = li.querySelector("input");
+        if (!cb) return;
+        var key = "ssc3-" + cb.id;
+        try { if (localStorage.getItem(key) === "1"){ cb.checked = true; li.classList.add("done"); } } catch(e){}
+        cb.addEventListener("change", function(){
+          li.classList.toggle("done", cb.checked);
+          try { localStorage.setItem(key, cb.checked ? "1" : "0"); } catch(e){}
+          if (onChange) onChange();
+        });
+      })(items[i]);
+    }
+    if (onChange) onChange();
+  }
+  function countDone(id){
+    var root = document.getElementById(id);
+    if (!root) return [0, 0];
+    var boxes = root.querySelectorAll("input[type=checkbox]");
+    var done = 0;
+    for (var i = 0; i < boxes.length; i++){ if (boxes[i].checked) done++; }
+    return [done, boxes.length];
+  }
+  wireChecklist("vault-check");
+  wireChecklist("install-check");
+  wireChecklist("composio-check");
+  wireChecklist("data-check");
+  wireChecklist("run-check");
+  wireChecklist("test-check");
+  wireChecklist("prod-check");
+  wireChecklist("deliverable", function(){
+    var c = countDone("deliverable");
+    var el = document.getElementById("delivProgress");
+    if (el){
+      if (c[0] === c[1] && c[1] > 0){ el.textContent = "All " + c[1] + " done. Your deliverable is complete. Progress saves on this device."; }
+      else { el.textContent = c[0] + " of " + c[1] + " complete. Progress saves on this device."; }
+    }
+  });
+})();
+</script>
+</body>
+</html>

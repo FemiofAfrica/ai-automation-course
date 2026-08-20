@@ -43,7 +43,7 @@ Interactive, works offline, and includes the six copyable templates plus a downl
 - Run the correction loop on every AI task this week, target 10 new vault lines
 - Confirm every note has `type`, `status`, `updated` and `owner` in its frontmatter
 - Bring your vault path written down, on the laptop you will use in class
-- Install Docker Desktop and have a Claude API key ready
+- Install Claude Code and have a Composio account ready (free tiers)
 
 ---
 

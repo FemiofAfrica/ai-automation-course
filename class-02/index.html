@@ -307,8 +307,8 @@
     <div class="course-strip">
       <a class="week-chip" href="../class-01/">Week 1 &middot; Foundations</a>
       <span class="week-chip active">Week 2 &middot; Context Engineering (today)</span>
-      <span class="week-chip">Week 3 &middot; Workflows</span>
-      <span class="week-chip">Week 4 &middot; Your Agent</span>
+      <a class="week-chip" href="../class-03/">Week 3 &middot; The Harness</a>
+      <a class="week-chip" href="../weeks/week-04/">Week 4 &middot; Operating System</a>
     </div>
     <h1>Context Engineering: Teaching Your AI Your Brand</h1>
     <p class="sub">Last week you learned the pipeline. Today you build <strong>step 2</strong>: the context layer. You will leave with a real Brand Context Vault on your own machine, wired into your AI, and proof it works: the same marketing task run before and after, side by side.</p>
@@ -382,7 +382,7 @@
       <tr><th>Week</th><th>What you build</th><th>Pipeline step</th></tr>
       <tr><td><strong>1</strong> (done)</td><td>Vocabulary, the pipeline, your Readiness Map</td><td>Seeing the whole flow</td></tr>
       <tr><td><strong>2</strong> (today)</td><td>Brand Context Vault, wired into your AI</td><td>&#9313; Context</td></tr>
-      <tr><td><strong>3</strong></td><td>Workflow automation with n8n, reading your vault</td><td>&#9315; Tools</td></tr>
+      <tr><td><strong>3</strong></td><td>The Marketing Intelligence Harness: Claude Code reads your vault, pulls Meta data</td><td>&#9315; Tools + trigger</td></tr>
       <tr><td><strong>4</strong></td><td>Your own persistent agent</td><td>&#9314; + &#9315; Memory and autonomy</td></tr>
     </table>
     </div>
@@ -416,7 +416,7 @@
       <span class="tag">4 of 5</span>
       <h4>Tools</h4>
       <p>The abilities that let the model fetch or change things: web search, a file reader, your CRM. Tools are how new context arrives mid-task rather than being supplied up front.</p>
-      <p class="example">A web search tool pulls today's competitor pricing into the answer. Week 3 is entirely about this.</p>
+      <p class="example">A web search tool pulls today's competitor pricing into the answer. Week 3 is entirely about this layer.</p>
     </div>
     <div class="card">
       <span class="tag">5 of 5</span>
@@ -532,7 +532,7 @@
       <div class="flow-body">
         <h4>Dynamic context: the things that are true right now</h4>
         <p>Today's campaign numbers, this morning's competitor announcement, the lead who filled the form ten minutes ago, live inventory. It is stale the moment you write it down, so you never write it down. You fetch it.</p>
-        <p class="use">Lives in: tools and live connections, fetched at the moment of the request. Week 3 builds this with n8n.</p>
+        <p class="use">Lives in: tools and live connections, fetched at the moment of the request. Week 3 builds this with a Claude Code harness.</p>
       </div>
     </div>
   </div>
@@ -600,7 +600,7 @@
       <td><strong>Gemini Notebook</strong><br><span class="rm-hint">formerly NotebookLM</span></td>
       <td>Google web app: upload sources, then ask questions answered from those sources with citations</td>
       <td><span class="pill mid">Medium</span> your sources stay yours, the notebook does not</td>
-      <td><span class="pill no">No</span> web app, not a folder n8n can read</td>
+      <td><span class="pill no">No</span> web app, not a folder a local agent can read</td>
       <td><span class="pill yes">Excellent</span> grounded answers with citations, its core strength</td>
       <td>Free tier: 100 notebooks, up to 50 sources each, 500,000 words per source, 50 chat queries a day</td>
     </tr>
@@ -656,7 +656,7 @@
 
   <div class="callout ok">
     <strong>The recommendation, and the evidence for it</strong>
-    <p><strong>Obsidian stays the primary tool for this course.</strong> Not from habit. Because of one decisive property that the others cannot match: Obsidian's own documentation states that notes are stored as Markdown-formatted plain text files in a folder on your local file system, and that because they are plain text you can edit and manage them with other text editors and file managers. That is exactly the shape the rest of this course needs. In Week 3, n8n reads those files. In Week 4, your agent reads those files. Nothing needs an API key, nothing needs a network call, nothing breaks if a vendor changes a plan.</p>
+    <p><strong>Obsidian stays the primary tool for this course.</strong> Not from habit. Because of one decisive property that the others cannot match: Obsidian's own documentation states that notes are stored as Markdown-formatted plain text files in a folder on your local file system, and that because they are plain text you can edit and manage them with other text editors and file managers. That is exactly the shape the rest of this course needs. In Week 3, a Claude Code harness reads those files. In Week 4, the same harness gains memory and more skills. A web app cannot do that, and an API-only workspace adds a network hop you do not need for a local vault.</p>
     <p>Structure comes free too: Obsidian's properties are stored in a YAML frontmatter block at the top of each note, so type, status and last-updated are queryable fields rather than prose. Its Bases core plugin builds database-style table views, and its docs confirm all that data still lives in your local Markdown files and their properties. You get database behaviour without a database.</p>
     <p><strong>What would change my mind:</strong> if your team already runs on Notion, build it there and accept the API path in Week 3. If you never intend to automate and only want to interrogate documents conversationally, Gemini Notebook beats Obsidian at that specific job. Neither is true for you today, so we build in Obsidian.</p>
   </div>
@@ -824,7 +824,7 @@
       <li>Open the installer and complete it as normal. Launch Obsidian.</li>
       <li>On the welcome screen choose <strong>Create new vault</strong>.</li>
       <li>Name it <code>brand-context-vault</code>.</li>
-      <li>For location, choose a folder you will find again and that your backup covers. Your Documents folder is fine. <strong>Write the full path on paper now.</strong> You will need it in Week 3 when n8n reads these files.</li>
+      <li>For location, choose a folder you will find again and that your backup covers. Your Documents folder is fine. <strong>Write the full path on paper now.</strong> You will need it in Week 3 when the harness reads these files.</li>
       <li>Click <strong>Create</strong>. You now have an empty vault, which on disk is simply a folder holding text files.</li>
     </ol>
     <p class="rm-hint">Sanity check: open your normal file manager, navigate to that folder, and confirm you can see it. That folder <em>is</em> your vault. Obsidian is just a comfortable window onto it.</p>
@@ -1367,7 +1367,7 @@ sticks. That matters more than fixing the draft in front of us.</pre>
 
   <div class="callout warn">
     <strong>Keeping the copies in step</strong>
-    <p>Uploading notes to a project creates a second copy. Your vault stays the original. When you change a note, re-upload it, or the project will keep serving the old version. Set a habit now: <strong>edit in the vault, then push to the project.</strong> Never the other way around, or you will end up with two sources of truth and the problem from idea 7. In Week 3 we remove this friction, because n8n reads the files directly and there is no second copy to maintain.</p>
+    <p>Uploading notes to a project creates a second copy. Your vault stays the original. When you change a note, re-upload it, or the project will keep serving the old version. Set a habit now: <strong>edit in the vault, then push to the project.</strong> Never the other way around, or you will end up with two sources of truth and the problem from idea 7. In Week 3 we remove this friction, because the harness reads the files directly and there is no second copy to maintain.</p>
   </div>
 
   <!-- ============ SECTION 11 ============ -->
@@ -1596,7 +1596,7 @@ sticks. That matters more than fixing the draft in front of us.</pre>
   <div class="grid grid-2">
     <div class="card">
       <h4>&#128218; Homework for Week 3</h4>
-      <p>Week 3 is n8n, and it will read the files you built today directly off your disk. That only works if the vault is genuinely populated, so this homework is load-bearing.</p>
+      <p>Week 3 is the Marketing Intelligence Harness, and it will read the files you built today directly off your disk. That only works if the vault is genuinely populated, so this homework is load-bearing.</p>
       <ul style="font-size:14.5px;">
         <li>Fill the remaining three templates: <strong>product-facts</strong>, one <strong>campaign retro</strong>, and a second <strong>persona</strong></li>
         <li>Run the correction loop on <strong>every</strong> AI task you do this week. Target: 10 new lines in the vault by Week 3</li>
@@ -1607,18 +1607,18 @@ sticks. That matters more than fixing the draft in front of us.</pre>
     <div class="card">
       <h4>&#9881; Week 3 prerequisites, from your setup guide</h4>
       <ul style="font-size:14.5px;">
-        <li>Install <strong>Docker Desktop</strong>, free for personal use. n8n runs in it</li>
-        <li>Have a <strong>Claude API key</strong> ready from the Anthropic console</li>
-        <li>Have login access to at least 2 marketing tools you use daily</li>
-        <li>Bring 1 manual workflow you repeat that touches 3 or more tools</li>
+        <li>Install <strong>Claude Code</strong> (free to start). The harness runs in it.</li>
+        <li>Have an <strong>Instagram Business or Creator account</strong> linked to a <strong>Facebook Page</strong>, under one Meta Business Manager</li>
+        <li>Make a <strong>Composio</strong> account (free tier) for the Meta toolkits</li>
+        <li>Bring 1 recurring marketing report you wish ran itself every week</li>
       </ul>
-      <p class="example">If Docker will not install on your machine, tell me before Week 3, not during it. There is a fallback, but it needs setting up in advance.</p>
+      <p class="example">No Docker, no Hermes. If Claude Code will not install on your machine, tell me before Week 3, not during it.</p>
     </div>
   </div>
 
   <div class="callout">
     <strong>What Week 3 does with what you built today</strong>
-    <p>Today you built static context and loaded it by hand. Next week, an n8n workflow reads those same files automatically, adds <em>dynamic</em> context by fetching something live, sends both to the model, and delivers the result somewhere useful without you being in the room. Your vault stops being a document you consult and becomes a component in a system. Everything you wrote today is the input to that.</p>
+    <p>Today you built static context and loaded it by hand. Next week, a Claude Code harness reads those same files automatically, adds <em>dynamic</em> context by pulling live Meta data through Composio, sends both to the model, and delivers a weekly report somewhere useful without you being in the room. Your vault stops being a document you consult and becomes the memory of a system. Everything you wrote today is the input to that.</p>
   </div>
 
   <div class="panel">
@@ -1667,15 +1667,15 @@ sticks. That matters more than fixing the draft in front of us.</pre>
       <strong>Class 1: The Foundations</strong>
       <span class="rm-hint" style="display:block;">Vocabulary, the pipeline, your Readiness Map</span>
     </a>
-    <a class="nav-link next" href="../">
-      <small>Course home &#8594;</small>
-      <strong>All four weeks</strong>
-      <span class="rm-hint" style="display:block;">Class 3: workflow automation with n8n</span>
+    <a class="nav-link next" href="../class-03/">
+      <small>Next class &#8594;</small>
+      <strong>Class 3: The Marketing Intelligence Harness</strong>
+      <span class="rm-hint" style="display:block;">Claude Code reads your vault, pulls Meta data, delivers a weekly report</span>
     </a>
   </div>
 
   <div class="footer-note">
-    <p><strong>AI Automation for Marketing Executives</strong>, Class 2 of 4 &middot; Ingenious Resources Int'l. Next class: <em>n8n workflow automation, where your vault gets read automatically and dynamic context arrives.</em> This handout works offline; your scores and checklists are saved in this browser only.</p>
+    <p><strong>AI Automation for Marketing Executives</strong>, Class 2 of 4 &middot; Ingenious Resources Int'l. Next class: <em>the Marketing Intelligence Harness, where your vault gets read by Claude Code and live Meta data arrives through Composio.</em> This handout works offline; your scores and checklists are saved in this browser only.</p>
   </div>
 
 </div>
@@ -1769,7 +1769,7 @@ sticks. That matters more than fixing the draft in front of us.</pre>
     { q: "Yesterday's ad click-through rate. Static or dynamic?",
       opts: ["Static - write it in the campaign note", "Dynamic - fetch from the platform", "Static, if you update it weekly", "Neither"],
       answer: 1,
-      explain: "Dynamic. Write it into a note and you have created a fact that is wrong tomorrow and will be repeated confidently forever. Fetch it. Week 3 shows how." },
+      explain: "This is dynamic context. It cannot live in a static vault because it did not exist when you wrote the vault. The model needs a tool, such as web search, to fetch it at the moment of the request. Week 3 shows how." },
     { q: "Your current price list. Static or dynamic?",
       opts: ["Purely static, it rarely changes", "Purely dynamic, always fetch it", "Static with a visible date and a named owner, reviewed monthly", "It does not belong in a vault at all"],
       answer: 2,

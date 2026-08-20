@@ -18,6 +18,7 @@ Interactive student handouts. Each one works offline and saves your progress on 
 
 - **[Class 1: The Foundations →](class-01/)**: the pipeline, the vocabulary, your Automation Readiness Map
 - **[Class 2: Context Engineering →](class-02/)**: build a Brand Context Vault your AI actually reads
+- **[Class 3: The Marketing Intelligence Harness →](class-03/)**: a Claude Code harness that reads your vault, pulls Meta data through Composio, and delivers a weekly report
 
 ---
 
@@ -27,8 +28,8 @@ Interactive student handouts. Each one works offline and saves your progress on 
 |------|-------|-------------|
 | [Week 1](weeks/week-01) | Foundations: LLMs, APIs, Webhooks, Agents | Automation Readiness Map |
 | [Week 2](weeks/week-02) | Context Engineering for Marketing | Brand Context Vault |
-| [Week 3](weeks/week-03) | n8n: Marketing Workflow Automation | Content Distribution Pipeline |
-| [Week 4](weeks/week-04) | Hermes Agent: Autonomous Marketing Operations | Brand Intelligence Agent |
+| [Week 3](weeks/week-03) | The Marketing Intelligence Harness: Claude Code + Composio | Weekly Meta insights report, delivered |
+| [Week 4](weeks/week-04) | The Marketing Operating System: hardening the harness | Multi-skill, self-improving marketing system |
 
 ---
 
